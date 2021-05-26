@@ -1,15 +1,11 @@
 import React from 'react';
+import Sidebar from './sidebar';
+import Topbar from './topbar';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.state = { incrementor: 0 };
-  }
-
-  handleClick() {
-    const newValue = this.state.incrementor + 1;
-    this.setState({ incrementor: newValue });
+    this.state = { width: 300, height: '100vh' };
   }
 
   render() {
@@ -17,7 +13,8 @@ class Home extends React.Component {
     return (
     <React.Fragment>
       <div className="container">
-
+        <Topbar/>
+        <Sidebar/>
       </div>
     </React.Fragment>
     );
