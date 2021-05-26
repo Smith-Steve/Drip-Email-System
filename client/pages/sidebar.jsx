@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sidebar = () => {
   return (
-    <div className="side-bar lg">
+    <div className="side-bar lg" style={ { display: 'flex' } }>
       <React.Fragment>
         <div className="col textContainer-side-bar">
           <h1>Manage</h1>

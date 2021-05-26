@@ -1,6 +1,9 @@
 body {
   background-color: #303841;
+  font-family: 'Playfair Display', serif;
 }
+
+/* font-family: 'Playfair Display', serif; secondary font */
 
 .side-bar {
   width: 200px;
@@ -22,4 +25,17 @@ h1 {
 
 .textContainer-side-bar {
   margin-left: 1rem;
+}
+
+.specialText {
+  font-family: 'Playfair Display', serif;
+  color: #ab8ce4;
+  float: right;
+  text-align: center;
+  margin-right: 2rem;
+  font-size: 1.5rem;
+}
+
+.align-right {
+  text-align: right;
 }

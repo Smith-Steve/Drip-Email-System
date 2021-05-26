@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './sidebar';
 import Topbar from './topbar';
+import CreateContact from './createContact';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,8 +14,14 @@ class Home extends React.Component {
     return (
     <React.Fragment>
       <div className="container">
+        <div className="universal">
         <Topbar/>
         <Sidebar/>
+        </div>
+        <div className="component window">
+          {// Create Contact Component is Currently being rendered underneath other components.}
+          <CreateContact/>
+        </div>
       </div>
     </React.Fragment>
     );
