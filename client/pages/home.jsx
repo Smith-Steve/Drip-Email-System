@@ -14,12 +14,16 @@ class Home extends React.Component {
     return (
     <React.Fragment>
       <div className="container">
-        <div className="universal">
-        <Topbar/>
-        <Sidebar/>
+        <div className="row">
+          <Topbar/>
         </div>
-        <div className="component window">
-          <CreateContact/>
+        <div className="row">
+          <div className="column side-bar">
+            <Sidebar/>
+          </div>
+          <div className="column component">
+            <CreateContact/>
+          </div>
         </div>
       </div>
     </React.Fragment>

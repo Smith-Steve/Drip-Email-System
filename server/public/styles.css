@@ -1,9 +1,14 @@
 body {
   background-color: #303841;
+  box-sizing: border-box;
   font-family: 'Playfair Display', serif;
 }
 
 /* font-family: 'Playfair Display', serif; secondary font */
+
+.row {
+  display: flex;
+}
 
 .side-bar {
   width: 200px;
