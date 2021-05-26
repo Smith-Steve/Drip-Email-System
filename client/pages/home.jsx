@@ -19,7 +19,6 @@ class Home extends React.Component {
         <Sidebar/>
         </div>
         <div className="component window">
-          {// Create Contact Component is Currently being rendered underneath other components.}
           <CreateContact/>
         </div>
       </div>
