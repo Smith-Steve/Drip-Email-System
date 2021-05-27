@@ -5,6 +5,7 @@ class Scripts extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.clearForm = this.clearForm.bind(this);
     this.state = { scriptName: '' };
   }
 
@@ -14,12 +15,13 @@ class Scripts extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state.scriptName) };
+    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) };
     fetch('/api/scripts', initMethod)
       .then(response => response.json())
       .then(returnedResponse => {
         if (returnedResponse) {
           alert('Contact Submitted');
+          this.clearForm();
         } else {
           alert('Not submitted.');
         }
@@ -37,7 +39,7 @@ class Scripts extends React.Component {
         <div className="row">
           <div className="col">
             <div className="scriptsBlockNameEntryForm lg">
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <div>
                   <label>Script Chain Name:</label>
                 </div>

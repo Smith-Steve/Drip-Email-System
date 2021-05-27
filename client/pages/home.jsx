@@ -5,6 +5,15 @@ import CreateContact from './createContact';
 import Scripts from './scripts';
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.getRoute = this.getRoute.bind(this);
+    this.state = { route: '' };
+  }
+
+  getRoute() {
+    this.setState({ route: window.location.hash });
+  }
 
   render() {
 
@@ -16,10 +25,10 @@ class Home extends React.Component {
         </div>
         <div className="row">
           <div className="column side-bar">
-            <Sidebar/>
+            <Sidebar returnRoute={this.getRoute}/>
           </div>
           <div className="column component">
-            <Scripts/>
+            <Scripts data-view="scripts"/>
           </div>
         </div>
       </div>

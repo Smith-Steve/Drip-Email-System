@@ -12,6 +12,10 @@ body {
   display: flex;
 }
 
+a {
+  text-decoration: none;
+}
+
 .col {
   width: 100%;
 }
