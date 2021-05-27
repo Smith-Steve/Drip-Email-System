@@ -25,18 +25,35 @@ app.post('/api/contacts', (req, res, next) => {
   if (!firstName || !lastName || !company || !email || !phoneNumber) {
     throw new ClientError('400', 'all fields are required in order to register a user.');
   }
-  const sqlPostQuery = `insert into "contacts"
+  const sqlPostContactsQuery = `insert into "contacts"
                         ("firstName", "lastName", "company", "email", "phoneNumber")
                         values ($1, $2, $3, $4, $5)
                         returning*;`;
-  const sqlPostParams = [firstName, lastName, company, email, phoneNumber];
-  db.query(sqlPostQuery, sqlPostParams)
+  const sqlPostContactsParams = [firstName, lastName, company, email, phoneNumber];
+  db.query(sqlPostContactsQuery, sqlPostContactsParams)
     .then(result => {
       const contact = result.rows[0];
       res.status(201).json(contact);
     }).catch(error => {
       console.error(error);
       res.status(500).json({ error: 'please see the entered parameters and try again.' });
+    });
+});
+app.post('/api/scripts', (requests, response, next) => {
+  const { scriptName } = requests.body;
+  if (typeof scriptName !== 'string' || !scriptName) throw new ClientError('400', 'invalid input');
+  const sqlPostScriptsInsert = `insert into "scripts"
+                                ("scriptName")
+                                values ($1)
+                                returning*;`;
+  const sqlPostScriptsParams = [scriptName];
+  db.query(sqlPostScriptsInsert, sqlPostScriptsParams)
+    .then(result => {
+      const script = result.rows[0];
+      response.status(201).json(script);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'please review entered parameters and try again.' });
     });
 });
 
