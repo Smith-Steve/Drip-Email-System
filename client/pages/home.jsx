@@ -4,10 +4,6 @@ import Topbar from './topbar';
 import CreateContact from './createContact';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { width: 300, height: '100vh' };
-  }
 
   render() {
 

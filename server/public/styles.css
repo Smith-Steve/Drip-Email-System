@@ -66,8 +66,13 @@ span {
 label {
   display: inline-block;
   text-align: right;
-  color: rgb(186, 186, 186);
   margin: 1rem;
+}
+
+label,
+h1,
+h4 {
+  color: rgb(186, 186, 186);
 }
 
 form {
