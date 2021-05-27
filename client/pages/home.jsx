@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './sidebar';
 import Topbar from './topbar';
 import CreateContact from './createContact';
+import Scripts from './scripts';
 
 class Home extends React.Component {
 
@@ -18,7 +19,7 @@ class Home extends React.Component {
             <Sidebar/>
           </div>
           <div className="column component">
-            <CreateContact/>
+            <Scripts/>
           </div>
         </div>
       </div>
