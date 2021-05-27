@@ -11,12 +11,29 @@ class Home extends React.Component {
     this.state = { route: '' };
   }
 
+  componentDidMount() {
+    window.addEventListener('hashchange', () => {
+      this.setState({ route: window.location.hash });
+    });
+  }
+
   getRoute() {
-    this.setState({ route: window.location.hash });
+    const newRoute = window.location.hash.replace('#', '');
+    this.setState({ route: newRoute });
+  }
+
+  renderComponent() {
+    const activeRoute = this.state.route;
+    if (activeRoute === 'Contacts') {
+      return <CreateContact/>;
+    } else if (activeRoute === 'Scripts') {
+      return <Scripts/>;
+    } else {
+      return null;
+    }
   }
 
   render() {
-
     return (
     <React.Fragment>
       <div className="container">
@@ -28,7 +45,7 @@ class Home extends React.Component {
             <Sidebar returnRoute={this.getRoute}/>
           </div>
           <div className="column component">
-            <Scripts data-view="scripts"/>
+            {this.renderComponent()}
           </div>
         </div>
       </div>
