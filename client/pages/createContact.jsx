@@ -5,6 +5,7 @@ class CreateContact extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearForm = this.clearForm.bind(this);
     this.state = { firstName: '', lastName: '', company: '', email: '', phoneNumber: '' };
   }
 
@@ -15,36 +16,55 @@ class CreateContact extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // will come back to this code, and add toaster to provide user feedback around entry.
 
     const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) };
     fetch('/api/contacts/', initMethod)
       .then(response => response.json())
-      // eslint-disable-next-line no-console
-      .catch(error => console.log(error));
+      .then(returnedResponse => {
+        if (returnedResponse) {
+          alert('Contact Submitted');
+          this.clearForm();
+        } else {
+          alert('Not Submitted');
+        }
+      });
+  }
+
+  clearForm() {
+    this.setState({ firstName: '', lastName: '', company: '', email: '', phoneNumber: '' });
   }
 
   render() {
     return (
       <div className="row create-contact">
-        <span><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="generic contact"></img></span>
         <div className="column picture">
+          <span><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="generic contact"></img></span>
         </div>
         <div className="column form">
           <form onSubmit={this.handleSubmit}>
-            <label>
-              <span>First Name:</span>
-              <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
-              Last Name:
-              <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
-              Company:
-              <input type="text" name="company" value={this.state.company} onChange={this.handleChange}/>
-              E-mail:
-              <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-              Phone Number:
-              <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange}/>
-              <button onSubmit={this.handleSubmit}>Submit</button>
-            </label>
+            <div className="formBlock">
+              <label> Firstname: </label>
+              <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required/>
+            </div>
+            <div className="formBlock">
+              <label> Lastname: </label>
+              <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required/>
+            </div>
+            <div className="formBlock">
+              <label className="companyLabel"> Company: </label>
+              <input type="text" name="company" value={this.state.company} onChange={this.handleChange} required/>
+            </div>
+            <div className="formBlock">
+              <label className="emailLabel"> E-mail: </label>
+              <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required/>
+            </div>
+            <div className="formBlock">
+              <label className="phoneLabel"> Phone #: </label>
+              <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required/>
+            </div>
+            <div className="align-right">
+              <button className="createContact" onSubmit={this.handleSubmit}>Enter Contact</button>
+            </div>
           </form>
         </div>
       </div>

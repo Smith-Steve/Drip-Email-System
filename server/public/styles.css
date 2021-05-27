@@ -36,9 +36,14 @@ span {
   background-color: #36404a;
 }
 
-.column.form,
 .column.picture {
-  width: 50%;
+  float: left;
+  width: 691px;
+}
+
+.column.form {
+  float: left;
+  width: 691px;
 }
 
 .textContainer-side-bar {
@@ -58,9 +63,11 @@ span {
   text-align: right;
 }
 
-label,
-input {
-  display: block;
+label {
+  display: inline-block;
+  text-align: right;
+  color: rgb(186, 186, 186);
+  margin: 1rem;
 }
 
 form {
@@ -72,11 +79,16 @@ input {
   border: 1px solid rgb(171, 140, 228);
   padding: 0.3rem;
   font-size: 1rem;
-  width: 100%;
+  width: 65%;
+  margin-bottom: 2rem;
+  display: inline-block;
 }
 
-input:focus {
-  border: 1px solid rgb(171, 140, 228);
+input:hover {
+  cursor: pointer;
+  border: 3px solid rgb(171, 140, 228);
+  box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
+  outline: none;
 }
 
 img {
@@ -84,4 +96,38 @@ img {
   height: 450px;
   margin-left: 3rem;
   margin-top: 3rem;
+}
+
+button {
+  background-color: rgb(171, 140, 228);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(171, 140, 228);
+}
+
+button.createContact {
+  margin-right: 120px;
+  margin-top: 40px;
+  padding: 0.3rem 0.7rem;
+}
+
+label.emailLabel {
+  margin-right: 2.5rem;
+}
+
+label.phoneLabel {
+  margin-right: 1.7rem;
+}
+
+label.companyLabel {
+  margin-right: 1.1rem;
 }
