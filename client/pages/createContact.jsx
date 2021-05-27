@@ -56,7 +56,7 @@ class CreateContact extends React.Component {
             </div>
             <div className="formBlock">
               <label className="emailLabel"> E-mail: </label>
-              <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required/>
+              <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required/>
             </div>
             <div className="formBlock">
               <label className="phoneLabel"> Phone #: </label>
