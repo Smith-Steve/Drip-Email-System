@@ -43,7 +43,9 @@ class Scripts extends React.Component {
                 <div>
                   <label>Script Chain Name:</label>
                 </div>
-                <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
+                <div className="scriptInputContainer">
+                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
+                </div>
                 <div className="align-right">
                   <button className="scripts" onSubmit={this.handleSubmit}>Create Script</button>
                 </div>

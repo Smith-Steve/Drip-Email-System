@@ -102,16 +102,27 @@ form.scripts {
 }
 
 input {
+  display: block;
   border: 1px solid rgb(171, 140, 228);
   padding: 0.3rem;
   font-size: 1rem;
-  width: 65%;
   margin: 0 0 2rem 0;
+  width: fill-available;
+}
+
+div.scriptInputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input.contact {
+  width: 65%;
   display: inline-block;
 }
 
 input.scriptInputField {
-  width: 100%;
+  flex-basis: 100%;
 }
 
 input:hover {
