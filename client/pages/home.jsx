@@ -7,7 +7,6 @@ import Scripts from './scripts';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.getRoute = this.getRoute.bind(this);
     this.state = { route: '' };
   }
 
@@ -15,11 +14,6 @@ class Home extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: window.location.hash.replace('#', '') });
     });
-  }
-
-  getRoute() {
-    const newRoute = window.location.hash.replace('#', '');
-    this.setState({ route: newRoute });
   }
 
   renderComponent() {
@@ -42,9 +36,9 @@ class Home extends React.Component {
         </div>
         <div className="row">
           <div className="column side-bar">
-            <Sidebar returnRoute={this.getRoute}/>
+            <Sidebar/>
           </div>
-          <div className="column component">
+          <div className="column component-container">
             {this.renderComponent()}
           </div>
         </div>

@@ -39,7 +39,7 @@ class Scripts extends React.Component {
         <div className="row">
           <div className="col">
             <div className="scriptsBlockNameEntryForm lg">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit} className="scripts">
                 <div>
                   <label>Script Chain Name:</label>
                 </div>
