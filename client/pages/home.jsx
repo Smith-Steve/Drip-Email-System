@@ -13,7 +13,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
-      this.setState({ route: window.location.hash });
+      this.setState({ route: window.location.hash.replace('#', '') });
     });
   }
 
