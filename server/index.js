@@ -39,23 +39,6 @@ app.post('/api/contacts', (req, res, next) => {
       res.status(500).json({ error: 'please see the entered parameters and try again.' });
     });
 });
-app.post('/api/scripts', (requests, response, next) => {
-  const { scriptName } = requests.body;
-  if (typeof scriptName !== 'string' || !scriptName) throw new ClientError('400', 'invalid input');
-  const sqlPostScriptsInsert = `insert into "scripts"
-                                ("scriptName")
-                                values ($1)
-                                returning*;`;
-  const sqlPostScriptsParams = [scriptName];
-  db.query(sqlPostScriptsInsert, sqlPostScriptsParams)
-    .then(result => {
-      const script = result.rows[0];
-      response.status(201).json(script);
-    }).catch(error => {
-      console.error(error);
-      response.status(500).json({ error: 'please review entered parameters and try again.' });
-    });
-});
 
 app.get('/api/contacts/:contactId', (req, res, next) => {
   const contactId = parseInt(req.params.contactId, 10);
@@ -87,6 +70,53 @@ app.delete('/api/contacts/:contactId', (req, res, next) => {
     }).catch(error => {
       console.error(error);
       res.status(500).json({ error: 'an unexpected error occured.' });
+    });
+});
+
+app.post('/api/scripts', (requests, response, next) => {
+  const { scriptName } = requests.body;
+  if (typeof scriptName !== 'string' || !scriptName) throw new ClientError('400', 'invalid input');
+  const sqlPostScriptsInsert = `insert into "scripts"
+                                ("scriptName")
+                                values ($1)
+                                returning*;`;
+  const sqlPostScriptsParams = [scriptName];
+  db.query(sqlPostScriptsInsert, sqlPostScriptsParams)
+    .then(result => {
+      const script = result.rows[0];
+      response.status(201).json(script);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'please review entered parameters and try again.' });
+    });
+});
+
+app.get('/api/scripts', (requests, response) => {
+  const sqlGetAllScriptsQuery = 'select * from "scripts";';
+  db.query(sqlGetAllScriptsQuery)
+    .then(result => {
+      const scripts = result.rows[0];
+      response.status(201).json(scripts);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occured.' });
+    });
+});
+
+app.post('/api/flights/:scriptId', (request, response) => {
+  const { name, topics } = request.body;
+  const scriptId = parseInt(request.params.scriptId, 10);
+
+  const sqlPostFlightsInsert = 'insert into "flights" ("name", "topics", "scriptId") values ($1, $2, $3) returning*;';
+  const sqlPostFlightsParams = [name, topics, scriptId];
+  db.query(sqlPostFlightsInsert, sqlPostFlightsParams)
+    .then(result => {
+      const flight = result.row(0);
+      response.status(201).json(flight);
+    })
+    .catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'please review entered parameters and try again.' });
     });
 });
 
