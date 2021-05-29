@@ -20,7 +20,7 @@ class Scripts extends React.Component {
       .then(response => response.json())
       .then(returnedResponse => {
         if (returnedResponse) {
-          alert('Contact Submitted');
+          alert('Script Submitted');
           this.clearForm();
         } else {
           alert('Not submitted.');
@@ -38,7 +38,7 @@ class Scripts extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <div className="scriptsBlockNameEntryForm lg">
+            <div className="form-container lg">
               <form onSubmit={this.handleSubmit} className="scripts">
                 <div>
                   <label>Script Chain Name:</label>

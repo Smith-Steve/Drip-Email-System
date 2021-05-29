@@ -84,30 +84,31 @@ label {
   display: inline-block;
   text-align: right;
   margin: 0 1rem 1rem 0;
+  white-space: nowrap;
 }
 
 label,
 h1,
-h4 {
+h4,
+.defaultOption {
   color: rgb(186, 186, 186);
 }
 
 form {
   margin: 3rem auto;
   font-family: 'Montserrat', sans-serif;
-}
-
-form.scripts {
   padding: 2rem;
 }
 
-input {
+input,
+select {
   display: block;
   border: 1px solid rgb(171, 140, 228);
   padding: 0.3rem;
   font-size: 1rem;
   margin: 0 0 2rem 0;
   width: fill-available;
+  flex-basis: 100%;
 }
 
 div.scriptInputContainer {
@@ -119,10 +120,6 @@ div.scriptInputContainer {
 input.contact {
   width: 65%;
   display: inline-block;
-}
-
-input.scriptInputField {
-  flex-basis: 100%;
 }
 
 input:hover {
@@ -171,4 +168,8 @@ label.phoneLabel {
 
 label.companyLabel {
   margin-right: 1.1rem;
+}
+
+.margin {
+  margin-left: 0.7rem;
 }

@@ -95,7 +95,7 @@ app.get('/api/scripts', (requests, response) => {
   const sqlGetAllScriptsQuery = 'select * from "scripts";';
   db.query(sqlGetAllScriptsQuery)
     .then(result => {
-      const scripts = result.rows[0];
+      const scripts = result.rows;
       response.status(201).json(scripts);
     }).catch(error => {
       console.error(error);
@@ -111,7 +111,7 @@ app.post('/api/flights/:scriptId', (request, response) => {
   const sqlPostFlightsParams = [name, topics, scriptId];
   db.query(sqlPostFlightsInsert, sqlPostFlightsParams)
     .then(result => {
-      const flight = result.row(0);
+      const flight = result.rows[0];
       response.status(201).json(flight);
     })
     .catch(error => {

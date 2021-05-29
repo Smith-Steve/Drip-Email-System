@@ -27,6 +27,8 @@ class CreateContact extends React.Component {
         } else {
           alert('Not Submitted');
         }
+      }).catch(err => {
+        if (err) throw err;
       });
   }
 

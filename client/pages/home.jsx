@@ -3,6 +3,7 @@ import Sidebar from './sidebar';
 import Topbar from './topbar';
 import CreateContact from './createContact';
 import Scripts from './scripts';
+import Flights from './flights';
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class Home extends React.Component {
       return <CreateContact/>;
     } else if (activeRoute === 'Scripts') {
       return <Scripts/>;
+    } else if (activeRoute === 'Flights') {
+      return <Flights/>;
     } else {
       return null;
     }
