@@ -7,7 +7,6 @@ class Flights extends React.Component {
     this.clearForm = this.clearForm.bind(this);
     this.getListOfScripts = this.getListOfScripts.bind(this);
     this.mappedSelectionScripts = this.mappedSelectionScripts.bind(this);
-    this.createSubmissionObject = this.createSubmissionObject.bind(this);
     this.state = { name: '', topics: '', scripts: [], selectedScriptId: '' };
   }
 
@@ -35,7 +34,10 @@ class Flights extends React.Component {
 
   submitFlight = event => {
     event.preventDefault();
-    const flightBody = this.createSubmissionObject(this.state);
+    const flightBody = {
+      name: this.state.name,
+      topics: this.state.topics
+    };
     const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(flightBody) };
     fetch(`/api/flights/${this.state.selectedScriptId}`, initMethod)
       .then(response => response.json())
@@ -45,14 +47,6 @@ class Flights extends React.Component {
       }).catch(error => {
         if (error) throw error;
       });
-  }
-
-  createSubmissionObject = object => {
-    const body = {
-      name: object.name,
-      topics: object.topics
-    };
-    return body;
   }
 
   mappedSelectionScripts = script => {
