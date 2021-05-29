@@ -41,6 +41,7 @@ class Flights extends React.Component {
       .then(response => response.json())
       .then(returnedResponse => {
         if (returnedResponse) alert('Flight Submitted!');
+        this.clearForm();
       }).catch(error => {
         if (error) throw error;
       });
@@ -82,7 +83,7 @@ class Flights extends React.Component {
                 <div className="row">
                   <label>Choose Script: </label>
                   <select id="scripts" value={this.state.selectedScriptId} onChange={this.handleChange} name="selectedScriptId">
-                    <option value="">Select a Script Here</option>
+                    <option value="" className="defaultOption">Select a Script Here</option>
                     {scriptList.map(this.mappedSelectionScripts)}
                   </select>
                 </div>
