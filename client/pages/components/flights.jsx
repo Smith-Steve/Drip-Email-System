@@ -3,10 +3,8 @@ import React from 'react';
 class Flights extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
     this.clearForm = this.clearForm.bind(this);
-    this.getListOfScripts = this.getListOfScripts.bind(this);
-    this.mappedSelectionScripts = this.mappedSelectionScripts.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = { name: '', topics: '', scripts: [], selectedScriptId: '' };
   }
 
@@ -21,7 +19,7 @@ class Flights extends React.Component {
         .then(returnedResponse => {
           this.setState({ scripts: returnedResponse });
         }).catch(error => {
-          error.log(error);
+          console.error(error);
         });
     }
 

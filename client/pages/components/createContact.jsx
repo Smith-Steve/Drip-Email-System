@@ -22,7 +22,7 @@ class CreateContact extends React.Component {
       .then(response => response.json())
       .then(returnedResponse => {
         if (returnedResponse) {
-          alert('Contact Submitted');
+          alert('Submited!');
           this.clearForm();
         } else {
           alert('Not Submitted');

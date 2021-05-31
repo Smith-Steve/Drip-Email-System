@@ -4,8 +4,6 @@ class Scripts extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.clearForm = this.clearForm.bind(this);
     this.state = { scriptName: '' };
   }
 
