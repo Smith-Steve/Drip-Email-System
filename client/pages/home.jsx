@@ -1,8 +1,9 @@
 import React from 'react';
 import Sidebar from './sidebar';
 import Topbar from './topbar';
-import CreateContact from './createContact';
-import Scripts from './scripts';
+import CreateContact from './components/createContact';
+import Scripts from './components/scripts';
+import Flights from './components/flights';
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,9 +23,10 @@ class Home extends React.Component {
       return <CreateContact/>;
     } else if (activeRoute === 'Scripts') {
       return <Scripts/>;
-    } else {
-      return null;
+    } else if (activeRoute === 'Flights') {
+      return <Flights/>;
     }
+    return null;
   }
 
   render() {
