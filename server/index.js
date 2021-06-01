@@ -103,6 +103,23 @@ app.get('/api/scripts', (requests, response) => {
     });
 });
 
+app.get('/api/scripts/:scriptId', (req, res, next) => {
+  const scriptId = parseInt(req.params.scriptId, 10);
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'must enter a legitimate contact.');
+  }
+  const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
+  const params = [scriptId];
+  db.query(sqlGetQuery, params)
+    .then(result => {
+      const script = result.rows[0];
+      res.status(200).json(script);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
 app.post('/api/flights/:scriptId', (request, response) => {
   const { name, topics } = request.body;
   const scriptId = parseInt(request.params.scriptId, 10);

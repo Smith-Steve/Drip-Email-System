@@ -43,7 +43,7 @@ class Flights extends React.Component {
         if (returnedResponse) alert('Flight Submitted!');
         this.clearForm();
       }).catch(error => {
-        if (error) throw error;
+        console.error(error);
       });
   }
 

@@ -36,7 +36,7 @@ class Home extends React.Component {
         <div className="row">
           <Topbar/>
         </div>
-        <div className="row">
+        <div className="row side-bar">
           <div className="column side-bar">
             <Sidebar/>
           </div>

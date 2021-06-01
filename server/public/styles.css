@@ -69,11 +69,13 @@ span {
   text-align: center;
   margin-right: 2rem;
   font-size: 1.5rem;
+  white-space: nowrap;
 }
 
 span.specialText {
   float: left;
   font-weight: 650;
+  margin-bottom: 1rem;
 }
 
 .align-right {
@@ -95,14 +97,17 @@ h4,
 }
 
 form {
-  margin: 3rem auto;
   font-family: 'Montserrat', sans-serif;
   padding: 2rem;
 }
 
+.form-container {
+  padding: 0.5rem;
+}
+
 input,
 select {
-  display: block;
+  display: inline-block;
   border: 1px solid rgb(171, 140, 228);
   padding: 0.3rem;
   font-size: 1rem;
