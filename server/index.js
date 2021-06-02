@@ -92,11 +92,11 @@ app.post('/api/scripts', (requests, response, next) => {
 });
 
 app.get('/api/scripts', (requests, response) => {
-  const sqlGetAllScriptsQuery = 'select * from "scripts";';
+  const sqlGetAllScriptsQuery = 'select * from "scripts" order by "scriptName" desc;';
   db.query(sqlGetAllScriptsQuery)
     .then(result => {
       const scripts = result.rows;
-      response.status(200).json(scripts.reverse());
+      response.status(200).json(scripts);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
