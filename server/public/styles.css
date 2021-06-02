@@ -25,9 +25,10 @@ a {
   height: 100%;
 }
 
-.component-container {
+.component-container,
+th,
+td {
   padding: 2rem;
-  display: flex;
 }
 
 .side-bar {
@@ -63,14 +64,18 @@ span {
   margin-left: 1rem;
 }
 
-.specialText {
+.specialText,
+.tableText {
   font-family: 'Montserrat', sans-serif;
   color: #ab8ce4;
-  float: right;
-  text-align: center;
   margin-right: 2rem;
   font-size: 1.5rem;
   white-space: nowrap;
+}
+
+.specialText {
+  float: right;
+  text-align: center;
 }
 
 span.specialText {
@@ -98,14 +103,20 @@ h4,
 }
 
 form {
-  margin: 3rem;
+  margin: 2rem;
   font-family: 'Montserrat', sans-serif;
   padding: 2rem;
 }
 
-.form-container {
+.form-container,
+.table-container {
   flex-basis: 100%;
   padding: 0.5rem;
+}
+
+.table-container {
+  margin-top: 1rem;
+  display: flex;
 }
 
 input,
@@ -167,6 +178,10 @@ button.createContact {
   margin-right: 6.5rem;
 }
 
+button.manageScripts {
+  background-color: rgb(0, 128, 128);
+}
+
 label.emailLabel {
   margin-right: 2.5rem;
 }
@@ -181,4 +196,22 @@ label.companyLabel {
 
 .margin {
   margin-left: 0.7rem;
+}
+
+table {
+  border-collapse: collapse;
+  flex-basis: 100%;
+}
+
+td {
+  text-align: center;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #303841;
+  border-color: #303841;
+}
+
+td:nth-child(3n + 1) {
+  text-align: left;
 }
