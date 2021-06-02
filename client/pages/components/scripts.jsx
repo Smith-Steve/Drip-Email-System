@@ -10,10 +10,6 @@ class Scripts extends React.Component {
 
   componentDidMount() {
     this.getListOfScripts();
-
-    window.addEventListener('hashchange', () => {
-      window.location.hash.replace('#', '');
-    });
   }
 
   chosenScript(script) {
