@@ -5,11 +5,15 @@ class Scripts extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buildTable = this.buildTable.bind(this);
-    this.state = { scriptName: '', scripts: [] };
+    this.state = { scriptName: '', selectedScript: null, scripts: [] };
   }
 
   componentDidMount() {
     this.getListOfScripts();
+  }
+
+  chosenScript(script) {
+    this.props.setActiveScript(script);
   }
 
   handleChange = event => this.setState({ scriptName: event.target.value });
@@ -54,7 +58,7 @@ class Scripts extends React.Component {
 
   buildTable(scriptList) {
     const scriptRow = scriptList.map(script => {
-      return <tr key={script.scriptId}><td key={script.scriptId}><span className="tableText">{script.scriptName}</span></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><button className="manageScripts alignRight" onSubmit={this.handleSubmit}>Manage Script</button></td></tr>;
+      return <tr key={script.scriptId}><td key={script.scriptId}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}> <span className="tableText">{script.scriptName}</span></a></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><button className="manageScripts alignRight" onSubmit={this.handleSubmit}>Manage Script</button></td></tr>;
     });
     return (
       <div className="row">

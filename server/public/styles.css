@@ -12,6 +12,10 @@ body {
   display: flex;
 }
 
+.row.view-script {
+  width: 100%;
+}
+
 a {
   text-decoration: none;
 }
@@ -27,7 +31,8 @@ a {
 
 .component-container,
 th,
-td {
+td,
+.flexContainer {
   padding: 2rem;
 }
 
@@ -82,6 +87,10 @@ span.specialText {
   float: left;
   font-weight: 650;
   margin-bottom: 1rem;
+}
+
+span.specialText.view-script {
+  flex: 0 0 100%;
 }
 
 .align-right {
@@ -182,6 +191,10 @@ button.manageScripts {
   background-color: rgb(0, 128, 128);
 }
 
+button.createEmail {
+  margin-top: 3rem;
+}
+
 label.emailLabel {
   margin-right: 2.5rem;
 }
@@ -214,4 +227,9 @@ tbody tr:nth-child(odd) {
 
 td:nth-child(3n + 1) {
   text-align: left;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
 }
