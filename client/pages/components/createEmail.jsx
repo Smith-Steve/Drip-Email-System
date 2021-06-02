@@ -4,6 +4,7 @@ class CreateEmail extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = { subject: '', emailBody: '' };
   }
 
@@ -16,7 +17,17 @@ class CreateEmail extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) };
+    const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId };
+    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
+
+    fetch('/api/emails', initMethod)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        if (returnedResponse) alert('Email Submitted!');
+        this.clearForm();
+      }).catch(error => {
+        console.error(error);
+      });
   }
 
   render() {
