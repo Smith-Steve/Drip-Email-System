@@ -96,7 +96,7 @@ app.get('/api/scripts', (requests, response) => {
   db.query(sqlGetAllScriptsQuery)
     .then(result => {
       const scripts = result.rows;
-      response.status(200).json(scripts);
+      response.status(200).json(scripts.reverse());
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
