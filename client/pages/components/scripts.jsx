@@ -4,6 +4,7 @@ class Scripts extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.buildTable = this.buildTable.bind(this);
     this.state = { scriptName: '', scripts: [] };
   }
 
