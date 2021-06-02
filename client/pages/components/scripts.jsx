@@ -53,16 +53,19 @@ class Scripts extends React.Component {
 
   buildTable(scriptList) {
     const scriptRow = scriptList.map(script => {
-      return <tr key={script.scriptId}> <td key={script.scriptId}><span className="tableText">{script.scriptName}</span></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><button className="manageScripts alignRight" onSubmit={this.handleSubmit}>Manage Script</button></td></tr>;
+      return <tr key={script.scriptId}><td key={script.scriptId}><span className="tableText">{script.scriptName}</span></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><button className="manageScripts alignRight" onSubmit={this.handleSubmit}>Manage Script</button></td></tr>;
     });
     return (
       <div className="row">
         <div className="col">
           <div className="table-container lg">
             <table id="scripts_list">
-              <th><span className="specialText">Script Name</span></th>
-              <th><span className="specialText">Number of E-mails: </span></th>
-              <th></th>
+              <thead>
+                <tr>
+                  <th><span className="specialText">Script Name</span></th>
+                  <th><span className="specialText">Number of E-mails: </span></th>
+                </tr>
+              </thead>
               <tbody>
                 {scriptRow}
               </tbody>
