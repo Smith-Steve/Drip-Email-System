@@ -106,7 +106,7 @@ app.get('/api/scripts', (requests, response) => {
 app.get('/api/scripts/:scriptId', (req, res, next) => {
   const scriptId = parseInt(req.params.scriptId, 10);
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
-    throw new ClientError('400', 'must enter a legitimate contact.');
+    throw new ClientError('400', 'Invalid Script.');
   }
   const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
   const params = [scriptId];
@@ -124,6 +124,10 @@ app.post('/api/flights/:scriptId', (request, response) => {
   const { name, topics } = request.body;
   const scriptId = parseInt(request.params.scriptId, 10);
 
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script.');
+  }
+
   const sqlPostFlightsInsert = 'insert into "flights" ("name", "topics", "scriptId") values ($1, $2, $3) returning*;';
   const sqlPostFlightsParams = [name, topics, scriptId];
   db.query(sqlPostFlightsInsert, sqlPostFlightsParams)
@@ -140,6 +144,10 @@ app.post('/api/flights/:scriptId', (request, response) => {
 app.post('/api/emails', (request, response) => {
   const { subject, emailBody } = request.body;
   const scriptId = parseInt(request.body.scriptId, 10);
+
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script.');
+  }
 
   const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId") values ($1, $2, $3) returning*;';
   const sqlPostEmailsParams = [subject, emailBody, scriptId];
