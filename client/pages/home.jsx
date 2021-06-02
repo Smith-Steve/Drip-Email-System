@@ -4,11 +4,13 @@ import Topbar from './topbar';
 import CreateContact from './components/createContact';
 import Scripts from './components/scripts';
 import Flights from './components/flights';
+import ViewScript from './components/viewScript';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { route: '' };
+    this.setActiveScript = this.setActiveScript.bind(this);
+    this.state = { route: '', activeScript: null };
   }
 
   componentDidMount() {
@@ -17,12 +19,18 @@ class Home extends React.Component {
     });
   }
 
+  setActiveScript(selectedScript) {
+    this.setState({ activeScript: selectedScript });
+  }
+
   renderComponent() {
     const activeRoute = this.state.route;
     if (activeRoute === 'Contacts') {
       return <CreateContact/>;
     } else if (activeRoute === 'Scripts') {
-      return <Scripts/>;
+      return <Scripts setActiveScript={this.setActiveScript}/>;
+    } else if (activeRoute.slice(0, 6) === 'Script') {
+      return this.state.activeScript === null ? null : <ViewScript script={this.state.activeScript} route={this.state.route}/>;
     } else if (activeRoute === 'Flights') {
       return <Flights/>;
     }

@@ -27,7 +27,8 @@ a {
 
 .component-container,
 th,
-td {
+td,
+.flexContainer {
   padding: 2rem;
 }
 
@@ -214,4 +215,8 @@ tbody tr:nth-child(odd) {
 
 td:nth-child(3n + 1) {
   text-align: left;
+}
+
+.flexContainer {
+  display: flex;
 }
