@@ -1,10 +1,6 @@
 import React from 'react';
 
 class ViewScript extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { route: '', activeScript: null };
-  }
 
   render() {
     return (
