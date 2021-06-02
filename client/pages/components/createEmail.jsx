@@ -23,9 +23,11 @@ class CreateEmail extends React.Component {
     fetch('/api/emails', initMethod)
       .then(response => response.json())
       .then(returnedResponse => {
-        if (returnedResponse) alert('Email Submitted!');
+        if (returnedResponse) alert('email submitted!');
         this.clearForm();
-      }).catch(error => {
+      })
+      .then(this.toastSuccess)
+      .catch(error => {
         console.error(error);
       });
   }
