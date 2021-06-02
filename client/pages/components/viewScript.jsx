@@ -1,6 +1,15 @@
 import React from 'react';
 
 class ViewScript extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.state = { scriptName: this.props.script.scriptName, scriptId: this.props.script.scriptId };
+  }
+
+  handlePageChange() {
+    window.location.hash = 'Email';
+  }
 
   render() {
     return (
@@ -17,7 +26,7 @@ class ViewScript extends React.Component {
                 <div className="col">
                   <span className="specialText view-script">{this.props.script.scriptName} is a new script to which there are no e-mails attached</span>
                   <div className="align-right">
-                    <button className="createEmail">Create Email</button>
+                    <button className="createEmail" onClick={this.handlePageChange}>Create Email</button>
                   </div>
                 </div>
               </div>

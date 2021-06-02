@@ -129,7 +129,8 @@ form {
 }
 
 input,
-select {
+select,
+textarea {
   display: block;
   border: 1px solid rgb(171, 140, 228);
   padding: 0.3rem;
@@ -140,7 +141,8 @@ select {
   flex-grow: 1;
 }
 
-div.scriptInputContainer {
+div.scriptInputContainer,
+div.emailInputContainer {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -137,6 +137,23 @@ app.post('/api/flights/:scriptId', (request, response) => {
     });
 });
 
+app.post('/api/emails', (request, response) => {
+  const { subject, emailBody } = request.body;
+  const scriptId = parseInt(request.body.scriptId, 10);
+
+  const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId") values ($1, $2, $3) returning*;';
+  const sqlPostEmailsParams = [subject, emailBody, scriptId];
+  db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
+    .then(result => {
+      const flight = result.rows[0];
+      response.status(201).json(flight);
+    })
+    .catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'please review entered parameters and try again. ' });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
