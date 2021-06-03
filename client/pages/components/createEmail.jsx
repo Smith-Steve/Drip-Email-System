@@ -28,6 +28,7 @@ class CreateEmail extends React.Component {
       })
       .then(this.toastSuccess)
       .catch(error => {
+        if (error) alert('Please check submission and try again.');
         console.error(error);
       });
   }
