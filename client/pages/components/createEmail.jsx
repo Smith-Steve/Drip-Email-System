@@ -26,7 +26,6 @@ class CreateEmail extends React.Component {
         if (returnedResponse) alert('email submitted!');
         this.clearForm();
       })
-      .then(this.toastSuccess)
       .catch(error => {
         if (error) alert('Please check submission and try again.');
         console.error(error);
