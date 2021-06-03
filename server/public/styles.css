@@ -189,7 +189,8 @@ button.createContact {
   margin-right: 6.5rem;
 }
 
-button.manageScripts {
+button.manageScripts,
+button.manageFlights {
   background-color: rgb(0, 128, 128);
 }
 

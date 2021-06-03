@@ -24,6 +24,11 @@ class Flights extends React.Component {
         });
     }
 
+    getFlightInfo(flight) {
+      this.props.getFlight(flight);
+      this.props.history.push('/#ManageFlights');
+    }
+
     getListOfFlights = () => {
       const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
       fetch('/api/flights/', initGetScripts)
@@ -71,14 +76,14 @@ class Flights extends React.Component {
 
   buildTable(flightsList) {
     const flightRow = flightsList.map(flight => {
-      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="tableText" key={flight.flightId + 1}>{flight.name}</span></td><button className="manageScripts alignRight" onSubmit={this.handleSubmit} key={flight.flightId + 2}>Manage Flight</button></tr>;
+      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="tableText" key={flight.flightId + 1}>{flight.name}</span></td><td id={flight.flightId + 2}><a href={`#ManageFlight/FlightId/${flight.flightId}`}><button className="manageFlights alignRight" onClick={() => this.getFlightInfo(flight)} key={flight.flightId + 2}>Manage Flight</button></a></td></tr>;
     });
 
     return (
       <div className="row">
         <div className="col">
           <div className="table-container lg">
-            <table id="scripts_list">
+            <table id="flights-list">
               <thead>
                 <tr>
                   <th><span className="specialText">Flight Name:</span></th>

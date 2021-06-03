@@ -12,7 +12,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
-    this.state = { route: '', activeScript: null };
+    this.setFlight = this.setFlight.bind(this);
+    this.state = { route: '', activeScript: null, activeFlight: null };
   }
 
   componentDidMount() {
@@ -25,6 +26,10 @@ class Home extends React.Component {
     this.setState({ activeScript: selectedScript });
   }
 
+  setFlight(selectedFlight) {
+    this.setState({ activeFlight: selectedFlight });
+  }
+
   renderComponent() {
     const activeRoute = this.state.route;
     if (activeRoute === 'Contacts') {
@@ -34,11 +39,11 @@ class Home extends React.Component {
     } else if (activeRoute.slice(0, 6) === 'Script') {
       return this.state.activeScript === null ? null : <ViewScript script={this.state.activeScript}/>;
     } else if (activeRoute === 'Flights') {
-      return <Flights/>;
+      return <Flights getFlight={this.setFlight}/>;
     } else if (activeRoute === 'Email') {
       return <CreateEmail script={this.state.activeScript}/>;
-    } else if (activeRoute === 'ManageFlight') {
-      return <ManageFlight script={this.state.activeScript}/>;
+    } else if (activeRoute.slice(0, 12) === 'ManageFlight') {
+      return <ManageFlight flight={this.state.activeFlight}/>;
     }
     return null;
   }

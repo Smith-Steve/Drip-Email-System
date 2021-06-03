@@ -1,6 +1,24 @@
 import React from 'react';
 
 class ManageFlight extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { flight: this.props.flight, script: '' };
+  }
+
+  componentDidMount() {
+  }
+
+  getListOfScripts = () => {
+    const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch('/api/scripts/', initGetScripts)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ scripts: returnedResponse });
+      }).catch(error => {
+        console.error(error);
+      });
+  };
 
   render() {
     return (
