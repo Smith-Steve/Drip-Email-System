@@ -57,6 +57,32 @@ app.get('/api/contacts/:contactId', (req, res, next) => {
     });
 });
 
+app.get('/api/contacts', (req, res) => {
+  const sqlGetQuery = 'select * from "contacts" order by "firstName" desc;';
+  db.query(sqlGetQuery)
+    .then(result => {
+      const contacts = result.rows;
+      res.status(200).json(contacts);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
+// app.get('/api/contacts/search', (request, response) => {
+//   const searchParam = request;
+//   const sqlGetQuery = 'select * from "contacts" where "firstName" @@ to_tsquery($1) order by "firstName" desc;';
+//   const params = [searchParam];
+//   db.query(sqlGetQuery, params)
+//     .then(result => {
+//       const contacts = result.rows;
+//       response.status(200).json(contacts);
+//     }).catch(error => {
+//       console.error(error);
+//       response.status(500).json({ error: 'an unexpected error occurred.' });
+//     });
+// });
+
 app.delete('/api/contacts/:contactId', (req, res, next) => {
   const contactId = parseInt(req.params.contactId, 10);
   if (!Number.isInteger(contactId) || contactId <= 0) {

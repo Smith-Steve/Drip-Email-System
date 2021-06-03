@@ -26,7 +26,6 @@ class Flights extends React.Component {
 
     getFlightInfo(flight) {
       this.props.getFlight(flight);
-      this.props.history.push('/#ManageFlights');
     }
 
     getListOfFlights = () => {
@@ -86,7 +85,7 @@ class Flights extends React.Component {
             <table id="flights-list">
               <thead>
                 <tr>
-                  <th><span className="specialText">Flight Name:</span></th>
+                  <th><span className="specialText align-left">Flight Name:</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -110,7 +109,7 @@ class Flights extends React.Component {
       <div className="flights">
         <div className="row">
           <div className="col">
-            <span className="specialText">Flight Set Up: </span>
+            <span className="specialText prompt">Flight Set Up: </span>
           </div>
         </div>
         <div className="row">

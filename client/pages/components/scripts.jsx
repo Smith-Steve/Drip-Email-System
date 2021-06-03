@@ -67,8 +67,8 @@ class Scripts extends React.Component {
             <table id="scripts_list">
               <thead>
                 <tr>
-                  <th><span className="specialText">Script Name</span></th>
-                  <th><span className="specialText">Number of E-mails: </span></th>
+                  <th><span className="specialText align-left">Script Name</span></th>
+                  <th><span className="specialText align-right">Number of E-mails: </span></th>
                 </tr>
               </thead>
               <tbody>
@@ -87,7 +87,7 @@ class Scripts extends React.Component {
       <div className="scripts">
         <div className="row">
           <div className="col">
-            <span className="specialText">Script E-mail Chain Set Up:</span>
+            <span className="specialText prompt">Script E-mail Chain Set Up:</span>
           </div>
         </div>
         <div className="row">
