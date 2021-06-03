@@ -5,11 +5,12 @@ class Flights extends React.Component {
     super(props);
     this.clearForm = this.clearForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { name: '', topics: '', scripts: [], selectedScriptId: '' };
+    this.state = { name: '', topics: '', scripts: [], selectedScriptId: '', flights: [] };
   }
 
   componentDidMount() {
     this.getListOfScripts();
+    this.getListOfFlights();
   }
 
     getListOfScripts = () => {
@@ -23,12 +24,32 @@ class Flights extends React.Component {
         });
     }
 
+    getListOfFlights = () => {
+      const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+      fetch('/api/flights/', initGetScripts)
+        .then(response => response.json())
+        .then(returnedResponse => {
+          this.setState({ flights: returnedResponse });
+        }).catch(error => {
+          console.error(error);
+        });
+    }
+
     handleChange(event) {
       const name = event.target.name;
       this.setState({ [name]: event.target.value });
     }
 
-    clearForm = () => this.setState({ name: '', topics: '', selectedScriptId: '' })
+  clearForm = () => this.setState({ name: '', topics: '', selectedScriptId: '' })
+
+  addFlight = newFlight => {
+    this.setState(state => {
+      const completeFlightList = [newFlight, ...this.state.flights];
+      return {
+        flights: completeFlightList
+      };
+    });
+  }
 
   submitFlight = event => {
     event.preventDefault();
@@ -42,9 +63,35 @@ class Flights extends React.Component {
       .then(returnedResponse => {
         if (returnedResponse) alert('Flight Submitted!');
         this.clearForm();
+        this.addFlight(returnedResponse);
       }).catch(error => {
         console.error(error);
       });
+  }
+
+  buildTable(flightsList) {
+    const flightRow = flightsList.map(flight => {
+      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="tableText" key={flight.flightId + 1}>{flight.name}</span></td><button className="manageScripts alignRight" onSubmit={this.handleSubmit} key={flight.flightId + 2}>Manage Flight</button></tr>;
+    });
+
+    return (
+      <div className="row">
+        <div className="col">
+          <div className="table-container lg">
+            <table id="scripts_list">
+              <thead>
+                <tr>
+                  <th><span className="specialText">Flight Name:</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                {flightRow}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   mappedSelectionScripts = script => {
@@ -53,6 +100,7 @@ class Flights extends React.Component {
 
   render() {
     const scriptList = this.state.scripts;
+    const flightList = this.state.flights;
     return (
       <div className="flights">
         <div className="row">
@@ -86,6 +134,7 @@ class Flights extends React.Component {
             </div>
           </div>
         </div>
+        {flightList.length > 0 ? this.buildTable(flightList) : null}
       </div>
     );
   }

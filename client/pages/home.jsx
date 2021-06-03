@@ -6,6 +6,7 @@ import Scripts from './components/scripts';
 import Flights from './components/flights';
 import ViewScript from './components/viewScript';
 import CreateEmail from './components/createEmail';
+import ManageFlight from './components/manageFlight';
 
 class Home extends React.Component {
   constructor(props) {
@@ -36,6 +37,8 @@ class Home extends React.Component {
       return <Flights/>;
     } else if (activeRoute === 'Email') {
       return <CreateEmail script={this.state.activeScript}/>;
+    } else if (activeRoute === 'ManageFlight') {
+      return <ManageFlight script={this.state.activeScript}/>;
     }
     return null;
   }
