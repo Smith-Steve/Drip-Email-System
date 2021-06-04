@@ -4,12 +4,29 @@ class ManageFlight extends React.Component {
   constructor(props) {
     super(props);
     this.controlChange = this.controlChange.bind(this);
-    this.state = { script: '', contacts: [], selectedContactId: '' };
+    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], experiment: '' };
   }
 
   componentDidMount() {
     this.getFlightScript();
     this.getContacts();
+    this.contactsAssignedToFlight();
+  }
+
+  addNewContactToFlight = newContact => {
+    this.setState(state => {
+      for (let i = 0; i < this.state.contacts.length; i++) {
+        const activeContact = this.state.contacts[i];
+        for (const key in activeContact) {
+          if (activeContact[key] === parseInt(newContact.contactId, 10)) {
+            const updateListOfContactsInFlight = [activeContact, ...this.state.contactsAssignedToFlight];
+            return {
+              contactsAssignedToFlight: updateListOfContactsInFlight
+            };
+          }
+        }
+      }
+    });
   }
 
   getFlightScript = () => {
@@ -29,6 +46,26 @@ class ManageFlight extends React.Component {
       .then(response => response.json())
       .then(returnedResponse => {
         this.setState({ contacts: returnedResponse });
+      }
+      ).catch(error => console.error(error));
+  }
+
+    getContacts = () => {
+      const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+      fetch('/api/contacts', initGetContacts)
+        .then(response => response.json())
+        .then(returnedResponse => {
+          this.setState({ contacts: returnedResponse });
+        }
+        ).catch(error => console.error(error));
+    }
+
+  contactsAssignedToFlight = () => {
+    const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch(`/api/contacts/flightAssignment/${this.props.flight.flightId}`, initGetContacts)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ contactsAssignedToFlight: returnedResponse });
       }
       ).catch(error => console.error(error));
   }
@@ -61,13 +98,13 @@ class ManageFlight extends React.Component {
       .then(response => response.json())
       .then(returnedResponse => {
         if (returnedResponse) alert('added to flight!');
-        this.clearForm();
+        this.addNewContactToFlight(returnedResponse);
       }).catch(error => console.error(error));
   }
 
   buildTable(contactList) {
     const contactRow = contactList.map(contact => {
-      return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 1}><span className="tableText">0</span></td><td id={contact.contactId + 2}><span className="tableText">{contact.email}</span></td></tr>;
+      return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 1}><span className="tableText">{contact.company}</span></td><td id={contact.contactId + 2}><span className="tableText">{contact.email}</span></td></tr>;
     });
     return (
             <div className="row">
@@ -93,6 +130,7 @@ class ManageFlight extends React.Component {
 
   render() {
     const contactList = this.state.contacts;
+    const contactFlightList = this.state.contactsAssignedToFlight;
     return (
       <div className="flights">
         <div className="row flex">
@@ -116,7 +154,7 @@ class ManageFlight extends React.Component {
             </div>
           </div>
         </div>
-        {contactList.length > 10 ? this.buildTable(contactList) : this.blankElement()}
+        {contactFlightList.length > 0 ? this.buildTable(contactFlightList) : this.blankElement()}
       </div>
     );
   }

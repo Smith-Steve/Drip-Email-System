@@ -69,6 +69,27 @@ app.get('/api/contacts', (req, res) => {
     });
 });
 
+app.get('/api/contacts/flightAssignment/:flightId', (request, response) => {
+  const flightId = parseInt(request.params.flightId, 10);
+  if (!Number.isInteger(flightId) || flightId <= 0) {
+    throw new ClientError('400', 'must enter legitimate flight');
+  }
+  const sqlGetQuery = `select *
+                      from "contacts" as "c"
+                      join "flightAssignments" as "fa" using("contactId")
+                      where "c"."contactId" = "fa"."contactId" and "fa"."flightId" = $1`;
+
+  const getContactFlightAssigmentQueryParameters = [flightId];
+  db.query(sqlGetQuery, getContactFlightAssigmentQueryParameters)
+    .then(result => {
+      const contacts = result.rows;
+      response.status(200).json(contacts);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
 // app.get('/api/contacts/search', (request, response) => {
 //   const searchParam = request;
 //   const sqlGetQuery = 'select * from "contacts" where "firstName" @@ to_tsquery($1) order by "firstName" desc;';
