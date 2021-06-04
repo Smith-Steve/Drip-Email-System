@@ -50,16 +50,6 @@ class ManageFlight extends React.Component {
       ).catch(error => console.error(error));
   }
 
-    getContacts = () => {
-      const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
-      fetch('/api/contacts', initGetContacts)
-        .then(response => response.json())
-        .then(returnedResponse => {
-          this.setState({ contacts: returnedResponse });
-        }
-        ).catch(error => console.error(error));
-    }
-
   contactsAssignedToFlight = () => {
     const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch(`/api/contacts/flightAssignment/${this.props.flight.flightId}`, initGetContacts)
