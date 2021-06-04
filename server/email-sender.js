@@ -1,5 +1,5 @@
-'user strict';
 // const nodemailer = require('nodemailer');
+// require('dotenv/config');
 const pg = require('pg');
 const express = require('express');
 // const ClientError = require('./client-error');
@@ -17,12 +17,12 @@ const database = new pg.Pool({
 });
 
 app.get('/api/email/:scriptId', (request, response) => {
-  const flightId = parseInt(response.body.flightId, 10);
+  const scriptId = parseInt(request.params.scriptId, 10);
   const sqlEmailGetQuery = 'select * from "emails" where "scriptId" = $1';
-  const param = [flightId];
+  const param = [scriptId];
   database.query(sqlEmailGetQuery, param)
     .then(result => {
-      const email = result.body;
+      const email = result.rows;
       response.status(200).json(email);
     }).catch(error => {
       console.error(error);
