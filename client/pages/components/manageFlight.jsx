@@ -158,7 +158,7 @@ class ManageFlight extends React.Component {
             </div>
           </div>
         </div>
-        {contactFlightList.length > 1 ? this.buildTable(contactFlightList) : this.blankElement()}
+        {contactFlightList.length > 0 ? this.buildTable(contactFlightList) : this.blankElement()}
       </div>
     );
   }
