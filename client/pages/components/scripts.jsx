@@ -58,7 +58,7 @@ class Scripts extends React.Component {
 
   buildTable(scriptList) {
     const scriptRow = scriptList.map(script => {
-      return <tr key={script.scriptId}><td key={script.scriptId}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}> <span className="tableText">{script.scriptName}</span></a></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><button className="manageScripts alignRight">Manage Script</button></td></tr>;
+      return <tr key={script.scriptId}><td key={script.scriptId}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}> <span className="tableText">{script.scriptName}</span></a></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><button className="manageScripts alignRight" onSubmit={this.handleSubmit}>Manage Script</button></td></tr>;
     });
     return (
       <div className="row">
@@ -67,8 +67,8 @@ class Scripts extends React.Component {
             <table id="scripts_list">
               <thead>
                 <tr>
-                  <th><span className="specialText align-left">Script Name</span></th>
-                  <th><span className="specialText align-right">Number of E-mails: </span></th>
+                  <th><span className="specialText">Script Name</span></th>
+                  <th><span className="specialText">Number of E-mails: </span></th>
                 </tr>
               </thead>
               <tbody>
@@ -87,7 +87,7 @@ class Scripts extends React.Component {
       <div className="scripts">
         <div className="row">
           <div className="col">
-            <span className="specialText prompt">Script E-mail Chain Set Up:</span>
+            <span className="specialText">Script E-mail Chain Set Up:</span>
           </div>
         </div>
         <div className="row">
@@ -98,7 +98,7 @@ class Scripts extends React.Component {
                   <label>Script Chain Name:</label>
                 </div>
                 <div className="scriptInputContainer">
-                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} maxLength="40" onChange={this.handleChange} required/>
+                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
                 </div>
                 <div className="align-right">
                   <button className="scripts" onSubmit={this.handleSubmit}>Create Script</button>
