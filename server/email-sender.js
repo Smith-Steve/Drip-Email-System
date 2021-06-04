@@ -1,5 +1,5 @@
 // const nodemailer = require('nodemailer');
-// require('dotenv/config');
+require('dotenv/config');
 const pg = require('pg');
 const express = require('express');
 // const ClientError = require('./client-error');
@@ -30,7 +30,7 @@ app.get('/api/email/:scriptId', (request, response) => {
     });
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.EMAIL_PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`express server listening on port ${process.env.PORT}`);
+  console.log(`express server listening on port ${process.env.EMAIL_PORT}`);
 });

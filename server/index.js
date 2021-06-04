@@ -1,5 +1,6 @@
 require('dotenv/config');
 const express = require('express');
+const nodemailer = require('nodemailer');
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
@@ -11,6 +12,8 @@ app.use(express.json());
 app.use(staticMiddleware);
 
 app.use(errorMiddleware);
+
+app.use(express.static('public'));
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -220,6 +223,33 @@ app.post('/api/flightAssignments', (request, response) => {
     .catch(error => {
       console.error(error);
       response.status(500).json({ error: 'please review entered parameters and try again. ' });
+    });
+});
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp-mail.outlook.com',
+  secureConnection: false,
+  port: 587,
+  secure: false,
+  tls: { ciphers: 'SSLv3' },
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+app.get('/api/email/:scriptId', (request, response) => {
+  const scriptId = parseInt(request.params.scriptId, 10);
+  const sqlEmailGetQuery = 'select * from "emails" where "scriptId" = $1';
+  const param = [scriptId];
+  db.query(sqlEmailGetQuery, param)
+    .then(result => {
+
+      const email = result.rows;
+      response.status(200).json(email);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
 
