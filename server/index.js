@@ -57,6 +57,39 @@ app.get('/api/contacts/:contactId', (req, res, next) => {
     });
 });
 
+app.get('/api/contacts', (req, res) => {
+  const sqlGetQuery = 'select * from "contacts" order by "firstName" desc;';
+  db.query(sqlGetQuery)
+    .then(result => {
+      const contacts = result.rows;
+      res.status(200).json(contacts);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
+app.get('/api/contacts/flightAssignment/:flightId', (request, response) => {
+  const flightId = parseInt(request.params.flightId, 10);
+  if (!Number.isInteger(flightId) || flightId <= 0) {
+    throw new ClientError('400', 'must enter legitimate flight');
+  }
+  const sqlGetQuery = `select *
+                      from "contacts" as "c"
+                      join "flightAssignments" as "fa" using("contactId")
+                      where "c"."contactId" = "fa"."contactId" and "fa"."flightId" = $1`;
+
+  const getContactFlightAssigmentQueryParameters = [flightId];
+  db.query(sqlGetQuery, getContactFlightAssigmentQueryParameters)
+    .then(result => {
+      const contacts = result.rows;
+      response.status(200).json(contacts);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
 app.delete('/api/contacts/:contactId', (req, res, next) => {
   const contactId = parseInt(req.params.contactId, 10);
   if (!Number.isInteger(contactId) || contactId <= 0) {
@@ -100,6 +133,18 @@ app.get('/api/scripts', (requests, response) => {
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
+    });
+});
+
+app.get('/api/flights', (request, response) => {
+  const sqlGetQuery = 'select * from "flights" order by "name" desc;';
+  db.query(sqlGetQuery)
+    .then(result => {
+      const flights = result.rows;
+      response.status(200).json(flights);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occurred.' });
     });
 });
 
@@ -151,6 +196,22 @@ app.post('/api/emails', (request, response) => {
 
   const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId") values ($1, $2, $3) returning*;';
   const sqlPostEmailsParams = [subject, emailBody, scriptId];
+  db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
+    .then(result => {
+      const flight = result.rows[0];
+      response.status(201).json(flight);
+    })
+    .catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'please review entered parameters and try again. ' });
+    });
+});
+
+app.post('/api/flightAssignments', (request, response) => {
+  const { flightId, contactId } = request.body;
+
+  const sqlPostEmailsInsert = 'insert into "flightAssignments" ("flightId", "contactId") values ($1, $2) returning*;';
+  const sqlPostEmailsParams = [flightId, contactId];
   db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
     .then(result => {
       const flight = result.rows[0];
