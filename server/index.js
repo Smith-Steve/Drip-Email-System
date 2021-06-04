@@ -90,20 +90,6 @@ app.get('/api/contacts/flightAssignment/:flightId', (request, response) => {
     });
 });
 
-// app.get('/api/contacts/search', (request, response) => {
-//   const searchParam = request;
-//   const sqlGetQuery = 'select * from "contacts" where "firstName" @@ to_tsquery($1) order by "firstName" desc;';
-//   const params = [searchParam];
-//   db.query(sqlGetQuery, params)
-//     .then(result => {
-//       const contacts = result.rows;
-//       response.status(200).json(contacts);
-//     }).catch(error => {
-//       console.error(error);
-//       response.status(500).json({ error: 'an unexpected error occurred.' });
-//     });
-// });
-
 app.delete('/api/contacts/:contactId', (req, res, next) => {
   const contactId = parseInt(req.params.contactId, 10);
   if (!Number.isInteger(contactId) || contactId <= 0) {

@@ -106,7 +106,7 @@ class ManageFlight extends React.Component {
     const contactRow = contactList.map(contact => {
       return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 1}><span className="tableText">{contact.company}</span></td><td id={contact.contactId + 2}><span className="tableText">{contact.email}</span></td></tr>;
     });
-    return (
+    return (<React.Fragment>
             <div className="row">
         <div className="col">
           <div className="table-container lg">
@@ -125,6 +125,10 @@ class ManageFlight extends React.Component {
           </div>
         </div>
       </div>
+    <div className="align-right">
+          <button>Begin Flight</button>
+    </div>
+    </React.Fragment>
     );
   }
 
@@ -154,7 +158,7 @@ class ManageFlight extends React.Component {
             </div>
           </div>
         </div>
-        {contactFlightList.length > 0 ? this.buildTable(contactFlightList) : this.blankElement()}
+        {contactFlightList.length > 100 ? this.buildTable(contactFlightList) : this.blankElement()}
       </div>
     );
   }
