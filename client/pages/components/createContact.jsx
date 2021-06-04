@@ -46,19 +46,19 @@ class CreateContact extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="formBlock">
               <label> Firstname: </label>
-              <input type="text" name="firstName" className="contact" value={this.state.firstName} onChange={this.handleChange} required/>
+              <input type="text" name="firstName" className="contact" value={this.state.firstName} onChange={this.handleChange} maxLength="15" required/>
             </div>
             <div className="formBlock">
               <label> Lastname: </label>
-              <input type="text" name="lastName" className="contact" value={this.state.lastName} onChange={this.handleChange} required/>
+              <input type="text" name="lastName" className="contact" value={this.state.lastName} onChange={this.handleChange} maxLength="15" required/>
             </div>
             <div className="formBlock">
               <label className="companyLabel"> Company: </label>
-              <input type="text" name="company" className="contact" value={this.state.company} onChange={this.handleChange} required/>
+              <input type="text" name="company" className="contact" value={this.state.company} onChange={this.handleChange} maxLength="15" required/>
             </div>
             <div className="formBlock">
               <label className="emailLabel"> E-mail: </label>
-              <input type="email" name="email" className="contact" value={this.state.email} onChange={this.handleChange} required/>
+              <input type="email" name="email" className="contact" value={this.state.email} onChange={this.handleChange} maxLength="15" required/>
             </div>
             <div className="formBlock">
               <label className="phoneLabel"> Phone #: </label>

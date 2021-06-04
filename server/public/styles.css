@@ -208,7 +208,8 @@ button.manageFlights {
   background-color: rgb(0, 128, 128);
 }
 
-button.createEmail {
+button.createEmail,
+div.flights > div.align-right > button {
   margin-top: 3rem;
 }
 

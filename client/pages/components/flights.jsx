@@ -118,7 +118,7 @@ class Flights extends React.Component {
               <form onSubmit={this.submitFlight}>
                 <div className="row">
                   <label>Flight Name:</label>
-                  <input className="margin" type="text" name="name" value={this.state.name} onChange={this.handleChange} required></input>
+                  <input className="margin" type="text" name="name" value={this.state.name} onChange={this.handleChange} maxLength="40" required></input>
                 </div>
                 <div className="row">
                   <label>Flight Topic(s): </label>

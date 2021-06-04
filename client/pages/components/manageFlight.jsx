@@ -115,7 +115,7 @@ class ManageFlight extends React.Component {
                 <tr>
                   <th><span className="specialText align-left">Contact Name</span></th>
                   <th><span className="specialText align-right">Contact Company </span></th>
-                  <th><span className="specialText align-right">Contact Company </span></th>
+                  <th><span className="specialText align-right">Contact Email </span></th>
                 </tr>
               </thead>
               <tbody>
