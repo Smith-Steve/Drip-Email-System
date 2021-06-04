@@ -4,7 +4,7 @@ class ManageFlight extends React.Component {
   constructor(props) {
     super(props);
     this.controlChange = this.controlChange.bind(this);
-    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], experiment: '' };
+    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [] };
   }
 
   componentDidMount() {
