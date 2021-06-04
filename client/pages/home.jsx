@@ -6,14 +6,12 @@ import Scripts from './components/scripts';
 import Flights from './components/flights';
 import ViewScript from './components/viewScript';
 import CreateEmail from './components/createEmail';
-import ManageFlight from './components/manageFlight';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
-    this.setFlight = this.setFlight.bind(this);
-    this.state = { route: '', activeScript: null, activeFlight: null };
+    this.state = { route: '', activeScript: null };
   }
 
   componentDidMount() {
@@ -26,10 +24,6 @@ class Home extends React.Component {
     this.setState({ activeScript: selectedScript });
   }
 
-  setFlight(selectedFlight) {
-    this.setState({ activeFlight: selectedFlight });
-  }
-
   renderComponent() {
     const activeRoute = this.state.route;
     if (activeRoute === 'Contacts') {
@@ -39,11 +33,9 @@ class Home extends React.Component {
     } else if (activeRoute.slice(0, 6) === 'Script') {
       return this.state.activeScript === null ? null : <ViewScript script={this.state.activeScript}/>;
     } else if (activeRoute === 'Flights') {
-      return <Flights getFlight={this.setFlight}/>;
+      return <Flights/>;
     } else if (activeRoute === 'Email') {
       return <CreateEmail script={this.state.activeScript}/>;
-    } else if (activeRoute.slice(0, 12) === 'ManageFlight') {
-      return <ManageFlight flight={this.state.activeFlight}/>;
     }
     return null;
   }

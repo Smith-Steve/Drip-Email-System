@@ -16,7 +16,7 @@ class ViewScript extends React.Component {
       <div className="view-script">
         <div className="row">
           <div className="col">
-              <span className="specialText prompt">Manage Script: {this.props.script.scriptName} </span>
+              <span className="specialText">Manage Script: {this.props.script.scriptName} </span>
           </div>
         </div>
         <div className="row">

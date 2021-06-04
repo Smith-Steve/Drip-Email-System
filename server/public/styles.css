@@ -12,11 +12,6 @@ body {
   display: flex;
 }
 
-.row.flex {
-  display: flex;
-  flex-direction: flex;
-}
-
 .row.view-script {
   width: 100%;
 }
@@ -83,15 +78,13 @@ span {
   white-space: nowrap;
 }
 
-span.specialText.prompt.manageFlightScriptPrompt {
-  margin-left: auto;
-}
-
 .specialText {
+  float: right;
   text-align: center;
 }
 
 span.specialText {
+  float: left;
   font-weight: 650;
   margin-bottom: 1rem;
 }
@@ -102,13 +95,6 @@ span.specialText.view-script {
 
 .align-right {
   text-align: right;
-  float: right;
-}
-
-.align-left,
-span.prompt {
-  text-align: left;
-  float: left;
 }
 
 label {
@@ -203,13 +189,11 @@ button.createContact {
   margin-right: 6.5rem;
 }
 
-button.manageScripts,
-button.manageFlights {
+button.manageScripts {
   background-color: rgb(0, 128, 128);
 }
 
-button.createEmail,
-div.flights > div.align-right > button {
+button.createEmail {
   margin-top: 3rem;
 }
 
@@ -250,8 +234,4 @@ td:nth-child(3n + 1) {
 .flexContainer {
   display: flex;
   flex-wrap: wrap;
-}
-
-.blankElement {
-  margin-top: 1rem;
 }
