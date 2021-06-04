@@ -74,7 +74,7 @@ class ManageFlight extends React.Component {
     return <option key={contact.contactId} id={contact.contactId} value={contact.contactId} name="selectedContactId">{contact.firstName + ' ' + contact.lastName} </option>;
   }
 
-  clearForm = () => this.setState({ selectedContactId: null })
+  clearForm = () => this.setState({ selectedContactId: '' })
 
   controlChange(event) {
     this.setState({ selectedContactId: event.target.value });
@@ -99,6 +99,7 @@ class ManageFlight extends React.Component {
       .then(returnedResponse => {
         if (returnedResponse) alert('added to flight!');
         this.addNewContactToFlight(returnedResponse);
+        this.clearForm();
       }).catch(error => console.error(error));
   }
 
