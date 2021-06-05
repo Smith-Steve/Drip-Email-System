@@ -4,7 +4,8 @@ class ManageFlight extends React.Component {
   constructor(props) {
     super(props);
     this.controlChange = this.controlChange.bind(this);
-    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [] };
+    this.getContacts = this.getContacts.bind(this);
+    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
   }
 
   componentDidMount() {
@@ -39,6 +40,17 @@ class ManageFlight extends React.Component {
         console.error(error);
       });
   };
+
+  launchFlight = () => {
+    const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ final: returnedResponse });
+      }).catch(error => {
+        console.error(error);
+      });
+  }
 
   getContacts = () => {
     const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
@@ -117,7 +129,7 @@ class ManageFlight extends React.Component {
         </div>
       </div>
     <div className="align-right">
-          <button>Begin Flight</button>
+          <button onClick={this.launchFlight}>Begin Flight</button>
     </div>
     </React.Fragment>
     );
