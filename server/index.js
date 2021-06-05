@@ -227,8 +227,10 @@ app.post('/api/flightAssignments', (request, response) => {
 });
 
 const transporter = nodemailer.createTransport({
+  pool: true,
   host: 'smtp-mail.outlook.com',
   secureConnection: false,
+  maxConnections: 1,
   port: 587,
   secure: false,
   tls: { ciphers: 'SSLv3' },
@@ -252,48 +254,26 @@ app.get('/api/email/:scriptId', (request, response) => {
   const param = [scriptId];
   db.query(sqlEmailGetQuery, param)
     .then(result => {
-      handleEmail(result, response);
+      const flightInfo = result.rows[0];
+      handleEmail(flightInfo);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
 
-function handleEmail(result, response) {
-  const email = result.rows[0];
-  let i = 0;
-  email.json_agg.forEach(() => {
-    setTimeout(() => {
-      const contact = email.json_agg[i].email;
-      const info = transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: contact,
-        subject: email.subject,
-        text: email.emailBody
-      }).catch(error => response.status(error));
-      i++;
-    }, 10000);
-  });
+async function handleEmail(flightInfo) {
+
+  for (const [contact] of flightInfo.json_agg.entries()) {
+    const msg = {
+      from: process.env.EMAIL_USER,
+      to: contact.email,
+      subject: flightInfo.subject,
+      text: flightInfo.emailBody
+    };
+    await transporter.sendMail(msg);
+  }
 }
-
-// function handleEmail(result, response) {
-//   const email = result.rows[0];
-//   let i = 0;
-//   email.json_agg.forEach(() => {
-//     setTimeout(() => {
-//       const contact = email.json_agg[i].email;
-//       const info = transporter.sendMail({
-//         from: process.env.EMAIL_USER,
-//         to: contact,
-//         subject: email.subject,
-//         text: email.emailBody
-//       }).catch(error => response.status(error));
-//       i++;
-//     }, 10000);
-//   });
-// }
-
-/// reconfig
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
