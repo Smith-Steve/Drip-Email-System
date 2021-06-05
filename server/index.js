@@ -252,23 +252,48 @@ app.get('/api/email/:scriptId', (request, response) => {
   const param = [scriptId];
   db.query(sqlEmailGetQuery, param)
     .then(result => {
-      const email = result.rows;
-      response.send(email);
-      const info = transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: 'Steve.A.Dore@outlook.com',
-        subject: email[0].subject,
-        text: email[0].emailBody
-      });
-      response.status(200).json({
-        success: 'message successfully sent!',
-        info: nodemailer.getTestMessageUrl(info)
-      });
+      handleEmail(result, response);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
+
+function handleEmail(result, response) {
+  const email = result.rows[0];
+  let i = 0;
+  email.json_agg.forEach(() => {
+    setTimeout(() => {
+      const contact = email.json_agg[i].email;
+      const info = transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: contact,
+        subject: email.subject,
+        text: email.emailBody
+      }).catch(error => response.status(error));
+      i++;
+    }, 10000);
+  });
+}
+
+// function handleEmail(result, response) {
+//   const email = result.rows[0];
+//   let i = 0;
+//   email.json_agg.forEach(() => {
+//     setTimeout(() => {
+//       const contact = email.json_agg[i].email;
+//       const info = transporter.sendMail({
+//         from: process.env.EMAIL_USER,
+//         to: contact,
+//         subject: email.subject,
+//         text: email.emailBody
+//       }).catch(error => response.status(error));
+//       i++;
+//     }, 10000);
+//   });
+// }
+
+/// reconfig
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
