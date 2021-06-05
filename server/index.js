@@ -140,7 +140,7 @@ app.get('/api/scripts', (requests, response) => {
 });
 
 app.get('/api/flights', (request, response) => {
-  const sqlGetQuery = 'select * from "flights" order by "name" desc;';
+  const sqlGetQuery = 'select * from "flights" order by "flightName" desc;';
   db.query(sqlGetQuery)
     .then(result => {
       const flights = result.rows;
@@ -169,15 +169,15 @@ app.get('/api/scripts/:scriptId', (req, res, next) => {
 });
 
 app.post('/api/flights/:scriptId', (request, response) => {
-  const { name, topics } = request.body;
+  const { flightName, topics } = request.body;
   const scriptId = parseInt(request.params.scriptId, 10);
 
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
 
-  const sqlPostFlightsInsert = 'insert into "flights" ("name", "topics", "scriptId") values ($1, $2, $3) returning*;';
-  const sqlPostFlightsParams = [name, topics, scriptId];
+  const sqlPostFlightsInsert = 'insert into "flights" ("flightName", "topics", "scriptId") values ($1, $2, $3) returning*;';
+  const sqlPostFlightsParams = [flightName, topics, scriptId];
   db.query(sqlPostFlightsInsert, sqlPostFlightsParams)
     .then(result => {
       const flight = result.rows[0];
@@ -240,13 +240,30 @@ const transporter = nodemailer.createTransport({
 
 app.get('/api/email/:scriptId', (request, response) => {
   const scriptId = parseInt(request.params.scriptId, 10);
-  const sqlEmailGetQuery = 'select * from "emails" where "scriptId" = $1';
+  const sqlEmailGetQuery = `select DISTINCT on ("f"."flightId")
+                            "f"."flightName" as "flightName", "s"."scriptName", "e"."subject", "e"."emailBody", (select json_agg(json_build_object('firstName', "c"."firstName", 'lastName', "c"."lastName", 'company',"c"."company", 'email', "c"."email"))
+                            from "contacts" as "c")
+                            from "flightAssignments" as "fA"
+                            join "contacts" as "c" on "fA"."contactId" = "c"."contactId"
+                            inner join "flights" as "f" on "fA"."flightId" = "f"."flightId"
+                            inner join "scripts" as "s" on "f"."scriptId" = "s"."scriptId"
+                            inner join "emails" as "e" on "s"."scriptId" = "e"."scriptId"
+                            where "f"."flightId" = "fA"."flightId" and "fA"."flightId" = $1`;
   const param = [scriptId];
   db.query(sqlEmailGetQuery, param)
     .then(result => {
-
       const email = result.rows;
-      response.status(200).json(email);
+      response.send(email);
+      const info = transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: 'Steve.A.Dore@outlook.com',
+        subject: email[0].subject,
+        text: email[0].emailBody
+      });
+      response.status(200).json({
+        success: 'message successfully sent!',
+        info: nodemailer.getTestMessageUrl(info)
+      });
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });

@@ -73,7 +73,7 @@ class ManageFlight extends React.Component {
   blankElement() {
     return (
     <div className="row flex">
-      <span className="specialText prompt blankElement">No Contacts in {this.props.flight.name} Presently </span>
+      <span className="specialText prompt blankElement">No Contacts in {this.props.flight.flightName} Presently </span>
     </div>);
   }
 
@@ -129,7 +129,7 @@ class ManageFlight extends React.Component {
     return (
       <div className="flights">
         <div className="row flex">
-            <span className="specialText prompt">Managing Flight - {this.props.flight.name}</span> <span className="specialText prompt manageFlightScriptPrompt">Script Name: {this.state.script.scriptName}</span>
+            <span className="specialText prompt">Managing Flight - {this.props.flight.flightName}</span> <span className="specialText prompt manageFlightScriptPrompt">Script Name: {this.state.script.scriptName}</span>
         </div>
         <div className="row">
           <div className="col">

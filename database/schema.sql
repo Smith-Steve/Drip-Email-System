@@ -24,7 +24,7 @@ create table "scripts" (
 
 create table "flights" (
   "flightId" serial,
-  "name" text not null,
+  "flightName" text not null,
   "topics" text not null,
   "scriptId" INT not null,
   primary key ("flightId"),
