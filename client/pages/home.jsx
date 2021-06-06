@@ -7,6 +7,7 @@ import Flights from './components/flights';
 import ViewScript from './components/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight';
+import HomeComponent from './homeComponent';
 
 class Home extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class Home extends React.Component {
     } else if (activeRoute.slice(0, 12) === 'ManageFlight') {
       return <ManageFlight flight={this.state.activeFlight}/>;
     }
-    return null;
+    return <HomeComponent/>;
   }
 
   render() {

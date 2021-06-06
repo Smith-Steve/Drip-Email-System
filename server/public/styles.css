@@ -161,7 +161,6 @@ textarea {
   margin: 0 0 2rem 0;
   width: fill-available;
   flex-basis: 100%;
-  flex-grow: 1;
 }
 
 div.scriptInputContainer,
@@ -178,7 +177,7 @@ input.contact {
 
 input:hover {
   cursor: pointer;
-  border: 3px solid rgb(171, 140, 228);
+  border: 2px solid rgb(171, 140, 228);
   box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
 }
 
@@ -265,14 +264,15 @@ td:nth-child(3n + 1) {
   margin-top: 1rem;
 }
 
-/* new css */
+.fa-5x {
+  transform: scale(9);
+  color: rgba(186, 186, 186, 0.1);
+}
 
-#sidebar {
-  border: 1px solid skyblue;
-  width: 100px;
-  position: absolute;
-  margin-top: 3.5em;
-  top: 0;
-  left: 0;
-  bottom: 0;
+.homeComponentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  height: 85vh;
 }

@@ -6,7 +6,7 @@ const Sidebar = () => {
       <React.Fragment>
         <div className="col textContainer-side-bar">
           <div className="sidenav">
-            <h1>Manage</h1>
+            <a href=""><h1>Home</h1></a>
             <a href="#Contacts" ><h4>Contacts</h4></a>
             <h4>Company</h4>
             <a href="#Flights"><h4>Flights</h4></a>
