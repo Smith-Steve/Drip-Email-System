@@ -5,6 +5,8 @@ const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
+const { createEmail, readEmail } = require('./emailTextManager');
+const handleText = require('./textCreator');
 
 const app = express();
 app.use(express.json());
@@ -253,14 +255,17 @@ app.get('/api/email/:flightId', (request, response) => {
   db.query(sqlEmailGetQuery, param)
     .then(result => {
       const flightInfo = result.rows[0];
-      handleEmail(flightInfo);
+      handleEmail(flightInfo, response);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
 
-async function handleEmail(flightInfo) {
+async function handleEmail(flightInfo, response) {
+  handleText(flightInfo);
+  // createEmail('./server/email.txt', flightInfo.emailBody);
+  // readEmail('./server/email.txt');
   for (let i = 0; i < flightInfo.json_agg.length; i++) {
     const contact = flightInfo.json_agg[i];
     const msg = {

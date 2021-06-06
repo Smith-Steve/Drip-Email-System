@@ -1,0 +1,5 @@
+Hello {{contact.firstName}},
+
+We're hoping that you'll stop by. Running a new sales drive this week and its awful busy down here with all the people that are coming into the store. You came by last summer and bought a couple of chairs, and we have some great couches that match them. Why don't you come on down!?
+
+Steve
