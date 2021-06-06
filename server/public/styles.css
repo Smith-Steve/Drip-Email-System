@@ -4,6 +4,11 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /* font-family: 'Playfair Display', serif; secondary font */
 
 /* font-family: 'Montserrat', sans-serif; */
@@ -44,6 +49,10 @@ td,
 .side-bar {
   width: 200px;
   height: 100vh;
+}
+
+.column.side-bar {
+  height: auto;
 }
 
 .top-bar {
@@ -152,7 +161,6 @@ textarea {
   margin: 0 0 2rem 0;
   width: fill-available;
   flex-basis: 100%;
-  flex-grow: 1;
 }
 
 div.scriptInputContainer,
@@ -169,7 +177,7 @@ input.contact {
 
 input:hover {
   cursor: pointer;
-  border: 3px solid rgb(171, 140, 228);
+  border: 2px solid rgb(171, 140, 228);
   box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
 }
 
@@ -254,4 +262,17 @@ td:nth-child(3n + 1) {
 
 .blankElement {
   margin-top: 1rem;
+}
+
+.fa-5x {
+  transform: scale(9);
+  color: rgba(186, 186, 186, 0.1);
+}
+
+.homeComponentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  height: 85vh;
 }
