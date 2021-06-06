@@ -263,15 +263,17 @@ app.get('/api/email/:flightId', (request, response) => {
 });
 
 async function handleEmail(flightInfo) {
-
-  for (const [contact] of flightInfo.json_agg.entries()) {
+  for (let i = 0; i < flightInfo.json_agg.length; i++) {
+    const contact = flightInfo.json_agg[i];
     const msg = {
       from: process.env.EMAIL_USER,
       to: contact.email,
       subject: flightInfo.subject,
       text: flightInfo.emailBody
     };
-    await transporter.sendMail(msg);
+    await transporter.sendMail(msg).catch(error => {
+      console.error(error);
+    });
   }
 }
 

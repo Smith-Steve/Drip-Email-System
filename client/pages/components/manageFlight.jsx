@@ -45,11 +45,14 @@ class ManageFlight extends React.Component {
     const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
       .then(response => response.json())
-      .then(returnedResponse => {
-        this.setState({ final: returnedResponse });
-      }).catch(error => {
+      .then(alert(`flight launched to: /api/email/${this.props.flight.flightId}`))
+      .catch(error => {
         console.error(error);
       });
+  }
+
+  triggerButton = () => {
+    this.launchFlight();
   }
 
   getContacts = () => {
@@ -129,7 +132,7 @@ class ManageFlight extends React.Component {
         </div>
       </div>
     <div className="align-right">
-          <button onClick={this.launchFlight}>Begin Flight</button>
+          <button onClick={this.triggerButton}>Begin Flight</button>
     </div>
     </React.Fragment>
     );
