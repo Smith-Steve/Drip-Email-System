@@ -5,7 +5,7 @@ const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
-const { createEmail, readEmail } = require('./emailTextManager');
+// const { createEmail, readEmail } = require('./emailTextManager');
 const handleText = require('./textCreator');
 
 const app = express();
@@ -263,16 +263,16 @@ app.get('/api/email/:flightId', (request, response) => {
 });
 
 async function handleEmail(flightInfo, response) {
-  handleText(flightInfo);
-  // createEmail('./server/email.txt', flightInfo.emailBody);
-  // readEmail('./server/email.txt');
+  const messageBody = handleText(flightInfo);
+  // createEmail('./server/email.txt', messageBody);
+  // messageBody = readEmail('./server/email.txt');
   for (let i = 0; i < flightInfo.json_agg.length; i++) {
     const contact = flightInfo.json_agg[i];
     const msg = {
       from: process.env.EMAIL_USER,
       to: contact.email,
       subject: flightInfo.subject,
-      text: flightInfo.emailBody
+      text: messageBody
     };
     await transporter.sendMail(msg).catch(error => {
       console.error(error);

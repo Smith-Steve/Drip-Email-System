@@ -1,5 +1,0 @@
-Hello ${contact.firstName},
-
-Hope you're well. Checking in to see how you're doing.
-
-Steve
