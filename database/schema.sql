@@ -20,4 +20,37 @@ create table "scripts" (
   "scriptId" serial,
   "scriptName" text not null,
   primary key ("scriptId")
+);
+
+create table "flights" (
+  "flightId" serial,
+  "flightName" text not null,
+  "topics" text not null,
+  "scriptId" INT not null,
+  primary key ("flightId"),
+  constraint "scriptId"
+   foreign key ("scriptId")
+   references "scripts"("scriptId")
+);
+
+create table "emails" (
+  "emailId" serial,
+  "subject" text not null,
+  "emailBody" text not null,
+  "scriptId" INT not null,
+  primary key ("emailId"),
+  constraint "scriptId"
+   foreign key ("scriptId")
+   references "scripts"("scriptId")
+);
+
+create table "flightAssignments" (
+  "flightId" int not null,
+  "contactId" INT not null,
+  constraint "flightId"
+   foreign key ("flightId")
+   references "flights"("flightId"),
+  constraint "contactId"
+   foreign key ("contactId")
+   references "contacts"("contactId")
 )

@@ -1,5 +1,6 @@
 require('dotenv/config');
 const express = require('express');
+const nodemailer = require('nodemailer');
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
@@ -137,7 +138,7 @@ app.get('/api/scripts', (requests, response) => {
 });
 
 app.get('/api/flights', (request, response) => {
-  const sqlGetQuery = 'select * from "flights" order by "name" desc;';
+  const sqlGetQuery = 'select * from "flights" order by "flightName" desc;';
   db.query(sqlGetQuery)
     .then(result => {
       const flights = result.rows;
@@ -166,15 +167,15 @@ app.get('/api/scripts/:scriptId', (req, res, next) => {
 });
 
 app.post('/api/flights/:scriptId', (request, response) => {
-  const { name, topics } = request.body;
+  const { flightName, topics } = request.body;
   const scriptId = parseInt(request.params.scriptId, 10);
 
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
 
-  const sqlPostFlightsInsert = 'insert into "flights" ("name", "topics", "scriptId") values ($1, $2, $3) returning*;';
-  const sqlPostFlightsParams = [name, topics, scriptId];
+  const sqlPostFlightsInsert = 'insert into "flights" ("flightName", "topics", "scriptId") values ($1, $2, $3) returning*;';
+  const sqlPostFlightsParams = [flightName, topics, scriptId];
   db.query(sqlPostFlightsInsert, sqlPostFlightsParams)
     .then(result => {
       const flight = result.rows[0];
@@ -222,6 +223,57 @@ app.post('/api/flightAssignments', (request, response) => {
       response.status(500).json({ error: 'please review entered parameters and try again. ' });
     });
 });
+
+const transporter = nodemailer.createTransport({
+  pool: true,
+  host: 'smtp-mail.outlook.com',
+  secureConnection: false,
+  maxConnections: 1,
+  port: 587,
+  secure: false,
+  tls: { ciphers: 'SSLv3' },
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+app.get('/api/email/:flightId', (request, response) => {
+  const flightId = parseInt(request.params.flightId, 10);
+  const sqlEmailGetQuery = `select DISTINCT on ("f"."flightId")
+                            "f"."flightName" as "flightName", "s"."scriptName", "e"."subject", "e"."emailBody", (select json_agg(json_build_object('firstName', "c"."firstName", 'lastName', "c"."lastName", 'company',"c"."company", 'email', "c"."email"))
+                            from "contacts" as "c")
+                            from "flightAssignments" as "fA"
+                            join "contacts" as "c" on "fA"."contactId" = "c"."contactId"
+                            inner join "flights" as "f" on "fA"."flightId" = "f"."flightId"
+                            inner join "scripts" as "s" on "f"."scriptId" = "s"."scriptId"
+                            inner join "emails" as "e" on "s"."scriptId" = "e"."scriptId"
+                            where "f"."flightId" = "fA"."flightId" and "fA"."flightId" = $1`;
+  const param = [flightId];
+  db.query(sqlEmailGetQuery, param)
+    .then(result => {
+      const flightInfo = result.rows[0];
+      handleEmail(flightInfo);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occured.' });
+    });
+});
+
+async function handleEmail(flightInfo) {
+  for (let i = 0; i < flightInfo.json_agg.length; i++) {
+    const contact = flightInfo.json_agg[i];
+    const msg = {
+      from: process.env.EMAIL_USER,
+      to: contact.email,
+      subject: flightInfo.subject,
+      text: flightInfo.emailBody
+    };
+    await transporter.sendMail(msg).catch(error => {
+      console.error(error);
+    });
+  }
+}
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console

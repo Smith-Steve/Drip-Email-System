@@ -4,7 +4,8 @@ class ManageFlight extends React.Component {
   constructor(props) {
     super(props);
     this.controlChange = this.controlChange.bind(this);
-    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], experiment: '' };
+    this.getContacts = this.getContacts.bind(this);
+    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
   }
 
   componentDidMount() {
@@ -40,6 +41,20 @@ class ManageFlight extends React.Component {
       });
   };
 
+  launchFlight = () => {
+    const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
+      .then(response => response.json())
+      .then(alert(`flight launched to: /api/email/${this.props.flight.flightId}`))
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  triggerButton = () => {
+    this.launchFlight();
+  }
+
   getContacts = () => {
     const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch('/api/contacts', initGetContacts)
@@ -73,7 +88,7 @@ class ManageFlight extends React.Component {
   blankElement() {
     return (
     <div className="row flex">
-      <span className="specialText prompt blankElement">No Contacts in {this.props.flight.name} Presently </span>
+      <span className="specialText prompt blankElement">No Contacts in {this.props.flight.flightName} Presently </span>
     </div>);
   }
 
@@ -117,7 +132,7 @@ class ManageFlight extends React.Component {
         </div>
       </div>
     <div className="align-right">
-          <button>Begin Flight</button>
+          <button onClick={this.triggerButton}>Begin Flight</button>
     </div>
     </React.Fragment>
     );
@@ -129,7 +144,7 @@ class ManageFlight extends React.Component {
     return (
       <div className="flights">
         <div className="row flex">
-            <span className="specialText prompt">Managing Flight - {this.props.flight.name}</span> <span className="specialText prompt manageFlightScriptPrompt">Script Name: {this.state.script.scriptName}</span>
+            <span className="specialText prompt">Managing Flight - {this.props.flight.flightName}</span> <span className="specialText prompt manageFlightScriptPrompt">Script Name: {this.state.script.scriptName}</span>
         </div>
         <div className="row">
           <div className="col">
