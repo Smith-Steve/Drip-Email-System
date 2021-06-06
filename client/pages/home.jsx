@@ -56,7 +56,7 @@ class Home extends React.Component {
           <Topbar/>
         </div>
         <div className="row">
-          <div className="column side-bar">
+          <div className="column side-bar lg">
             <Sidebar/>
           </div>
           <div className="column component-container">
@@ -67,5 +67,6 @@ class Home extends React.Component {
     </React.Fragment>
     );
   }
+
 }
 export default Home;

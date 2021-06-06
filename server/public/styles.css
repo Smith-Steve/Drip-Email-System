@@ -4,6 +4,11 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /* font-family: 'Playfair Display', serif; secondary font */
 
 /* font-family: 'Montserrat', sans-serif; */
@@ -44,6 +49,10 @@ td,
 .side-bar {
   width: 200px;
   height: 100vh;
+}
+
+.column.side-bar {
+  height: auto;
 }
 
 .top-bar {
@@ -254,4 +263,16 @@ td:nth-child(3n + 1) {
 
 .blankElement {
   margin-top: 1rem;
+}
+
+/* new css */
+
+#sidebar {
+  border: 1px solid skyblue;
+  width: 100px;
+  position: absolute;
+  margin-top: 3.5em;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
