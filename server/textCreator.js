@@ -7,6 +7,9 @@ function textCreator(emailInfo) {
     if (line.includes('{{PersonName}}')) {
       const newLine = line.replace('{{PersonName}}', person.firstName);
       emailArray.push(newLine);
+    } else if (line.includes('{{Company}}')) {
+      const companyNewLine = line.replace('{{Company}}', person.company);
+      emailArray.push(companyNewLine);
     } else if (line.includes('')) {
       const removedNonText = line.replace('', '\n');
       emailArray.push(removedNonText);
