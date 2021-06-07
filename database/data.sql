@@ -8,7 +8,7 @@ insert into "flights" ("flightName", "topics", "scriptId")
 values ('May BBM flight #1', 'Nice', 1);
 
 insert into "emails" ("subject", "emailBody", "scriptId")
-values ('Data Update', 'Hello Blank, hope you are doing well. Sounds like you are having a great day today.', 1);
+values ('Penn Testing', 'Hello {{PersonName}}, Hope you are doing well. We are offering some new penn testing services. We feel this is a great opportunity for you and you all over at {{Company}} to have your software reviewed by some quality consultants.', 1);
 
 insert into "flightAssignments" ("flightId", "contactId")
 values (1, 1);
