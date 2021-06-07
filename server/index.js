@@ -255,19 +255,20 @@ app.get('/api/email/:flightId', (request, response) => {
   db.query(sqlEmailGetQuery, param)
     .then(result => {
       const flightInfo = result.rows[0];
-      handleEmail(flightInfo, response);
+      handleEmail(flightInfo);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
 
-async function handleEmail(flightInfo, response) {
+async function handleEmail(flightInfo) {
   const messageBody = handleText(flightInfo);
   // createEmail('./server/email.txt', messageBody);
   // messageBody = readEmail('./server/email.txt');
-  for (let i = 0; i < flightInfo.json_agg.length; i++) {
-    const contact = flightInfo.json_agg[i];
+  const contactList = flightInfo.json_agg;
+  for (let i = 0; i < contactList.length; i++) {
+    const contact = contactList[i];
     const msg = {
       from: process.env.EMAIL_USER,
       to: contact.email,

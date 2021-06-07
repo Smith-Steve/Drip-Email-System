@@ -45,7 +45,7 @@ class ManageFlight extends React.Component {
     const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
       .then(response => response.json())
-      .then(alert(`flight launched to: /api/email/${this.props.flight.flightId}`))
+      .then(alert('Flight Launched!'))
       .catch(error => {
         console.error(error);
       });
