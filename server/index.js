@@ -267,8 +267,8 @@ app.get('/api/email/:flightId', (request, response) => {
 async function handleEmail(flightInfo) {
   const contactList = flightInfo.json_agg;
   for (let i = 0; i < contactList.length; i++) {
-    const messageBody = handleText(flightInfo);
     const contact = contactList[i];
+    const messageBody = handleText(flightInfo, contact);
     const msg = {
       from: process.env.EMAIL_USER,
       to: contact.email,
