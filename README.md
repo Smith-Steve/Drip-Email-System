@@ -1,3 +1,18 @@
-# final-project
+# Drip Email System
 
-A full stack JavaScript solo project.
+A Full Stack JavaScript || Node.js || PostgreSQL solo project created for users who wish to send customized emails to contacts in groups.
+
+
+# Technologies Used.
+- React.js
+- Node.js
+- PostgreSQL
+- HTML5
+- CSS3
+- Webpack
+- Nodemailer
+
+# Featues
+ - Conditionaly rendered components.
+ - User can send emails.
+ - E-mails are dynamically formulated based on user provided input.
