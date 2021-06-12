@@ -12,7 +12,7 @@ A Full Stack JavaScript || Node.js || PostgreSQL solo project created for users 
 - Webpack
 - Nodemailer
 
-# Featues
+# Features
  - Conditionaly rendered components.
  - User can send emails.
  - E-mails are dynamically formulated based on user provided input.
