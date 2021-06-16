@@ -1,4 +1,5 @@
 import React from 'react';
+import FlightTable from './flightTable';
 
 class ManageFlight extends React.Component {
   constructor(props) {
@@ -41,15 +42,15 @@ class ManageFlight extends React.Component {
       });
   };
 
-  launchFlight = () => {
-    const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
-    fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
-      .then(response => response.json())
-      .then(alert('Flight Launched!'))
-      .catch(error => {
-        console.error(error);
-      });
-  }
+  // launchFlight = () => {
+  //   const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+  //   fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
+  //     .then(response => response.json())
+  //     .then(alert('Flight Launched!'))
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }
 
   triggerButton = () => {
     this.launchFlight();
@@ -108,36 +109,6 @@ class ManageFlight extends React.Component {
       }).catch(error => console.error(error));
   }
 
-  buildTable(contactList) {
-    const contactRow = contactList.map(contact => {
-      return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 1}><span className="tableText">{contact.company}</span></td><td id={contact.contactId + 2}><span className="tableText">{contact.email}</span></td></tr>;
-    });
-    return (<React.Fragment>
-            <div className="row">
-        <div className="col">
-          <div className="table-container lg">
-            <table id="contact_list">
-              <thead>
-                <tr>
-                  <th><span className="specialText align-left">Contact Name</span></th>
-                  <th><span className="specialText align-right">Contact Company </span></th>
-                  <th><span className="specialText align-right">Contact Email </span></th>
-                </tr>
-              </thead>
-              <tbody>
-                {contactRow}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    <div className="align-right">
-          <button onClick={this.triggerButton}>Begin Flight</button>
-    </div>
-    </React.Fragment>
-    );
-  }
-
   render() {
     const contactList = this.state.contacts;
     const contactFlightList = this.state.contactsAssignedToFlight;
@@ -164,7 +135,7 @@ class ManageFlight extends React.Component {
             </div>
           </div>
         </div>
-        {contactFlightList.length > 0 ? this.buildTable(contactFlightList) : this.blankElement()}
+        {contactFlightList.length > 0 ? <FlightTable contactList={contactFlightList} flightId={this.props.flight.flightId}/> : this.blankElement()}
       </div>
     );
   }
