@@ -5,7 +5,7 @@ const triggerButton = flightId => {
   launchFlight(flightId);
 };
 
-export default function FlightTable({ contactList, flightId }) {
+function FlightTable({ contactList, flightId }) {
   const contactRow = contactList.map(contact => {
     return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 1}><span className="tableText">{contact.company}</span></td><td id={contact.contactId + 2}><span className="tableText">{contact.email}</span></td></tr>;
   });
@@ -34,3 +34,12 @@ export default function FlightTable({ contactList, flightId }) {
     </React.Fragment>
   );
 }
+
+function BlankElement({ flightName }) {
+  return (
+    <div className="row flex">
+      <span className="specialText prompt blankElement">No Contacts in {flightName} Presently </span>
+    </div>);
+}
+
+export { FlightTable, BlankElement };

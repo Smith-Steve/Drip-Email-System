@@ -72,6 +72,23 @@ app.get('/api/contacts', (req, res) => {
     });
 });
 
+// app.get('/api/contacts/:flightId', (req, res) => {
+//   const flightId = parseInt(req.params.flightId, 10);
+//   const sqlGetQuery = `select DISTINCT on ("c"."contactId") "c"."contactId", "c"."firstName", "c"."lastName"
+//                         from "contacts" as "c"
+//                         join "flightAssignments" as "fA" ON ("fA"."contactId" = "c"."contactId")
+//                         where "fA"."flightId" <> $1`;
+//   const sqlGetContacts = [flightId];
+//   db.query(sqlGetQuery, sqlGetContacts)
+//     .then(result => {
+//       const contacts = result.rows;
+//       res.status(200).json(contacts);
+//     }).catch(error => {
+//       console.error(error);
+//       res.status(500).json({ error: 'an unexpected error occurred.' });
+//     });
+// });
+
 app.get('/api/contacts/flightAssignment/:flightId', (request, response) => {
   const flightId = parseInt(request.params.flightId, 10);
   if (!Number.isInteger(flightId) || flightId <= 0) {

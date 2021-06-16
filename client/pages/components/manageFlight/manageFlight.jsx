@@ -1,12 +1,12 @@
 import React from 'react';
-import FlightTable from './flightTable';
+import { FlightTable, BlankElement } from './flightTable';
 
 class ManageFlight extends React.Component {
   constructor(props) {
     super(props);
     this.controlChange = this.controlChange.bind(this);
     this.getContacts = this.getContacts.bind(this);
-    this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
+    this.state = { script: '', contacts: [], unassignedContacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
   }
 
   componentDidMount() {
@@ -42,20 +42,6 @@ class ManageFlight extends React.Component {
       });
   };
 
-  // launchFlight = () => {
-  //   const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
-  //   fetch(`/api/email/${this.props.flight.flightId}`, initGetLaunchFlight)
-  //     .then(response => response.json())
-  //     .then(alert('Flight Launched!'))
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
-
-  triggerButton = () => {
-    this.launchFlight();
-  }
-
   getContacts = () => {
     const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch('/api/contacts', initGetContacts)
@@ -84,13 +70,6 @@ class ManageFlight extends React.Component {
 
   controlChange(event) {
     this.setState({ selectedContactId: event.target.value });
-  }
-
-  blankElement() {
-    return (
-    <div className="row flex">
-      <span className="specialText prompt blankElement">No Contacts in {this.props.flight.flightName} Presently </span>
-    </div>);
   }
 
   submitFlightAssignment = event => {
@@ -135,7 +114,7 @@ class ManageFlight extends React.Component {
             </div>
           </div>
         </div>
-        {contactFlightList.length > 0 ? <FlightTable contactList={contactFlightList} flightId={this.props.flight.flightId}/> : this.blankElement()}
+        {contactFlightList.length > 0 ? <FlightTable contactList={contactFlightList} flightId={this.props.flight.flightId}/> : <BlankElement flightName={this.props.flight.flightName}/>}
       </div>
     );
   }
