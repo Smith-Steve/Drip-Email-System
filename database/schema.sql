@@ -47,7 +47,7 @@ create table "emails" (
 create table "flightAssignments" (
   "flightId" int not null,
   "contactId" INT not null,
-  unique("contactId"),
+  unique("contactId", "flightId"),
   constraint "flightId"
    foreign key ("flightId")
    references "flights"("flightId"),
