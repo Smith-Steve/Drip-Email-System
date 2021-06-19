@@ -1,10 +1,11 @@
 import React from 'react';
 import Sidebar from './sidebar';
 import Topbar from './topbar';
-import CreateContact from './components/createContact';
-import Scripts from './components/scripts';
-import Flights from './components/flights';
-import ViewScript from './components/viewScript';
+import parseRoute from './lib/parse-route';
+import CreateContact from './components/contacts/createContact';
+import Scripts from './components/scriptsFolder/scripts';
+import Flights from './components/flight/flights';
+import ViewScript from './components/scriptsFolder/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
@@ -19,7 +20,8 @@ class Home extends React.Component {
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
-      this.setState({ route: window.location.hash.replace('#', '') });
+      const activeRoute = parseRoute(window.location.hash);
+      this.setState({ route: activeRoute });
     });
   }
 
@@ -33,11 +35,12 @@ class Home extends React.Component {
 
   renderComponent() {
     const activeRoute = this.state.route;
+    console.log(activeRoute); // eslint-disable-line no-console
     if (activeRoute === 'Contacts') {
       return <CreateContact/>;
     } else if (activeRoute === 'Scripts') {
       return <Scripts setActiveScript={this.setActiveScript}/>;
-    } else if (activeRoute.slice(0, 6) === 'Script') {
+    } else if (activeRoute === 'Script') {
       return this.state.activeScript === null ? null : <ViewScript script={this.state.activeScript}/>;
     } else if (activeRoute === 'Flights') {
       return <Flights getFlight={this.setFlight}/>;
