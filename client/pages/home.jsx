@@ -6,7 +6,7 @@ import Scripts from './components/scripts';
 import Flights from './components/flights';
 import ViewScript from './components/viewScript';
 import CreateEmail from './components/createEmail';
-import ManageFlight from './components/manageFlight';
+import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
 
 class Home extends React.Component {
