@@ -1,10 +1,11 @@
 import React from 'react';
 import Sidebar from './sidebar';
 import Topbar from './topbar';
-import CreateContact from './components/createContact';
-import Scripts from './components/scripts';
-import Flights from './components/flights';
-import ViewScript from './components/viewScript';
+import parseRoute from './lib/parse-route';
+import CreateContact from './components/contacts/createContact';
+import Scripts from './components/scriptsFolder/scripts';
+import Flights from './components/flight/flights';
+import ViewScript from './components/scriptsFolder/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
@@ -14,12 +15,13 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
-    this.state = { route: '', activeScript: null, activeFlight: null };
+    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null };
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
-      this.setState({ route: window.location.hash.replace('#', '') });
+      const activeRoute = parseRoute(window.location.hash);
+      this.setState({ route: activeRoute });
     });
   }
 
@@ -33,17 +35,17 @@ class Home extends React.Component {
 
   renderComponent() {
     const activeRoute = this.state.route;
-    if (activeRoute === 'Contacts') {
+    if (activeRoute.path === 'Contacts') {
       return <CreateContact/>;
-    } else if (activeRoute === 'Scripts') {
+    } else if (activeRoute.path === 'Scripts') {
       return <Scripts setActiveScript={this.setActiveScript}/>;
-    } else if (activeRoute.slice(0, 6) === 'Script') {
-      return this.state.activeScript === null ? null : <ViewScript script={this.state.activeScript}/>;
-    } else if (activeRoute === 'Flights') {
+    } else if (activeRoute.path.slice(0, 6) === 'Script') {
+      return this.state.activeScript.path === null ? null : <ViewScript script={this.state.activeScript}/>;
+    } else if (activeRoute.path === 'Flights') {
       return <Flights getFlight={this.setFlight}/>;
-    } else if (activeRoute === 'Email') {
+    } else if (activeRoute.path === 'Email') {
       return <CreateEmail script={this.state.activeScript}/>;
-    } else if (activeRoute.slice(0, 12) === 'ManageFlight') {
+    } else if (activeRoute.path.slice(0, 12) === 'ManageFlight') {
       return <ManageFlight flight={this.state.activeFlight}/>;
     }
     return <HomeComponent/>;

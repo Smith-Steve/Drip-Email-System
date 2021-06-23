@@ -1,4 +1,3 @@
-
 const launchFlight = flightId => {
   const initGetLaunchFlight = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
   fetch(`/api/email/${flightId}`, initGetLaunchFlight)
@@ -8,5 +7,4 @@ const launchFlight = flightId => {
       console.error(error);
     });
 };
-
-export default launchFlight;
+export { launchFlight };
