@@ -49,6 +49,8 @@ td,
 .side-bar {
   width: 200px;
   height: 100vh;
+  flex-direction: column;
+  border: 3px solid rgba(186, 186, 186, 0.5);
 }
 
 .column.side-bar {

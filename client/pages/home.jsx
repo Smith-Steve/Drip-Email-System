@@ -1,6 +1,5 @@
 import React from 'react';
 import Sidebar from './sidebar';
-import Topbar from './topbar';
 import parseRoute from './lib/parse-route';
 import CreateContact from './components/contacts/createContact';
 import Scripts from './components/scriptsFolder/scripts';
@@ -56,12 +55,7 @@ class Home extends React.Component {
     <React.Fragment>
       <div className="container">
         <div className="row">
-          <Topbar/>
-        </div>
-        <div className="row">
-          <div className="column side-bar lg">
             <Sidebar/>
-          </div>
           <div className="column component-container">
             {this.renderComponent()}
           </div>
