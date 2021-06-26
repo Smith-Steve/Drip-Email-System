@@ -12,6 +12,7 @@ const Sidebar = ({ sideBarState }) => {
             <h4>Company</h4>
             <a href="#Flights"><h4>Flights</h4></a>
             <a href="#Scripts" ><h4>Scripts</h4></a>
+            <h4>MyAccount</h4>
           </div>
         </div>
       </React.Fragment>

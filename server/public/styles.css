@@ -73,7 +73,6 @@ span {
 
 .column.picture {
   float: left;
-  width: 691px;
 }
 
 .column.form {
@@ -123,8 +122,6 @@ span.prompt {
 }
 
 label {
-  display: inline-block;
-  text-align: right;
   margin: 0 1rem 1rem 0;
   white-space: nowrap;
 }
@@ -172,11 +169,6 @@ div.emailInputContainer {
   justify-content: center;
 }
 
-input.contact {
-  width: 65%;
-  display: inline-block;
-}
-
 input:hover {
   cursor: pointer;
   border: 2px solid rgb(171, 140, 228);
@@ -186,7 +178,6 @@ input:hover {
 img {
   width: 450px;
   height: 450px;
-  margin-left: 3rem;
   margin-top: 3rem;
 }
 
@@ -277,4 +268,9 @@ td:nth-child(3n + 1) {
   align-items: center;
   padding: 10px;
   height: 85vh;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
 }

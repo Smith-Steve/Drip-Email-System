@@ -14,6 +14,7 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
+    this.manageSideBar = this.manageSideBar.bind(this);
     this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed', x: null };
   }
 
