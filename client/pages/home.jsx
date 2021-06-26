@@ -14,13 +14,21 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
-    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null };
+    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed', x: null };
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       const activeRoute = parseRoute(window.location.hash);
       this.setState({ route: activeRoute });
+    });
+
+    document.addEventListener('mousemove', () => {
+      if (event.pageX < 200) {
+        this.setState({ sideBar: 'open' });
+      } else if (event.pageX > 200) {
+        this.setState({ sideBar: 'closed' });
+      }
     });
   }
 
@@ -30,6 +38,16 @@ class Home extends React.Component {
 
   setFlight(selectedFlight) {
     this.setState({ activeFlight: selectedFlight });
+  }
+
+  manageSideBar(event) {
+    let sideBarControl = 'closed';
+    if (this.state.x <= 200) {
+      sideBarControl = 'open';
+    } else {
+      sideBarControl = 'closed';
+    }
+    this.setState({ sideBar: sideBarControl });
   }
 
   renderComponent() {
@@ -53,9 +71,9 @@ class Home extends React.Component {
   render() {
     return (
     <React.Fragment>
-      <div className="container">
+      <div className='container'>
         <div className="row">
-            <Sidebar/>
+            <Sidebar sideBarState={this.state.sideBar}/>
           <div className="column component-container">
             {this.renderComponent()}
           </div>
