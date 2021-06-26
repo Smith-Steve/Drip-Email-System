@@ -58,7 +58,7 @@ export default class CreateContact extends React.Component {
                 <input type="text" name="company" value={this.state.company} onChange={this.handleChange} maxLength="15" required/>
               </div>
               <div className="input-row">
-                <label> E-mail </label>
+                <label> E-mail: </label>
                 <input type="email" name="email" value={this.state.email} onChange={this.handleChange} maxLength="30" required/>
               </div>
               <div className="input-row">

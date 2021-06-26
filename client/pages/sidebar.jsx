@@ -2,6 +2,7 @@
 import React from 'react';
 
 const Sidebar = ({ sideBarState }) => {
+
   return (
     <div className={`side-bar lg ${sideBarState}`}>
       <React.Fragment>

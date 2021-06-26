@@ -9,10 +9,6 @@ body {
   height: 100%;
 }
 
-/* font-family: 'Playfair Display', serif; secondary font */
-
-/* font-family: 'Montserrat', sans-serif; */
-
 .row {
   display: flex;
 }
@@ -50,7 +46,7 @@ td,
   width: 200px;
   height: 100vh;
   flex-direction: column;
-  border: 3px solid rgba(186, 186, 186, 0.5);
+  border: 0.188rem solid rgba(186, 186, 186, 0.5);
 }
 
 .column.side-bar {
@@ -72,7 +68,7 @@ span {
 }
 
 .column.picture {
-  float: left;
+  margin-right: 60px;
 }
 
 .column.form {
@@ -154,7 +150,7 @@ input,
 select,
 textarea {
   display: block;
-  border: 1px solid rgb(171, 140, 228);
+  border: rgba(186, 186, 186, 0.5) 0.188rem solid;
   padding: 0.3rem;
   font-size: 1rem;
   margin: 0 0 2rem 0;
@@ -162,17 +158,17 @@ textarea {
   flex-basis: 100%;
 }
 
-div.scriptInputContainer,
+input:hover,
+textarea:hover {
+  cursor: pointer;
+  border: 0.188rem solid rgb(171, 140, 228);
+  box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
+}
+
 div.emailInputContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-input:hover {
-  cursor: pointer;
-  border: 2px solid rgb(171, 140, 228);
-  box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
 }
 
 img {
@@ -193,10 +189,6 @@ button {
   cursor: pointer;
   box-shadow: 2px 2px rgb(0, 0, 0, 0.5);
   padding: 0.3rem 0.7rem;
-}
-
-button:hover {
-  background-color: rgb(171, 140, 228);
 }
 
 button.createContact {
@@ -224,10 +216,6 @@ label.phoneLabel {
 
 label.companyLabel {
   margin-right: 1.1rem;
-}
-
-.margin {
-  margin-left: 0.7rem;
 }
 
 table {

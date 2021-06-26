@@ -116,15 +116,15 @@ class Flights extends React.Component {
           <div className="col">
             <div className="form-container lg">
               <form onSubmit={this.submitFlight}>
-                <div className="row">
+                <div className="input-row">
                   <label>Flight Name:</label>
-                  <input className="margin" type="text" name="flightName" value={this.state.flightName} onChange={this.handleChange} maxLength="40" required></input>
+                  <input type="text" name="flightName" value={this.state.flightName} onChange={this.handleChange} maxLength="40" required></input>
                 </div>
-                <div className="row">
+                <div className="input-row">
                   <label>Flight Topic(s): </label>
                   <input name="topics" value={this.state.topics} onChange={this.handleChange} required></input>
                 </div>
-                <div className="row">
+                <div className="input-row">
                   <label>Choose Script: </label>
                   <select id="scripts" value={this.state.selectedScriptId} onChange={this.handleChange} name="selectedScriptId">
                     <option value="" className="defaultOption">Select a Script Here</option>

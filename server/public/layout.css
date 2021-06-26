@@ -12,3 +12,11 @@ div.sidenav.closed {
   transform: translateX(-120%);
   transition: transform 1s ease;
 }
+
+div.side-bar.closed {
+  display: none;
+}
+
+.row:first-of-type {
+  overflow: hidden;
+}
