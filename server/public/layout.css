@@ -19,8 +19,17 @@ div.sidenav.closed {
   flex-direction: row;
 }
 
-/* .column.component-container,
-div.flights {
+.column.component-container {
+  width: 100%;
+  height: 100%;
+}
 
-  transition: flex-grow 1s ease;
-} */
+.column.component-container.closed {
+  transform: translateX(-5%);
+  transition: transform 1s ease;
+}
+
+.column.component-container.open {
+  transform: translateX(5%);
+  transition: transform 1s ease;
+}

@@ -75,7 +75,7 @@ class Home extends React.Component {
       <div className='container'>
         <div className="row">
             <Sidebar sideBarState={this.state.sideBar}/>
-          <div className="column component-container">
+          <div className={`column component-container ${this.state.sideBar}`}>
             {this.renderComponent()}
           </div>
         </div>
