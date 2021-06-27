@@ -30,6 +30,6 @@ div.sidenav.closed {
 }
 
 .column.component-container.open {
-  transform: translateX(5%);
+  transform: translateX(0);
   transition: transform 1s ease;
 }
