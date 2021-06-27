@@ -43,9 +43,7 @@ td,
 }
 
 .side-bar {
-  width: 200px;
   height: 100vh;
-  flex-direction: column;
   border: 0.188rem solid rgba(186, 186, 186, 0.5);
 }
 

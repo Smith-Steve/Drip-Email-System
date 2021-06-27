@@ -4,6 +4,7 @@ div.textContainer-side-bar.open,
 div.sidenav.open {
   transform: translateX(0);
   transition: transform 1s ease;
+  flex: 1 1 200px;
 }
 
 div.side-bar.closed,
@@ -13,10 +14,13 @@ div.sidenav.closed {
   transition: transform 1s ease;
 }
 
-div.side-bar.closed {
-  display: none;
-}
-
 .row:first-of-type {
   overflow: hidden;
+  flex-direction: row;
 }
+
+/* .column.component-container,
+div.flights {
+
+  transition: flex-grow 1s ease;
+} */
