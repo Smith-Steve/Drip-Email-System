@@ -1,0 +1,26 @@
+
+div.side-bar.open,
+div.textContainer-side-bar.open,
+div.sidenav.open {
+  transform: translateX(0);
+  transition: transform 1s ease;
+  flex: 1 1 200px;
+}
+
+div.side-bar.closed,
+div.textContainer-side-bar.closed,
+div.sidenav.closed {
+  transform: translateX(-120%);
+  transition: transform 1s ease;
+}
+
+.row:first-of-type {
+  overflow: hidden;
+  flex-direction: row;
+}
+
+/* .column.component-container,
+div.flights {
+
+  transition: flex-grow 1s ease;
+} */
