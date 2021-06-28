@@ -21,7 +21,7 @@ div.sidenav.closed {
 
 .column.component-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 /* .column.component-container.closed {
