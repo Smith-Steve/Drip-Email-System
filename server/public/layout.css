@@ -24,12 +24,23 @@ div.sidenav.closed {
   height: 100%;
 }
 
+/* .column.component-container.closed {
+  transform: translate(-5%);
+  transition: transform 1s ease;
+} */
+
 .column.component-container.closed {
-  transform: translateX(-5%);
+  transform: translate(-3.75%) scale(1.073, 1);
   transition: transform 1s ease;
 }
 
 .column.component-container.open {
-  transform: translateX(5%);
+  transform: translateX(0);
   transition: transform 1s ease;
+}
+
+@media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
+  .column.picture {
+    display: none;
+  }
 }
