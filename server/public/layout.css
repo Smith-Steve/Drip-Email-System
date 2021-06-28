@@ -39,7 +39,7 @@ div.sidenav.closed {
   transition: transform 1s ease;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
   .column.picture {
     display: none;
   }
