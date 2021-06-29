@@ -1,4 +1,3 @@
-
 div.side-bar.open,
 div.textContainer-side-bar.open,
 div.sidenav.open {
@@ -24,11 +23,6 @@ div.sidenav.closed {
   height: 100vh;
 }
 
-/* .column.component-container.closed {
-  transform: translate(-5%);
-  transition: transform 1s ease;
-} */
-
 .column.component-container.closed {
   transform: translate(-3.75%) scale(1.073, 1);
   transition: transform 1s ease;
@@ -42,5 +36,36 @@ div.sidenav.closed {
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
   .column.picture {
     display: none;
+  }
+
+  .side-bar {
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    padding: 1rem 2rem 0 0;
+  }
+
+  .row:first-of-type {
+    flex-direction: column;
+  }
+
+  .component-container.open,
+  .component-container.closed {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    overflow: none;
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  .flights,
+  .contacts,
+  .scripts,
+  .view-script {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
   }
 }
