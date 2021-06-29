@@ -72,7 +72,7 @@ class Home extends React.Component {
   render() {
     return (
     <React.Fragment>
-      <div className='container' id='container'>
+      <div className={`container ${this.state.sideBar}`}>
         <div className="row">
             <Sidebar sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
