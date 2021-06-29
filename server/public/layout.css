@@ -40,31 +40,32 @@ div.sidenav.closed {
 
   .side-bar {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     top: 0;
     height: 100vh;
     padding: 1rem 2rem 0 0;
   }
 
-  .component-container.open {
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.9);
-  }
-
   .row:first-of-type {
     flex-direction: column;
   }
 
-  .component-container {
+  .component-container.open,
+  .component-container.closed {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     overflow: none;
+    padding: 1rem 1rem 0 1rem;
   }
 
-  .flights {
-    flex-wrap: wrap;
-    min-width: auto;
+  .flights,
+  .contacts,
+  .scripts,
+  .view-script {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
   }
 }
