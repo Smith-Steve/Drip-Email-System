@@ -60,6 +60,15 @@ div.sidenav.closed {
     padding: 1rem 1rem 0 1rem;
   }
 
+  .component-container.open *,
+  .container.open,
+  .open input,
+  .open button {
+    background-color: rgb(1, 1, 1);
+    border: 0.188rem solid rgb(1, 1, 1);
+    color: rgb(1, 1, 1);
+  }
+
   .flights,
   .contacts,
   .scripts,
