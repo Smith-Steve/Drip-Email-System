@@ -24,10 +24,11 @@ class Home extends React.Component {
       this.setState({ route: activeRoute });
     });
 
-    document.addEventListener('mousemove', () => {
-      if (event.pageX < 200) {
+    window.addEventListener('mousemove', () => {
+
+      if (event.clientX < 100) {
         this.setState({ sideBar: 'open' });
-      } else if (event.pageX > 200) {
+      } else if (event.clientX > 100) {
         this.setState({ sideBar: 'closed' });
       }
     });

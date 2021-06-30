@@ -22,17 +22,6 @@ a {
   text-decoration: none;
 }
 
-.col {
-  width: 100%;
-}
-
-.component-container,
-th,
-td,
-.flexContainer {
-  padding: 2rem;
-}
-
 .side-bar {
   border: 0.188rem solid rgba(186, 186, 186, 0.5);
 }
@@ -244,4 +233,24 @@ td:nth-child(3n + 1) {
 .input-row {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
+  .component-container.open *,
+  .container.open,
+  .open input,
+  .open button {
+    background-color: rgb(1, 1, 1);
+    color: rgb(1, 1, 1);
+    border: 0.188rem solid rgb(1, 1, 1);
+  }
+
+  .table-container button {
+    font-size: 1rem;
+  }
+
+  .table-container .specialText,
+  .table-container .tableText {
+    font-size: 1rem;
+  }
 }
