@@ -2,6 +2,37 @@
   width: 100%;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: flex;
+}
+
+.row.view-script {
+  width: 100%;
+}
+
+.column.side-bar {
+  height: auto;
+}
+
+.column.picture {
+  margin-right: 60px;
+}
+
+.column.form {
+  float: left;
+  width: 691px;
+}
+
+.textContainer-side-bar {
+  margin-left: 1rem;
+}
+
 div.side-bar.open,
 div.textContainer-side-bar.open,
 div.sidenav.open {
@@ -44,6 +75,109 @@ div.sidenav.closed {
   transition: transform 1s ease;
 }
 
+span.specialText.view-script {
+  flex: 0 0 100%;
+}
+
+span.specialText {
+  margin-bottom: 1rem;
+}
+
+.align-right {
+  text-align: right;
+  float: right;
+}
+
+.align-left,
+span.prompt {
+  text-align: left;
+  float: left;
+}
+
+label {
+  margin: 0 1rem 1rem 0;
+  white-space: nowrap;
+}
+
+form {
+  margin: 1rem;
+  padding: 2rem;
+}
+
+.form-container,
+.table-container {
+  flex-basis: 100%;
+  padding: 0.4rem;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  margin: 0 0 2rem 0;
+  width: fill-available;
+  flex-basis: 100%;
+}
+
+div.emailInputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  padding: 0.3rem 0.7rem;
+}
+
+button.createContact {
+  margin-top: 3rem;
+  margin-right: 6.5rem;
+}
+
+button.createEmail,
+div.flights > div.align-right > button {
+  margin-top: 3rem;
+}
+
+label.emailLabel {
+  margin-right: 2.5rem;
+}
+
+label.phoneLabel {
+  margin-right: 1.7rem;
+}
+
+label.companyLabel {
+  margin-right: 1.1rem;
+}
+
+table {
+  border-collapse: collapse;
+  flex-basis: 100%;
+}
+
+td {
+  text-align: center;
+}
+
+td:nth-child(3n + 1) {
+  text-align: left;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blankElement {
+  margin-top: 1rem;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
   .column.picture {
     display: none;
@@ -69,13 +203,6 @@ div.sidenav.closed {
     flex-direction: column;
     overflow: none;
     padding: 1rem 1rem 0 2.5rem;
-  }
-
-  .component-container.open *,
-  .container.open,
-  .open input,
-  .open button {
-    border: 0.188rem solid rgb(1, 1, 1);
   }
 
   .flights,
