@@ -76,9 +76,9 @@ textarea:hover {
 }
 
 img {
-  width: 450px;
-  height: 450px;
-  margin-top: 3rem;
+  width: 565px;
+  height: 712px;
+  margin-top: 0.5rem;
 }
 
 button {
@@ -127,7 +127,7 @@ tbody tr:nth-child(odd) {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  height: 85vh;
+  height: 92vh;
 }
 
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
