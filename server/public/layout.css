@@ -189,6 +189,15 @@ td:nth-child(3n + 1) {
   flex-direction: column;
 }
 
+.row.parent {
+  display: flex;
+}
+
+.side-bar {
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
   .column.picture {
     display: none;

@@ -9,7 +9,6 @@ a {
 }
 
 .side-bar {
-  min-height: 100%;
   border: 0.188rem solid rgba(186, 186, 186, 0.5);
 }
 
@@ -128,7 +127,7 @@ tbody tr:nth-child(odd) {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  height: 92vh;
+  height: 85vh;
 }
 
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
