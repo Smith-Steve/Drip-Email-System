@@ -109,6 +109,18 @@ tbody tr:nth-child(odd) {
   color: rgba(186, 186, 186, 0.1);
 }
 
+.fa-arrow-left {
+  transform: scale(4);
+  color: rgba(186, 186, 186, 0.1);
+}
+
+.fa-arrow-left.hidden {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 2s;
+  transition-delay: 0.5s;
+}
+
 .homeComponentContainer {
   display: flex;
   justify-content: center;

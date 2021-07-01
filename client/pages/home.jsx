@@ -8,6 +8,7 @@ import ViewScript from './components/scriptsFolder/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
+import Arrow from './arrow';
 
 class Home extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class Home extends React.Component {
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
     this.manageSideBar = this.manageSideBar.bind(this);
-    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed', x: null };
+    this.setArrow = this.setArrow.bind(this);
+    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed', x: null, arrowVisibility: 'visible' };
   }
 
   componentDidMount() {
@@ -27,6 +29,7 @@ class Home extends React.Component {
     window.addEventListener('mousemove', () => {
 
       if (event.clientX < 100) {
+        this.setArrow();
         this.setState({ sideBar: 'open' });
       } else if (event.clientX > 100) {
         this.setState({ sideBar: 'closed' });
@@ -40,6 +43,16 @@ class Home extends React.Component {
 
   setFlight(selectedFlight) {
     this.setState({ activeFlight: selectedFlight });
+  }
+
+  setArrow() {
+    let executed = false;
+    return function () {
+      if (!executed) {
+        executed = true;
+        this.setState({ arrowVisibility: 'hidden' });
+      }
+    };
   }
 
   manageSideBar(event) {
@@ -77,6 +90,7 @@ class Home extends React.Component {
         <div className="row">
             <Sidebar sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
+            <Arrow sideBarState={this.state.sideBar}/>
             {this.renderComponent()}
           </div>
         </div>

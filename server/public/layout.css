@@ -125,6 +125,14 @@ div.emailInputContainer {
   justify-content: center;
 }
 
+.component-container .fa-arrow-left {
+  position: absolute;
+  z-index: 2;
+  display: inline;
+  line-height: 700px;
+  white-space: nowrap;
+}
+
 button {
   padding: 0.3rem 0.7rem;
 }
