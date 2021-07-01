@@ -9,6 +9,7 @@ a {
 }
 
 .side-bar {
+  min-height: 100%;
   border: 0.188rem solid rgba(186, 186, 186, 0.5);
 }
 
@@ -76,7 +77,7 @@ textarea:hover {
 }
 
 img {
-  width: 565px;
+  width: 680px;
   height: 712px;
   margin-top: 0.5rem;
 }
