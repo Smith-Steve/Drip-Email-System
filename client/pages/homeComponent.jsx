@@ -5,7 +5,7 @@ const HomeComponent = () => {
     <React.Fragment>
     <div className="homeComponentContainer">
       <div className="homeComponentIcon">
-        <i className="fa fa-home fa-5x"></i>
+        <i className="fa fa-envelope fa-5x"></i>
       </div>
     </div>
     </React.Fragment>

@@ -49,8 +49,11 @@ td,
 }
 
 div.side-bar.closed,
+div.side-bar.closed-open-first-time,
 div.textContainer-side-bar.closed,
-div.sidenav.closed {
+div.textContainer-side-bar.closed-open-first-time,
+div.sidenav.closed,
+div.sidenav.closed.closed-open-first-time {
   transform: translateX(-120%);
   transition: transform 1s ease;
 }
@@ -65,7 +68,8 @@ div.sidenav.closed {
   height: 100vh;
 }
 
-.column.component-container.closed {
+.column.component-container.closed,
+.colomn.component-container.closed-open-first-time {
   transform: translate(-3.75%) scale(1.073, 1);
   transition: transform 1s ease;
 }
@@ -205,7 +209,8 @@ td:nth-child(3n + 1) {
   }
 
   .component-container.open,
-  .component-container.closed {
+  .component-container.closed,
+  .component-container.closed-open-first-time {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -232,7 +237,8 @@ td:nth-child(3n + 1) {
 
 @media screen and (orientation: landscape) {
   .component-container.open,
-  .component-container.closed {
+  .component-container.closed,
+  .component-container.closed-open-first-time {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

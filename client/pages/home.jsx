@@ -8,7 +8,6 @@ import ViewScript from './components/scriptsFolder/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
-import Arrow from './arrow';
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,7 +16,7 @@ class Home extends React.Component {
     this.setFlight = this.setFlight.bind(this);
     this.manageSideBar = this.manageSideBar.bind(this);
     this.setArrow = this.setArrow.bind(this);
-    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed', x: null, arrowVisibility: 'visible' };
+    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed-open-first-time', x: null, arrowVisibility: 'visible' };
   }
 
   componentDidMount() {
@@ -90,7 +89,7 @@ class Home extends React.Component {
         <div className="row">
             <Sidebar sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
-            <Arrow sideBarState={this.state.sideBar}/>
+            <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i>
             {this.renderComponent()}
           </div>
         </div>
