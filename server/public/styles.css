@@ -61,15 +61,18 @@ form {
 }
 
 input,
-select,
-textarea {
+textarea,
+select {
   border: rgba(186, 186, 186, 0.5) 0.188rem solid;
   padding: 0.2rem;
   font-size: 1rem;
+  outline: rgb(171, 140, 228);
+  cursor: pointer;
 }
 
 input:hover,
-textarea:hover {
+textarea:hover,
+select:hover {
   cursor: pointer;
   border: 0.188rem solid rgb(171, 140, 228);
   box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
