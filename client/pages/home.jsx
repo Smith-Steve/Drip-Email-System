@@ -15,7 +15,6 @@ class Home extends React.Component {
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
     this.manageSideBar = this.manageSideBar.bind(this);
-    this.setArrow = this.setArrow.bind(this);
     this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed-open-first-time', x: null, arrowVisibility: 'visible' };
   }
 
@@ -28,7 +27,6 @@ class Home extends React.Component {
     window.addEventListener('mousemove', () => {
 
       if (event.clientX < 100) {
-        this.setArrow();
         this.setState({ sideBar: 'open' });
       } else if (event.clientX > 100) {
         this.setState({ sideBar: 'closed' });
@@ -42,16 +40,6 @@ class Home extends React.Component {
 
   setFlight(selectedFlight) {
     this.setState({ activeFlight: selectedFlight });
-  }
-
-  setArrow() {
-    let executed = false;
-    return function () {
-      if (!executed) {
-        executed = true;
-        this.setState({ arrowVisibility: 'hidden' });
-      }
-    };
   }
 
   manageSideBar(event) {
