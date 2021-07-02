@@ -1,12 +1,12 @@
 
 import React from 'react';
+const acceptableElements = ['H4', 'A'];
 
 const Sidebar = ({ sideBarState, removeSideBar }) => {
-
   const handleClick = event => {
     const targetElement = event.target.tagName;
-    if (targetElement === 'H4' || targetElement === 'A') {
-      if (event.target.closest('.sidenav')) removeSideBar();
+    if (acceptableElements.includes(targetElement) && event.target.closest('.sidenav')) {
+      removeSideBar();
     }
   };
 
