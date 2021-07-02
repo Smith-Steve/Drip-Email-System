@@ -67,7 +67,7 @@ export default class CreateContact extends React.Component {
                 <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required/>
               </div>
               <div className="row">
-                <button className="createContact" onSubmit={this.handleSubmit}>Enter Contact</button>
+                <button className="createContact purpleButton" onSubmit={this.handleSubmit}>Enter Contact</button>
               </div>
             </form>
           </div>

@@ -108,7 +108,7 @@ class ManageFlight extends React.Component {
                     </select >
                 </div>
                  <div className="align-right">
-                  <button onSubmit={this.submitFlightAssignment}>Add Contact</button>
+                  <button className="purpleButton" onSubmit={this.submitFlightAssignment}>Add Contact</button>
                 </div>
               </form>
             </div>

@@ -35,7 +35,7 @@ div.sidenav.open {
   transform: translateX(0);
   transition: transform 1s ease;
   flex: 1 1 200px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .component-container,
@@ -117,14 +117,15 @@ div.emailInputContainer {
 
 .component-container .fa-arrow-left {
   position: absolute;
-  z-index: 2;
   display: inline;
   line-height: 200px;
   white-space: nowrap;
 }
 
 button {
+  position: relative;
   padding: 0.3rem 0.7rem;
+  overflow: hidden;
 }
 
 button.createContact {
@@ -184,14 +185,16 @@ td:nth-child(3n + 1) {
   position: fixed;
   flex-direction: column;
   min-height: 100vh;
+  height: 100%;
+  white-space: nowrap;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: 1;
 }
 
 a,
 h4 {
-  z-index: 2;
+  z-index: 1;
   position: relative;
 }
 
@@ -199,7 +202,7 @@ h4 {
   position: relative;
   margin-right: 2rem;
   margin-left: 0.4rem;
-  z-index: 2;
+  z-index: 1;
 }
 
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
@@ -209,7 +212,7 @@ h4 {
 
   .side-bar {
     position: fixed;
-    z-index: 2;
+    z-index: 1;
     left: 0;
     top: 0;
     height: 100vh;
@@ -227,7 +230,7 @@ h4 {
     flex-wrap: wrap;
     flex-direction: column;
     overflow: none;
-    padding: 1rem 1rem 0 2.5rem;
+    padding: 1rem 1rem 0 1rem;
   }
 
   .flights,

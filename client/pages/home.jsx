@@ -75,6 +75,7 @@ class Home extends React.Component {
     <React.Fragment>
       <div className={`container ${this.state.sideBar}`}>
         <div className="row parent">
+
             <Sidebar sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
             <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i>
