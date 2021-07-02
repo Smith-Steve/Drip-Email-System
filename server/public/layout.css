@@ -35,7 +35,6 @@ div.sidenav.open {
   transform: translateX(0);
   transition: transform 1s ease;
   flex: 1 1 200px;
-  position: relative;
   z-index: 2;
 }
 
@@ -54,7 +53,6 @@ div.sidenav.closed,
 div.sidenav.closed.closed-open-first-time {
   transform: translateX(-120%);
   transition: transform 1s ease;
-  position: relative;
   z-index: 2;
 }
 
@@ -121,7 +119,7 @@ div.emailInputContainer {
   position: absolute;
   z-index: 2;
   display: inline;
-  line-height: 700px;
+  line-height: 200px;
   white-space: nowrap;
 }
 
@@ -183,7 +181,7 @@ td:nth-child(3n + 1) {
 }
 
 .side-bar {
-  position: absolute;
+  position: fixed;
   flex-direction: column;
   min-height: 100vh;
   left: 0;
