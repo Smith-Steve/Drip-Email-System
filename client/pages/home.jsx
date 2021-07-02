@@ -14,7 +14,6 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
-    this.manageSideBar = this.manageSideBar.bind(this);
     this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed-open-first-time', x: null, arrowVisibility: 'visible' };
   }
 
@@ -25,10 +24,11 @@ class Home extends React.Component {
     });
 
     window.addEventListener('mousemove', () => {
-
       if (event.clientX < 100) {
         this.setState({ sideBar: 'open' });
       } else if (event.clientX > 100) {
+        this.setState({ sideBar: 'closed' });
+      } else if (event.toElement === 'h4') {
         this.setState({ sideBar: 'closed' });
       }
     });
@@ -42,14 +42,8 @@ class Home extends React.Component {
     this.setState({ activeFlight: selectedFlight });
   }
 
-  manageSideBar(event) {
-    let sideBarControl = 'closed';
-    if (this.state.x <= 200) {
-      sideBarControl = 'open';
-    } else {
-      sideBarControl = 'closed';
-    }
-    this.setState({ sideBar: sideBarControl });
+  closeSideBar = () => {
+    this.setState({ sideBar: 'closed' });
   }
 
   renderComponent() {
@@ -76,7 +70,7 @@ class Home extends React.Component {
       <div className={`container ${this.state.sideBar}`}>
         <div className="row parent">
 
-            <Sidebar sideBarState={this.state.sideBar}/>
+            <Sidebar removeSideBar={this.closeSideBar} sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
             <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i>
             {this.renderComponent()}
