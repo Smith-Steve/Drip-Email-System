@@ -57,7 +57,7 @@ class CreateEmail extends React.Component {
                   <textarea className="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
                 </div>
                 <div className="align-right">
-                  <button className="scripts" onSubmit={this.handleSubmit}>Create Email</button>
+                  <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
               </form>
             </div>

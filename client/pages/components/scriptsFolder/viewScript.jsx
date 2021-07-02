@@ -26,7 +26,7 @@ class ViewScript extends React.Component {
                 <div className="col">
                   <span className="specialText view-script">{this.props.script.scriptName} is a new script to which there are no e-mails attached</span>
                   <div className="align-right">
-                    <button className="createEmail" onClick={this.handlePageChange}>Create Email</button>
+                    <button className="createEmail purpleButton" onClick={this.handlePageChange}>Create Email</button>
                   </div>
                 </div>
               </div>

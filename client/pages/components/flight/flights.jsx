@@ -132,7 +132,7 @@ class Flights extends React.Component {
                   </select>
                 </div>
                 <div className="align-right">
-                  <button onSubmit={this.submitFlight}>Create</button>
+                  <button className="purpleButton" onSubmit={this.submitFlight}>Create</button>
                 </div>
               </form>
             </div>

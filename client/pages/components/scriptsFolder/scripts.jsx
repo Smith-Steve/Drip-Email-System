@@ -99,7 +99,7 @@ class Scripts extends React.Component {
                   <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} maxLength="40" onChange={this.handleChange} required/>
                 </div>
                 <div className="align-right">
-                  <button className="scripts" onSubmit={this.handleSubmit}>Create Script</button>
+                  <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Script</button>
                 </div>
               </form>
             </div>

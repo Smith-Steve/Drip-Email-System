@@ -8,6 +8,37 @@ a {
   text-decoration: none;
 }
 
+label,
+h1,
+h4,
+.defaultOption {
+  color: rgb(186, 186, 186);
+}
+
+h4:hover {
+  color: rgba(190, 186, 186, 0.5);
+}
+
+button.purpleButton::after {
+  content: "";
+  background: rgb(171, 140, 228);
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+button.purpleButton:active::after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+
 .side-bar {
   border: 0.188rem solid rgba(186, 186, 186, 0.5);
 }
@@ -40,13 +71,6 @@ span.specialText.prompt.manageFlightScriptPrompt {
 
 span.specialText {
   font-weight: 650;
-}
-
-label,
-h1,
-h4,
-.defaultOption {
-  color: rgb(186, 186, 186);
 }
 
 form {
