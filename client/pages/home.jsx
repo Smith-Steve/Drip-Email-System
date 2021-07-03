@@ -7,8 +7,7 @@ import Flights from './components/flight/flights';
 import ViewScript from './components/scriptsFolder/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
-// import HomeComponent from './homeComponent';
-import HomeComponent from './homeMessageComponent';
+import HomeComponent from './homeComponent';
 
 class Home extends React.Component {
   constructor(props) {
