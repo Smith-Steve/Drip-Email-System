@@ -126,6 +126,14 @@ button.manageFlights {
   background-color: rgb(0, 128, 128);
 }
 
+.col > span.specialText {
+  font-style: italic;
+  font-size: 2rem;
+  text-shadow: 2px 2px 8px rgba(186, 186, 186, 0.5);
+  color: rgba(186, 186, 186, 0.5);
+  font-weight: bold;
+}
+
 tbody tr:nth-child(odd) {
   background-color: #303841;
   border-color: #303841;
@@ -155,6 +163,13 @@ tbody tr:nth-child(odd) {
   align-items: center;
   padding: 10px;
   height: 85vh;
+}
+
+.homeComponentContainer-textBox {
+  border: 0.188rem rgba(186, 186, 186, 0.5) solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
