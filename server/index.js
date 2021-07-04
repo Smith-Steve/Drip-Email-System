@@ -19,21 +19,6 @@ const db = new pg.Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-app.get('/api/emails/:scriptId', (request, response) => {
-  response.send(request);
-  const scriptId = parseInt(request.params.scriptId, 10);
-  const sqlGetEmailsQuery = 'select * from "emails" where "scriptId" = $1';
-  const dbParam = [scriptId];
-  db.query(sqlGetEmailsQuery, dbParam)
-    .then(result => {
-      const emails = result.rows;
-      response.status(201).json(emails);
-    }).catch(error => {
-      console.error(error);
-      response.status(500).json({ error: 'an unexpected error occured.' });
-    });
-});
-
 app.post('/api/contacts', (req, res, next) => {
   const { firstName, lastName, company, email, phoneNumber } = req.body;
   if (typeof firstName !== 'string' || typeof lastName !== 'string' || typeof company !== 'string' || typeof phoneNumber !== 'string') {
@@ -311,6 +296,23 @@ async function handleEmail(flightInfo) {
     });
   }
 }
+
+app.get('/api/emails/:scriptId', (req, res, next) => {
+  const scriptId = parseInt(req.params.scriptId, 10);
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script.');
+  }
+  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1';
+  const params = [scriptId];
+  db.query(sqlGetQuery, params)
+    .then(result => {
+      const emails = result.rows[0];
+      res.status(200).json(emails);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
