@@ -1,5 +1,4 @@
 import React from 'react';
-import WelcomeMessage from './welcomeMessage';
 
 const HomeComponent = () => {
   return (
@@ -8,7 +7,10 @@ const HomeComponent = () => {
         <div className="row">
           <div className="col">
             <div className="homeComponentContainer-textBox">
-              <span className="specialText-home"><h1>Unleash Your Message</h1></span>
+              <div className="homeHeader">
+                <i className="fa fa-envelope fa-4x"></i><h1>Unleash Your Message</h1>
+              </div>
+              <h2>Where Mass Emails look, feel and &apos;taste&lsquo; like personalized email messages.</h2>
             </div>
           </div>
         </div>
