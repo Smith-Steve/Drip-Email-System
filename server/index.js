@@ -5,7 +5,6 @@ const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
-// const { createEmail, readEmail } = require('./emailTextManager');
 const handleText = require('./textCreator');
 
 const app = express();
@@ -18,6 +17,21 @@ app.use(errorMiddleware);
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
+});
+
+app.get('/api/emails/:scriptId', (request, response) => {
+  response.send(request);
+  const scriptId = parseInt(request.params.scriptId, 10);
+  const sqlGetEmailsQuery = 'select * from "emails" where "scriptId" = $1';
+  const dbParam = [scriptId];
+  db.query(sqlGetEmailsQuery, dbParam)
+    .then(result => {
+      const emails = result.rows;
+      response.status(201).json(emails);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occured.' });
+    });
 });
 
 app.post('/api/contacts', (req, res, next) => {
@@ -207,20 +221,6 @@ app.post('/api/emails', (request, response) => {
     .catch(error => {
       console.error(error);
       response.status(500).json({ error: 'please review entered parameters and try again. ' });
-    });
-});
-
-app.get('/api/email/:scriptId', (requests, response) => {
-  const scriptId = parseInt(requests.params.scriptId, 10);
-  const sqlGetScriptEmailsQuery = 'select * from "emails" where "scriptId" = $1 order by "emailId" desc';
-  const params = [scriptId];
-  db.query(sqlGetScriptEmailsQuery, params)
-    .then(result => {
-      const emails = result.rows;
-      response.status(200).json(emails);
-    }).catch(error => {
-      console.error(error);
-      response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
 
