@@ -4,11 +4,24 @@ class ViewScript extends React.Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
-    this.state = { scriptName: this.props.script.scriptName, scriptId: this.props.script.scriptId };
+    this.state = { scriptName: this.props.script.scriptName, scriptId: this.props.script.scriptId, emails: {} };
+  }
+
+  componentDidMount() {
+    this.getEmails();
   }
 
   handlePageChange() {
     window.location.hash = 'Email';
+  }
+
+  getEmails = () => {
+    const initGetEmails = { method: 'GET', headers: { 'Content-Type': 'application/json' } };
+    fetch(`/api/emails/${this.state.scriptId}`, initGetEmails)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ emails: returnedResponse });
+      });
   }
 
   render() {

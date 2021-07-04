@@ -115,7 +115,8 @@ div.emailInputContainer {
   justify-content: center;
 }
 
-.component-container .fa-arrow-left {
+.component-container .fa-arrow-left,
+.component-container .fa-mailbox {
   position: absolute;
   display: inline;
   line-height: 200px;

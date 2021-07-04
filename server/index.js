@@ -72,23 +72,6 @@ app.get('/api/contacts', (req, res) => {
     });
 });
 
-// app.get('/api/contacts/:flightId', (req, res) => {
-//   const flightId = parseInt(req.params.flightId, 10);
-//   const sqlGetQuery = `select DISTINCT on ("c"."contactId") "c"."contactId", "c"."firstName", "c"."lastName"
-//                         from "contacts" as "c"
-//                         join "flightAssignments" as "fA" ON ("fA"."contactId" = "c"."contactId")
-//                         where "fA"."flightId" <> $1`;
-//   const sqlGetContacts = [flightId];
-//   db.query(sqlGetQuery, sqlGetContacts)
-//     .then(result => {
-//       const contacts = result.rows;
-//       res.status(200).json(contacts);
-//     }).catch(error => {
-//       console.error(error);
-//       res.status(500).json({ error: 'an unexpected error occurred.' });
-//     });
-// });
-
 app.get('/api/contacts/flightAssignment/:flightId', (request, response) => {
   const flightId = parseInt(request.params.flightId, 10);
   if (!Number.isInteger(flightId) || flightId <= 0) {
@@ -224,6 +207,37 @@ app.post('/api/emails', (request, response) => {
     .catch(error => {
       console.error(error);
       response.status(500).json({ error: 'please review entered parameters and try again. ' });
+    });
+});
+
+app.get('/api/email/:scriptId', (requests, response) => {
+  const scriptId = parseInt(requests.params.scriptId, 10);
+  const sqlGetScriptEmailsQuery = 'select * from "emails" where "scriptId" = $1 order by "emailId" desc';
+  const params = [scriptId];
+  db.query(sqlGetScriptEmailsQuery, params)
+    .then(result => {
+      const emails = result.rows;
+      response.status(200).json(emails);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occured.' });
+    });
+});
+
+app.get('/api/scripts/:scriptId', (req, res, next) => {
+  const scriptId = parseInt(req.params.scriptId, 10);
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script.');
+  }
+  const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
+  const params = [scriptId];
+  db.query(sqlGetQuery, params)
+    .then(result => {
+      const script = result.rows[0];
+      res.status(200).json(script);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
     });
 });
 

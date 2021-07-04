@@ -28,8 +28,6 @@ class Home extends React.Component {
         this.setState({ sideBar: 'open' });
       } else if (event.clientX > 100) {
         this.setState({ sideBar: 'closed' });
-      } else if (event.toElement === 'h4') {
-        this.setState({ sideBar: 'closed' });
       }
     });
   }
