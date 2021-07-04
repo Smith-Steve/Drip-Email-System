@@ -10,7 +10,7 @@ const HomeComponent = () => {
               <div className="homeHeader">
                 <i className="fa fa-envelope fa-4x"></i><h1>Unleash Your Message</h1>
               </div>
-              <h2>Where Mass Emails look, feel and &apos;taste&lsquo; like personalized email messages.</h2>
+              <h2>Where Mass Emails look, feel and &lsquo;taste&rsquo; like personalized email messages.</h2>
             </div>
           </div>
         </div>

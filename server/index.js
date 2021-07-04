@@ -5,7 +5,6 @@ const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
-// const { createEmail, readEmail } = require('./emailTextManager');
 const handleText = require('./textCreator');
 
 const app = express();
@@ -210,20 +209,6 @@ app.post('/api/emails', (request, response) => {
     });
 });
 
-app.get('/api/email/:scriptId', (requests, response) => {
-  const scriptId = parseInt(requests.params.scriptId, 10);
-  const sqlGetScriptEmailsQuery = 'select * from "emails" where "scriptId" = $1 order by "emailId" desc';
-  const params = [scriptId];
-  db.query(sqlGetScriptEmailsQuery, params)
-    .then(result => {
-      const emails = result.rows;
-      response.status(200).json(emails);
-    }).catch(error => {
-      console.error(error);
-      response.status(500).json({ error: 'an unexpected error occured.' });
-    });
-});
-
 app.get('/api/scripts/:scriptId', (req, res, next) => {
   const scriptId = parseInt(req.params.scriptId, 10);
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
@@ -311,6 +296,23 @@ async function handleEmail(flightInfo) {
     });
   }
 }
+
+app.get('/api/emails/:scriptId', (req, res, next) => {
+  const scriptId = parseInt(req.params.scriptId, 10);
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script.');
+  }
+  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1';
+  const params = [scriptId];
+  db.query(sqlGetQuery, params)
+    .then(result => {
+      const emails = result.rows[0];
+      res.status(200).json(emails);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
