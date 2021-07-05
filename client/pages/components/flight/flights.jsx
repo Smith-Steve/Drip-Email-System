@@ -26,6 +26,7 @@ class Flights extends React.Component {
 
     getFlightInfo(flight) {
       this.props.getFlight(flight);
+      window.localStorage.setItem('Active-Flight', JSON.stringify(flight));
     }
 
     getListOfFlights = () => {

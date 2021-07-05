@@ -33,6 +33,12 @@ class Home extends React.Component {
     });
   }
 
+  setLocalStorage = (route = null, aFlight = null, aScript = null) => {
+    window.localStorage.setItem('Active-Route', route);
+    window.localStorage.setItem('Active-Script', JSON.stringify(aScript));
+    window.localStorage.setItem('Active-Flight', JSON.stringify(aFlight));
+  }
+
   setActiveScript(selectedScript) {
     this.setState({ activeScript: selectedScript });
   }
@@ -53,7 +59,8 @@ class Home extends React.Component {
     } else if (activeRoute.path === 'Scripts') {
       return <Scripts setActiveScript={this.setActiveScript}/>;
     } else if (activeRoute.path.slice(0, 6) === 'Script') {
-      return this.state.activeScript.path === null ? null : <ViewScript script={this.state.activeScript}/>;
+      const route = this.state.activeScript ? JSON.parse(window.localStorage.getItem('Active-Script')) : null;
+      return route === null ? null : <ViewScript script={this.state.activeScript}/>;
     } else if (activeRoute.path === 'Flights') {
       return <Flights getFlight={this.setFlight}/>;
     } else if (activeRoute.path === 'Email') {
@@ -67,6 +74,7 @@ class Home extends React.Component {
   render() {
     const { activeScript, activeFlight, route } = this.state;
     const contextValue = { activeScript, activeFlight, route };
+    this.setLocalStorage(route.path, activeFlight, activeScript);
     return (
     <AppContext.Provider value={contextValue}>
     <React.Fragment>

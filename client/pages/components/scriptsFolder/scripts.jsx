@@ -14,6 +14,7 @@ class Scripts extends React.Component {
 
   chosenScript(script) {
     this.props.setActiveScript(script);
+    window.localStorage.setItem('Active-Script', JSON.stringify(script));
   }
 
   handleChange = event => this.setState({ scriptName: event.target.value });
