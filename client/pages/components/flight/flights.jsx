@@ -26,6 +26,7 @@ class Flights extends React.Component {
 
     getFlightInfo(flight) {
       this.props.getFlight(flight);
+      window.localStorage.setItem('Active-Flight', JSON.stringify(flight));
     }
 
     getListOfFlights = () => {
@@ -86,6 +87,7 @@ class Flights extends React.Component {
               <thead>
                 <tr>
                   <th><span className="specialText align-left">Flight Name:</span></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -118,7 +120,7 @@ class Flights extends React.Component {
               <form onSubmit={this.submitFlight}>
                 <div className="input-row">
                   <label>Flight Name:</label>
-                  <input type="text" name="flightName" value={this.state.flightName} onChange={this.handleChange} maxLength="40" required></input>
+                  <input type="text" name="flightName" value={this.state.flightName} onChange={this.handleChange} required></input>
                 </div>
                 <div className="input-row">
                   <label>Flight Topic(s): </label>

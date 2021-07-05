@@ -1,11 +1,12 @@
 import React from 'react';
+import AppContext from '../../lib/app-context';
 import EmailTable from './emailComponents/emailTable';
 
-class ViewScript extends React.Component {
+export default class ViewScript extends React.Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
-    this.state = { scriptName: this.props.script.scriptName, scriptId: this.props.script.scriptId, emails: {} };
+    this.state = { emails: {} };
   }
 
   componentDidMount() {
@@ -18,7 +19,7 @@ class ViewScript extends React.Component {
 
   getEmails = () => {
     const initGetEmails = { method: 'GET', headers: { 'Content-Type': 'application/json' } };
-    fetch(`/api/emails/${this.state.scriptId}`, initGetEmails)
+    fetch(`/api/emails/${this.props.script.scriptId}`, initGetEmails)
       .then(response => response.json())
       .then(returnedResponse => {
         this.setState({ emails: returnedResponse });
@@ -30,13 +31,14 @@ class ViewScript extends React.Component {
   }
 
   render() {
+    const { activeScript } = this.context;
     const emailList = this.state.emails;
     return (
       <div className="view-script-component">
         <div className="view-script">
           <div className="row">
             <div className="col">
-                <span className="specialText prompt">Manage Script: {this.props.script.scriptName} </span>
+                <span className="specialText prompt">Manage Script: {activeScript.scriptName} </span>
             </div>
           </div>
           <div className="row">
@@ -54,10 +56,10 @@ class ViewScript extends React.Component {
             </div>
           </div>
         </div>
-        {emailList.length > 0 ? <EmailTable emailList={emailList} scriptName={this.state.scriptName}></EmailTable> : null}
+        {emailList.length > 0 ? <EmailTable emailList={emailList} scriptName={this.props.script.scriptName}></EmailTable> : null}
       </div>
     );
   }
 }
 
-export default ViewScript;
+ViewScript.contextType = AppContext;

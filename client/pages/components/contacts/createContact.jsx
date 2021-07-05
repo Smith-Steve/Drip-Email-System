@@ -53,19 +53,19 @@ export default class CreateContact extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <div className="input-row">
                 <label> FirstName: </label>
-                <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} maxLength="15" required/>
+                <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
                 <label> Lastname:</label>
-                <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} maxLength="15" required/>
+                <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
                 <label> Company: </label>
-                <input type="text" name="company" value={this.state.company} onChange={this.handleChange} maxLength="15" required/>
+                <input type="text" name="company" value={this.state.company} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
                 <label> E-mail: </label>
-                <input type="email" name="email" value={this.state.email} onChange={this.handleChange} maxLength="30" required/>
+                <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
                 <label> Phone #:</label>
