@@ -52,22 +52,21 @@ class Home extends React.Component {
   }
 
   renderComponent() {
-    const activeRoute = this.state.route;
-
-    if (activeRoute.path === 'Contacts') {
+    const { path } = this.state.route;
+    if (path === 'Contacts') {
       return <CreateContact/>;
-    } else if (activeRoute.path === 'Scripts') {
+    } else if (path === 'Scripts') {
       return <Scripts setActiveScript={this.setActiveScript}/>;
-    } else if (activeRoute.path.slice(0, 6) === 'Script') {
-      const route = this.state.activeScript ? JSON.parse(window.localStorage.getItem('Active-Script')) : null;
-      return route === null ? null : <ViewScript script={this.state.activeScript}/>;
-    } else if (activeRoute.path === 'Flights') {
+    } else if (path.slice(0, 6) === 'Script') {
+      return this.state.activeScript.path === null ? null : <ViewScript script={this.state.activeScript}/>;
+    } else if (path === 'Flights') {
       return <Flights getFlight={this.setFlight}/>;
-    } else if (activeRoute.path === 'Email') {
+    } else if (path === 'Email') {
       return <CreateEmail script={this.state.activeScript}/>;
-    } else if (activeRoute.path.slice(0, 12) === 'ManageFlight') {
+    } else if (path.slice(0, 12) === 'ManageFlight') {
       return <ManageFlight flight={this.state.activeFlight}/>;
     }
+
     return <HomeComponent/>;
   }
 

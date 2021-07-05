@@ -1,7 +1,8 @@
 import React from 'react';
+import AppContext from '../../lib/app-context';
 import EmailTable from './emailComponents/emailTable';
 
-class ViewScript extends React.Component {
+export default class ViewScript extends React.Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -30,13 +31,14 @@ class ViewScript extends React.Component {
   }
 
   render() {
+    const { activeScript } = this.context;
     const emailList = this.state.emails;
     return (
       <div className="view-script-component">
         <div className="view-script">
           <div className="row">
             <div className="col">
-                <span className="specialText prompt">Manage Script: {this.props.script.scriptName} </span>
+                <span className="specialText prompt">Manage Script: {activeScript.scriptName} </span>
             </div>
           </div>
           <div className="row">
@@ -60,4 +62,4 @@ class ViewScript extends React.Component {
   }
 }
 
-export default ViewScript;
+ViewScript.contextType = AppContext;
