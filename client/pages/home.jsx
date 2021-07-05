@@ -15,7 +15,8 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
-    this.state = { route: parseRoute(window.location.hash), activeScript: null, activeFlight: null, sideBar: 'closed-open-first-time', x: null, arrowVisibility: 'visible' };
+    this.setLocalStorage = this.setLocalStorage.bind(this);
+    this.state = { route: parseRoute(window.location.hash), sideBar: 'closed-open-first-time', arrowVisibility: 'visible' };
   }
 
   componentDidMount() {
@@ -39,6 +40,18 @@ class Home extends React.Component {
     window.localStorage.setItem('Active-Flight', JSON.stringify(aFlight));
   }
 
+  // getLocalStorage = () => {
+  //   this.setState({
+  //     route: parseRoute(window.localStorage.getItem('Active-Route')),
+  //     activeScript: window.localStorage.getItem('Active-Script'),
+  //     activeFlight: window.localStorage.getItem('Active-Flight')
+  //   });
+  // }
+
+  getScript = () => {
+    window.localStorage.getItem('Active-Route');
+  }
+
   setActiveScript(selectedScript) {
     this.setState({ activeScript: selectedScript });
   }
@@ -58,7 +71,7 @@ class Home extends React.Component {
     } else if (path === 'Scripts') {
       return <Scripts setActiveScript={this.setActiveScript}/>;
     } else if (path.slice(0, 6) === 'Script') {
-      return this.state.activeScript.path === null ? null : <ViewScript script={this.state.activeScript}/>;
+      return <ViewScript script={this.state.activeScript}/>;
     } else if (path === 'Flights') {
       return <Flights getFlight={this.setFlight}/>;
     } else if (path === 'Email') {
@@ -72,15 +85,14 @@ class Home extends React.Component {
 
   render() {
     const { activeScript, activeFlight, route } = this.state;
-    const contextValue = { activeScript, activeFlight, route };
-    this.setLocalStorage(route.path, activeFlight, activeScript);
+    const { getScript } = this;
+    const contextValue = { activeScript, activeFlight, route, getScript };
     return (
     <AppContext.Provider value={contextValue}>
     <React.Fragment>
       <div className={`container ${this.state.sideBar}`}>
         <div className="row parent">
-
-            <Sidebar removeSideBar={this.closeSideBar} sideBarState={this.state.sideBar}/>
+          <Sidebar removeSideBar={this.closeSideBar} sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
             <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i>
             {this.renderComponent()}

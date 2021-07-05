@@ -6,7 +6,7 @@ export default class ViewScript extends React.Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
-    this.state = { scriptName: this.props.script.scriptName, scriptId: this.props.script.scriptId, emails: {} };
+    this.state = { emails: {} };
   }
 
   componentDidMount() {
@@ -19,7 +19,7 @@ export default class ViewScript extends React.Component {
 
   getEmails = () => {
     const initGetEmails = { method: 'GET', headers: { 'Content-Type': 'application/json' } };
-    fetch(`/api/emails/${this.state.scriptId}`, initGetEmails)
+    fetch(`/api/emails/${this.props.script.scriptId}`, initGetEmails)
       .then(response => response.json())
       .then(returnedResponse => {
         this.setState({ emails: returnedResponse });
@@ -56,7 +56,7 @@ export default class ViewScript extends React.Component {
             </div>
           </div>
         </div>
-        {emailList.length > 0 ? <EmailTable emailList={emailList} scriptName={this.state.scriptName}></EmailTable> : null}
+        {emailList.length > 0 ? <EmailTable emailList={emailList} scriptName={this.props.script.scriptName}></EmailTable> : null}
       </div>
     );
   }
