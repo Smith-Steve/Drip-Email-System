@@ -15,8 +15,7 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
-    this.setLocalStorage = this.setLocalStorage.bind(this);
-    this.state = { route: parseRoute(window.location.hash), sideBar: 'closed-open-first-time', arrowVisibility: 'visible' };
+    this.state = { route: parseRoute(window.location.hash), activeScript: JSON.parse(localStorage.getItem('Active-Script')) || null, activeFlight: JSON.parse(localStorage.getItem('Active-Flight')) || null, sideBar: 'closed-open-first-time', arrowVisibility: 'visible' };
   }
 
   componentDidMount() {
@@ -33,20 +32,6 @@ class Home extends React.Component {
       }
     });
   }
-
-  setLocalStorage = (route = null, aFlight = null, aScript = null) => {
-    window.localStorage.setItem('Active-Route', route);
-    window.localStorage.setItem('Active-Script', JSON.stringify(aScript));
-    window.localStorage.setItem('Active-Flight', JSON.stringify(aFlight));
-  }
-
-  // getLocalStorage = () => {
-  //   this.setState({
-  //     route: parseRoute(window.localStorage.getItem('Active-Route')),
-  //     activeScript: window.localStorage.getItem('Active-Script'),
-  //     activeFlight: window.localStorage.getItem('Active-Flight')
-  //   });
-  // }
 
   getScript = () => {
     window.localStorage.getItem('Active-Route');
@@ -84,7 +69,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { activeScript, activeFlight, route } = this.state;
+    const { activeFlight, route, activeScript } = this.state;
     const { getScript } = this;
     const contextValue = { activeScript, activeFlight, route, getScript };
     return (
@@ -94,7 +79,7 @@ class Home extends React.Component {
         <div className="row parent">
           <Sidebar removeSideBar={this.closeSideBar} sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
-            <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i>
+            {route.path === '' ? <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i> : null}
             {this.renderComponent()}
           </div>
         </div>

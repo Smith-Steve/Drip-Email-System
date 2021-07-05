@@ -59,7 +59,7 @@ class Scripts extends React.Component {
 
   buildTable(scriptList) {
     const scriptRow = scriptList.map(script => {
-      return <tr key={script.scriptId}><td key={script.scriptId}> <span className="tableText">{script.scriptName}</span></td><td id={script.scriptId + 1}><span className="tableText">0</span></td><td id={script.scriptId + 2}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}><button className="manageScripts alignRight">Manage Script</button></a></td></tr>;
+      return <tr key={script.scriptId}><td key={script.scriptId}> <span className="tableText">{script.scriptName}</span></td><td id={script.scriptId + 2}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}><button className="manageScripts alignRight">Manage Script</button></a></td></tr>;
     });
     return (
       <div className="row">
@@ -69,7 +69,7 @@ class Scripts extends React.Component {
               <thead>
                 <tr>
                   <th><span className="specialText align-left">Script Name</span></th>
-                  <th><span className="specialText align-right">Number of E-mails: </span></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -97,7 +97,7 @@ class Scripts extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <div className="input-row">
                   <label>Script Chain Name:</label>
-                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} maxLength="40" onChange={this.handleChange} required/>
+                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
                 </div>
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Script</button>
