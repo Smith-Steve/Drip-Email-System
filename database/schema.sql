@@ -13,6 +13,7 @@ create table "contacts" (
   "company" text        not null,
   "email" text          not null,
   "phoneNumber" text    not null,
+  "createdAt" timestamptz(5) not null default now(),
   primary key ("contactId")
 );
 
@@ -27,6 +28,7 @@ create table "flights" (
   "flightName" text not null,
   "topics" text not null,
   "scriptId" INT not null,
+  "createdAt" timestamptz(5) not null default now(),
   primary key ("flightId"),
   constraint "scriptId"
    foreign key ("scriptId")
@@ -38,6 +40,7 @@ create table "emails" (
   "subject" text not null,
   "emailBody" text not null,
   "scriptId" INT not null,
+  "createdAt" timestamptz(5) not null default now(),
   primary key ("emailId"),
   constraint "scriptId"
    foreign key ("scriptId")

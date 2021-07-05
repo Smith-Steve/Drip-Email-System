@@ -306,7 +306,7 @@ app.get('/api/emails/:scriptId', (req, res, next) => {
   const params = [scriptId];
   db.query(sqlGetQuery, params)
     .then(result => {
-      const emails = result.rows[0];
+      const emails = result.rows;
       res.status(200).json(emails);
     }).catch(error => {
       console.error(error);

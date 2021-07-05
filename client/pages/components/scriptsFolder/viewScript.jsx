@@ -1,4 +1,5 @@
 import React from 'react';
+import EmailTable from './emailComponents/emailTable';
 
 class ViewScript extends React.Component {
   constructor(props) {
@@ -24,28 +25,36 @@ class ViewScript extends React.Component {
       });
   }
 
+  renderPrompt = emailListLength => {
+    return (emailListLength > 0 ? <span className="specialText view-script">{this.props.script.scriptName} has {emailListLength} email(s) attached to it.</span> : <span className="specialText view-script">{this.props.script.scriptName} is a new script to which there are no e-mails attached</span>);
+  }
+
   render() {
+    const emailList = this.state.emails;
     return (
-      <div className="view-script">
-        <div className="row">
-          <div className="col">
-              <span className="specialText prompt">Manage Script: {this.props.script.scriptName} </span>
+      <div className="view-script-component">
+        <div className="view-script">
+          <div className="row">
+            <div className="col">
+                <span className="specialText prompt">Manage Script: {this.props.script.scriptName} </span>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <div className="lg flexContainer">
-              <div className="row view-script">
-                <div className="col">
-                  <span className="specialText view-script">{this.props.script.scriptName} is a new script to which there are no e-mails attached</span>
-                  <div className="align-right">
-                    <button className="createEmail purpleButton" onClick={this.handlePageChange}>Create Email</button>
+          <div className="row">
+            <div className="col">
+              <div className="lg flexContainer">
+                <div className="row view-script">
+                  <div className="col">
+                    {this.renderPrompt(emailList.length)}
+                    <div className="align-right">
+                      <button className="createEmail purpleButton" onClick={this.handlePageChange}>Create Email</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {emailList.length > 0 ? <EmailTable emailList={emailList} scriptName={this.state.scriptName}></EmailTable> : null}
       </div>
     );
   }

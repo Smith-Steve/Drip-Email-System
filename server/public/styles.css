@@ -9,14 +9,6 @@ a {
   text-decoration: none;
 }
 
-.material-icons-outlined {
-  font-family: 'material-icons-outlined', serif;
-  font-size: 75rem !important;
-  position: absolute;
-  z-index: 0;
-  overflow: hidden;
-}
-
 label,
 h1,
 h4,
