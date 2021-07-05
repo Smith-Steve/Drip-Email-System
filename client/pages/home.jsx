@@ -8,6 +8,7 @@ import ViewScript from './components/scriptsFolder/viewScript';
 import CreateEmail from './components/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
+import AppContext from './lib/app-context';
 
 class Home extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Home extends React.Component {
 
   renderComponent() {
     const activeRoute = this.state.route;
+
     if (activeRoute.path === 'Contacts') {
       return <CreateContact/>;
     } else if (activeRoute.path === 'Scripts') {
@@ -63,7 +65,10 @@ class Home extends React.Component {
   }
 
   render() {
+    const { activeScript, activeFlight, route } = this.state;
+    const contextValue = { activeScript, activeFlight, route };
     return (
+    <AppContext.Provider value={contextValue}>
     <React.Fragment>
       <div className={`container ${this.state.sideBar}`}>
         <div className="row parent">
@@ -76,6 +81,7 @@ class Home extends React.Component {
         </div>
       </div>
     </React.Fragment>
+    </AppContext.Provider>
     );
   }
 
