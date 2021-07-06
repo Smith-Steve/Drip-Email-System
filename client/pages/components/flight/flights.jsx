@@ -70,7 +70,6 @@ export default class Flights extends React.Component {
         if (returnedResponse) alert('Flight Submitted!');
         this.clearForm();
         this.addFlight(returnedResponse);
-        window.location.hash = localStorage.getItem('');
       }).catch(error => {
         console.error(error);
       });
