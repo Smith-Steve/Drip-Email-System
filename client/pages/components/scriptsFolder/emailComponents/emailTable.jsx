@@ -13,7 +13,7 @@ function EmailTable({ emailList, scriptName }) {
             <table id="contact_list">
               <thead>
                 <tr>
-                  <th><span className="specialText align-left">Contact Name</span></th>
+                  <th><span className="specialText align-left">Script Name</span></th>
                   <th><span className="specialText align-left">Email Subject </span></th>
                 </tr>
               </thead>

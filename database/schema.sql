@@ -40,7 +40,6 @@ create table "emails" (
   "subject" text not null,
   "emailBody" text not null,
   "scriptId" INT not null,
-  "emailNumber" INT,
   "sendOn" timestamp with time zone,
   "createdAt" timestamptz(5) not null default now(),
   primary key ("emailId"),
