@@ -1,6 +1,7 @@
 import React from 'react';
+import AppContext from '../../lib/app-context';
 
-class Flights extends React.Component {
+export default class Flights extends React.Component {
   constructor(props) {
     super(props);
     this.clearForm = this.clearForm.bind(this);
@@ -69,6 +70,7 @@ class Flights extends React.Component {
         if (returnedResponse) alert('Flight Submitted!');
         this.clearForm();
         this.addFlight(returnedResponse);
+        window.location.hash = localStorage.getItem('');
       }).catch(error => {
         console.error(error);
       });
@@ -146,4 +148,4 @@ class Flights extends React.Component {
   }
 }
 
-export default Flights;
+Flights.contextType = AppContext;

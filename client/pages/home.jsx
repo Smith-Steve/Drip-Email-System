@@ -22,6 +22,7 @@ class Home extends React.Component {
     window.addEventListener('hashchange', () => {
       const activeRoute = parseRoute(window.location.hash);
       this.setState({ route: activeRoute });
+      localStorage.setItem('Active-Route', this.state.route.path);
     });
 
     window.addEventListener('mousemove', () => {
@@ -31,10 +32,6 @@ class Home extends React.Component {
         this.setState({ sideBar: 'closed' });
       }
     });
-  }
-
-  getScript = () => {
-    window.localStorage.getItem('Active-Route');
   }
 
   setActiveScript(selectedScript) {
@@ -70,8 +67,7 @@ class Home extends React.Component {
 
   render() {
     const { activeFlight, route, activeScript } = this.state;
-    const { getScript } = this;
-    const contextValue = { activeScript, activeFlight, route, getScript };
+    const contextValue = { activeScript, activeFlight, route };
     return (
     <AppContext.Provider value={contextValue}>
     <React.Fragment>

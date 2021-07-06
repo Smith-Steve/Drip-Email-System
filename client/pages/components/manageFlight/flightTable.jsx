@@ -3,6 +3,7 @@ import { launchFlight } from './flightFunctions';
 
 const triggerButton = flightId => {
   launchFlight(flightId);
+  window.location.hash = 'Flights';
 };
 
 function FlightTable({ contactList, flightId }) {
