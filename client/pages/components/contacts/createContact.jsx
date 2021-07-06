@@ -24,6 +24,7 @@ export default class CreateContact extends React.Component {
         if (returnedResponse) {
           alert('Submited!');
           this.clearForm();
+          window.location.hash = localStorage.getItem('');
         } else {
           alert('Not Submitted');
         }

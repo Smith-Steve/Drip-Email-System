@@ -2,7 +2,7 @@ import React from 'react';
 
 function EmailTable({ emailList, scriptName }) {
   const emailRow = emailList.map(email => {
-    return <tr key={email.emailId}><td key={email.emailId}> <span className="tableText">{scriptName}</span></td><td id={Math.floor(Math.random() * email.emailId)}><span className="tableText">{email.subject}</span></td></tr>;
+    return <tr key={email.emailId}><td key={email.emailId}> <span className="tableText">{scriptName}</span></td><td id={Math.floor(Math.random() * email.emailId)}><span className="tableText align-left">{email.subject}</span></td></tr>;
   });
 
   return (
@@ -14,7 +14,7 @@ function EmailTable({ emailList, scriptName }) {
               <thead>
                 <tr>
                   <th><span className="specialText align-left">Contact Name</span></th>
-                  <th><span className="specialText align-right">Email Subject </span></th>
+                  <th><span className="specialText align-left">Email Subject </span></th>
                 </tr>
               </thead>
               <tbody>
