@@ -25,6 +25,7 @@ class CreateEmail extends React.Component {
       .then(returnedResponse => {
         if (returnedResponse) alert('email submitted!');
         this.clearForm();
+        window.location.hash = localStorage.getItem('Active-Route');
       })
       .catch(error => {
         if (error) alert('Please check submission and try again.');
