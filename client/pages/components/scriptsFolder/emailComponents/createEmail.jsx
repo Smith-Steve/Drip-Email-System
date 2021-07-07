@@ -5,7 +5,11 @@ class CreateEmail extends React.Component {
     super(props);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { subject: '', emailBody: '' };
+    this.state = { subject: '', emailBody: '', numberOfEmailsInScript: null };
+  }
+
+  componentDidMount() {
+    this.getCount();
   }
 
   handleFormChange(event) {
@@ -33,7 +37,26 @@ class CreateEmail extends React.Component {
       });
   }
 
+  getCount = () => {
+    const initGetCount = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch(`/api/scripts/count/${this.props.script.scriptId}`, initGetCount)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ numberOfEmailsInScript: parseInt(returnedResponse.count, 10) });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  renderSelectInput = emailNumber => {
+    return (<div className="align-left">
+      <span className="specialText">E-mail Number#: {emailNumber}</span>
+    </div>);
+  }
+
   render() {
+    const emailsInActiveScript = this.state.numberOfEmailsInScript;
     return (
       <div className="create-email">
         <div className="row">
@@ -60,6 +83,7 @@ class CreateEmail extends React.Component {
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
+                {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               </form>
             </div>
           </div>

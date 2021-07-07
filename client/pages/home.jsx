@@ -5,7 +5,7 @@ import CreateContact from './components/contacts/createContact';
 import Scripts from './components/scriptsFolder/scripts';
 import Flights from './components/flight/flights';
 import ViewScript from './components/scriptsFolder/viewScript';
-import CreateEmail from './components/createEmail';
+import CreateEmail from './components/scriptsFolder/emailComponents/createEmail';
 import ManageFlight from './components/manageFlight/manageFlight';
 import HomeComponent from './homeComponent';
 import AppContext from './lib/app-context';
