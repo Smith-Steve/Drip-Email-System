@@ -314,6 +314,22 @@ app.get('/api/emails/:scriptId', (req, res, next) => {
     });
 });
 
+app.get('/api/scripts/count/:scriptId', (request, response) => {
+  const scriptId = parseInt(request.params.scriptId, 10);
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script');
+  }
+  const sqlGetScriptEmailCount = 'select COUNT ("emailId") from "emails" where "scriptId" = $1';
+  const params = [scriptId];
+  db.query(sqlGetScriptEmailCount, params)
+    .then(result => {
+      response.status(200).json(result.rows[0]);
+    }).catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
