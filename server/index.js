@@ -189,15 +189,15 @@ app.post('/api/flights/:scriptId', (request, response) => {
 });
 
 app.post('/api/emails', (request, response) => {
-  const { subject, emailBody } = request.body;
+  const { subject, emailBody, emailNumberInSequence } = request.body;
   const scriptId = parseInt(request.body.scriptId, 10);
 
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
 
-  const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId") values ($1, $2, $3) returning*;';
-  const sqlPostEmailsParams = [subject, emailBody, scriptId];
+  const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId", "emailNumberInSequence") values ($1, $2, $3, $4) returning*;';
+  const sqlPostEmailsParams = [subject, emailBody, scriptId, emailNumberInSequence];
   db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
     .then(result => {
       const flight = result.rows[0];

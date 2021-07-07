@@ -5,7 +5,7 @@ class CreateEmail extends React.Component {
     super(props);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { subject: '', emailBody: '', numberOfEmailsInScript: null };
+    this.state = { subject: '', emailBody: '', numberOfEmailsInScript: '' };
   }
 
   componentDidMount() {
@@ -21,7 +21,9 @@ class CreateEmail extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId };
+    // fetch defaults to 1. So if there are more than 1 emails in script, than the number of emails is entered into the body of the init method
+    // so that it does not default to 1. Elsewise, as it must be the first email, 1 is put in.
+    const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId, emailNumberInSequence: this.state.emailNumberInSequence };
     const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
 
     fetch('/api/emails', initMethod)
@@ -49,14 +51,7 @@ class CreateEmail extends React.Component {
       });
   }
 
-  renderSelectInput = emailNumber => {
-    return (<div className="align-left">
-      <span className="specialText">E-mail Number#: {emailNumber}</span>
-    </div>);
-  }
-
   render() {
-    const emailsInActiveScript = this.state.numberOfEmailsInScript;
     return (
       <div className="create-email">
         <div className="row">
@@ -83,7 +78,6 @@ class CreateEmail extends React.Component {
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               </form>
             </div>
           </div>
