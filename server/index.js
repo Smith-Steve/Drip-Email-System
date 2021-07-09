@@ -302,7 +302,7 @@ app.get('/api/emails/:scriptId', (req, res, next) => {
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
-  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1';
+  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1 order by "createdAt" asc';
   const params = [scriptId];
   db.query(sqlGetQuery, params)
     .then(result => {

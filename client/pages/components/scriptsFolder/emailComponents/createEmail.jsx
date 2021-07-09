@@ -91,7 +91,7 @@ class CreateEmail extends React.Component {
                 <div className="align-left">
                 <div className="input-row">
                   <label>Date: </label>
-                  <input type="date" className="date" name="date" required/>
+                  <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
                 </div>
               </div>
               <div className="align-left sendOn-row">
