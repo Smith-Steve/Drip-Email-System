@@ -1,4 +1,5 @@
 import React from 'react';
+import Email from '../../../lib/email-post';
 
 class CreateEmail extends React.Component {
   constructor(props) {
@@ -21,13 +22,11 @@ class CreateEmail extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const formTimeInfo = new FormData(event.target);
-    const date = formTimeInfo.get('date'); const time = formTimeInfo.get('time');
-    const dateInformation = date.split('-'); const timeInformation = time.split(':');
-    // eslint-disable-next-line no-unused-vars
-    const [year, month, day] = dateInformation; const [hour, minute] = timeInformation;
-    // fetch defaults to 1. So if there are more than 1 emails in script, than the number of emails is entered into the body of the init method
-    // so that it does not default to 1. Elsewise, as it must be the first email, 1 is put in.
+    const form = new FormData(event.target);
+    const dateInfo = form.get('date'); const timeInfo = form.get('time');
+    const dateArray = dateInfo.split('-'); const timeArray = timeInfo.split(':');
+    const [year, month, day] = dateArray; const [hour, minute] = timeArray;
+    const emailSubmission2 = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, JSON.stringify(new Date(year, month - 1), day, hour, minute));
     const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId, emailNumberInSequence: this.state.emailNumberInSequence };
     const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
 
@@ -94,13 +93,13 @@ class CreateEmail extends React.Component {
                 <div className="align-left">
                 <div className="input-row">
                   <label>Date: </label>
-                  <input type="date" className="date" required/>
+                  <input type="date" className="date" name="date" required/>
                 </div>
               </div>
               <div className="align-left sendOn-row">
                 <div className="input-row">
                   <label>Time: </label>
-                  <input type="time" className="time" required/>
+                  <input type="time" className="time" name="time" required/>
                 </div>
               </div>
               </form>
