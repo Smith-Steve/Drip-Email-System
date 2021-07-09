@@ -21,6 +21,11 @@ class CreateEmail extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const formTimeInfo = new FormData(event.target);
+    const date = formTimeInfo.get('date'); const time = formTimeInfo.get('time');
+    const dateInformation = date.split('-'); const timeInformation = time.split(':');
+    // eslint-disable-next-line no-unused-vars
+    const [year, month, day] = dateInformation; const [hour, minute] = timeInformation;
     // fetch defaults to 1. So if there are more than 1 emails in script, than the number of emails is entered into the body of the init method
     // so that it does not default to 1. Elsewise, as it must be the first email, 1 is put in.
     const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId, emailNumberInSequence: this.state.emailNumberInSequence };
@@ -57,25 +62,6 @@ class CreateEmail extends React.Component {
     </div>);
   }
 
-  renderDateInput = () => {
-    return (
-      <React.Fragment>
-      <div className="align-left">
-        <div className="input-row">
-          <label>Date: </label>
-          <input type="date" className="date" required/>
-        </div>
-      </div>
-      <div className="align-left">
-        <div className="input-row">
-          <label>Time: </label>
-          <input type="time" className="time" required/>
-        </div>
-      </div>
-      </React.Fragment>
-    );
-  }
-
   render() {
     const emailsInActiveScript = this.state.numberOfEmailsInScript;
     return (
@@ -105,7 +91,18 @@ class CreateEmail extends React.Component {
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                {emailsInActiveScript > 0 ? this.renderDateInput() : null}
+                      <div className="align-left">
+                <div className="input-row">
+                  <label>Date: </label>
+                  <input type="date" className="date" required/>
+                </div>
+              </div>
+              <div className="align-left">
+                <div className="input-row">
+                  <label>Time: </label>
+                  <input type="time" className="time" required/>
+                </div>
+              </div>
               </form>
             </div>
           </div>
