@@ -6,7 +6,7 @@ class CreateEmail extends React.Component {
     super(props);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { subject: '', emailBody: '', numberOfEmailsInScript: '' };
+    this.state = { subject: '', emailBody: '', emailNumberInSequence: '' };
   }
 
   componentDidMount() {
@@ -26,10 +26,8 @@ class CreateEmail extends React.Component {
     const dateInfo = form.get('date'); const timeInfo = form.get('time');
     const dateArray = dateInfo.split('-'); const timeArray = timeInfo.split(':');
     const [year, month, day] = dateArray; const [hour, minute] = timeArray;
-    const emailSubmission2 = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, JSON.stringify(new Date(year, month - 1), day, hour, minute));
-    const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId, emailNumberInSequence: this.state.emailNumberInSequence };
-    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
-
+    const emailSubmission2 = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, new Date(year, month - 1), day, hour, minute);
+    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission2) };
     fetch('/api/emails', initMethod)
       .then(response => response.json())
       .then(returnedResponse => {
@@ -48,7 +46,7 @@ class CreateEmail extends React.Component {
     fetch(`/api/scripts/count/${this.props.script.scriptId}`, initGetCount)
       .then(response => response.json())
       .then(returnedResponse => {
-        this.setState({ numberOfEmailsInScript: parseInt(returnedResponse.count, 10) });
+        this.setState({ emailNumberInSequence: parseInt(returnedResponse.count, 10) });
       })
       .catch(error => {
         console.error(error);
@@ -62,7 +60,7 @@ class CreateEmail extends React.Component {
   }
 
   render() {
-    const emailsInActiveScript = this.state.numberOfEmailsInScript;
+    const emailsInActiveScript = this.state.emailNumberInSequence;
     return (
       <div className="create-email">
         <div className="row">
@@ -78,13 +76,13 @@ class CreateEmail extends React.Component {
                 <div className="input-row">
                   <label>Subject:</label>
                 <div className="emailInputContainer">
-                  <input className="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
+                  <input className="subjectInputField" name="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" required/>
                 </div>
                 </div>
                 <div className="input-row">
                   <label>Body:</label>
                 <div className="emailInputContainer">
-                  <textarea className="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
+                  <textarea className="emailBodyField" name="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" required/>
                 </div>
                 </div>
                 <div className="align-right">
