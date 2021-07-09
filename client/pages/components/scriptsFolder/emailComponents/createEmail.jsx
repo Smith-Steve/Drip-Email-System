@@ -1,11 +1,12 @@
 import React from 'react';
+import Email from '../../../lib/email-post';
 
 class CreateEmail extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { subject: '', emailBody: '', numberOfEmailsInScript: null };
+    this.state = { subject: '', emailBody: '', emailNumberInSequence: '' };
   }
 
   componentDidMount() {
@@ -21,9 +22,12 @@ class CreateEmail extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const emailSubmission = { subject: this.state.subject, emailBody: this.state.emailBody, scriptId: this.props.script.scriptId };
-    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
-
+    const form = new FormData(event.target);
+    const dateInfo = form.get('date'); const timeInfo = form.get('time');
+    const dateArray = dateInfo.split('-'); const timeArray = timeInfo.split(':');
+    const [year, month, day] = dateArray; const [hour, minute] = timeArray;
+    const emailSubmission2 = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, new Date(year, month - 1), day, hour, minute);
+    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission2) };
     fetch('/api/emails', initMethod)
       .then(response => response.json())
       .then(returnedResponse => {
@@ -42,7 +46,7 @@ class CreateEmail extends React.Component {
     fetch(`/api/scripts/count/${this.props.script.scriptId}`, initGetCount)
       .then(response => response.json())
       .then(returnedResponse => {
-        this.setState({ numberOfEmailsInScript: parseInt(returnedResponse.count, 10) });
+        this.setState({ emailNumberInSequence: parseInt(returnedResponse.count, 10) });
       })
       .catch(error => {
         console.error(error);
@@ -50,13 +54,13 @@ class CreateEmail extends React.Component {
   }
 
   renderSelectInput = emailNumber => {
-    return (<div className="align-left">
+    return (<div className="align-right">
       <span className="specialText">E-mail Number#: {emailNumber}</span>
     </div>);
   }
 
   render() {
-    const emailsInActiveScript = this.state.numberOfEmailsInScript;
+    const emailsInActiveScript = this.state.emailNumberInSequence;
     return (
       <div className="create-email">
         <div className="row">
@@ -67,23 +71,35 @@ class CreateEmail extends React.Component {
         <div className="row">
           <div className="col">
             <div className="form-container lg">
+              {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               <form className="create-email" onSubmit={this.handleSubmit}>
-                <div>
+                <div className="input-row">
                   <label>Subject:</label>
-                </div>
                 <div className="emailInputContainer">
                   <input className="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
                 </div>
-                <div>
-                  <label>Body:</label>
                 </div>
+                <div className="input-row">
+                  <label>Body:</label>
                 <div className="emailInputContainer">
                   <textarea className="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
+                </div>
                 </div>
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
+                <div className="align-left">
+                <div className="input-row">
+                  <label>Date: </label>
+                  <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
+                </div>
+              </div>
+              <div className="align-left sendOn-row">
+                <div className="input-row">
+                  <label>Time: </label>
+                  <input type="time" className="time" name="time" required/>
+                </div>
+              </div>
               </form>
             </div>
           </div>

@@ -189,15 +189,15 @@ app.post('/api/flights/:scriptId', (request, response) => {
 });
 
 app.post('/api/emails', (request, response) => {
-  const { subject, emailBody } = request.body;
+  const { subject, emailBody, emailNumberInSequence, sendOn } = request.body;
   const scriptId = parseInt(request.body.scriptId, 10);
 
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
 
-  const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId") values ($1, $2, $3) returning*;';
-  const sqlPostEmailsParams = [subject, emailBody, scriptId];
+  const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId", "emailNumberInSequence", "sendOn") values ($1, $2, $3, $4, $5) returning*;';
+  const sqlPostEmailsParams = [subject, emailBody, scriptId, emailNumberInSequence, sendOn];
   db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
     .then(result => {
       const flight = result.rows[0];
@@ -302,7 +302,7 @@ app.get('/api/emails/:scriptId', (req, res, next) => {
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
-  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1';
+  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1 order by "createdAt" asc';
   const params = [scriptId];
   db.query(sqlGetQuery, params)
     .then(result => {
