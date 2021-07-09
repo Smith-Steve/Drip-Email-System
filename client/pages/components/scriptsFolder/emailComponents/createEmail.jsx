@@ -91,13 +91,13 @@ class CreateEmail extends React.Component {
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                      <div className="align-left">
+                <div className="align-left">
                 <div className="input-row">
                   <label>Date: </label>
                   <input type="date" className="date" required/>
                 </div>
               </div>
-              <div className="align-left">
+              <div className="align-left sendOn-row">
                 <div className="input-row">
                   <label>Time: </label>
                   <input type="time" className="time" required/>

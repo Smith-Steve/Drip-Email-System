@@ -100,6 +100,14 @@ form {
   padding: 0.4rem;
 }
 
+.form-container {
+  contain: content;
+}
+
+.create-email .row:nth-child(2) {
+  margin-top: 1rem;
+}
+
 input,
 select,
 textarea {
@@ -212,6 +220,10 @@ table tbody tr > td span.tableText {
   width: 340px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.sendOn-row {
+  margin-left: 0.5rem;
 }
 
 @media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: landscape) {
