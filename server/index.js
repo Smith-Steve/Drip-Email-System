@@ -1,11 +1,11 @@
 require('dotenv/config');
+const transporter = require('./lib/nodeMailer-transporter');
+const handleText = require('./lib/textCreator');
+const ClientError = require('./lib/client-error');
+const errorMiddleware = require('./lib/error-middleware');
 const express = require('express');
-const transporter = require('./nodeMailer-transporter');
 const pg = require('pg');
-const ClientError = require('./client-error');
-const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
-const handleText = require('./textCreator');
 
 const app = express();
 app.use(express.json());
