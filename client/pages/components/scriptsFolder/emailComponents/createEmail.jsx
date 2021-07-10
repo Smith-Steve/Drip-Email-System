@@ -23,20 +23,25 @@ class CreateEmail extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const form = new FormData(event.target);
-    const dateInfo = form.get('date'); const timeInfo = form.get('time');
-    const dateArray = dateInfo.split('-'); const timeArray = timeInfo.split(':');
-    const [year, month, day] = dateArray; const [hour, minute] = timeArray;
-    const emailSubmission2 = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, new Date(year, month - 1), day, hour, minute);
-    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission2) };
+    let emailSubmission;
+    if (form.get('date') === null) {
+      emailSubmission = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId);
+    } else {
+      const dateInfo = form.get('date'); const timeInfo = form.get('time');
+      const dateArray = dateInfo.split('-'); const timeArray = timeInfo.split(':');
+      const [year, month, day] = dateArray; const [hour, minute] = timeArray;
+      emailSubmission = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, new Date(year, month - 1), day, hour, minute);
+    }
+    const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
     fetch('/api/emails', initMethod)
       .then(response => response.json())
       .then(returnedResponse => {
         if (returnedResponse) alert('email submitted!');
         this.clearForm();
-        window.location.hash = localStorage.getItem('Active-Route'); // not correct
+        window.location.hash = localStorage.getItem('Active-Route');
       })
       .catch(error => {
-        if (error) alert('Please check submission and try again.');
+        if (error) alert('please check submission and try again');
         console.error(error);
       });
   }
@@ -59,6 +64,25 @@ class CreateEmail extends React.Component {
     </div>);
   }
 
+  renderTimeFields = () => {
+    return (
+      <>
+        <div className="align-left">
+                <div className="input-row">
+                  <label>Date: </label>
+                  <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
+                </div>
+              </div>
+              <div className="align-left sendOn-row">
+                <div className="input-row">
+                  <label>Time: </label>
+                  <input type="time" className="time" name="time" required/>
+                </div>
+              </div>
+      </>
+    );
+  }
+
   render() {
     const emailsInActiveScript = this.state.emailNumberInSequence;
     return (
@@ -74,7 +98,7 @@ class CreateEmail extends React.Component {
               {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               <form className="create-email" onSubmit={this.handleSubmit}>
                 <div className="input-row">
-                  <label>Subject:</label>
+                  <label htmlFor="subjectInputField">Subject:</label>
                 <div className="emailInputContainer">
                   <input className="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
                 </div>
@@ -88,18 +112,7 @@ class CreateEmail extends React.Component {
                 <div className="align-right">
                   <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                <div className="align-left">
-                <div className="input-row">
-                  <label>Date: </label>
-                  <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
-                </div>
-              </div>
-              <div className="align-left sendOn-row">
-                <div className="input-row">
-                  <label>Time: </label>
-                  <input type="time" className="time" name="time" required/>
-                </div>
-              </div>
+                {emailsInActiveScript > 0 ? this.renderTimeFields() : null}
               </form>
             </div>
           </div>
