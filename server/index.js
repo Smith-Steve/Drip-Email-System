@@ -268,7 +268,7 @@ app.get('/api/email/:flightId', (request, response) => {
                             inner join "flights" as "f" on "fA"."flightId" = "f"."flightId"
                             inner join "scripts" as "s" on "f"."scriptId" = "s"."scriptId"
                             inner join "emails" as "e" on "s"."scriptId" = "e"."scriptId"
-                            where "f"."flightId" = "fA"."flightId" and "fA"."flightId" = $1`;
+                            where "f"."flightId" = "fA"."flightId" and "fA"."flightId" = $1 and "e"."sendOn" is NULL`;
   const param = [flightId];
   db.query(sqlEmailGetQuery, param)
     .then(result => {
