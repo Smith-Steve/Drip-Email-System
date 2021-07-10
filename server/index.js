@@ -1,6 +1,6 @@
 require('dotenv/config');
 const express = require('express');
-const nodemailer = require('nodemailer');
+const transporter = require('./nodeMailer-transporter');
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
@@ -240,20 +240,6 @@ app.post('/api/flightAssignments', (request, response) => {
       console.error(error);
       response.status(500).json({ error: 'please review entered parameters and try again. ' });
     });
-});
-
-const transporter = nodemailer.createTransport({
-  pool: true,
-  host: 'smtp-mail.outlook.com',
-  secureConnection: false,
-  maxConnections: 1,
-  port: 587,
-  secure: false,
-  tls: { ciphers: 'SSLv3' },
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
 });
 
 app.get('/api/email/:flightId', (request, response) => {
