@@ -1,11 +1,10 @@
 require('dotenv/config');
 const express = require('express');
-const nodemailer = require('nodemailer');
-const pg = require('pg');
-const ClientError = require('./client-error');
-const errorMiddleware = require('./error-middleware');
+const ClientError = require('./lib/client-error');
+const errorMiddleware = require('./lib/error-middleware');
+const db = require('./lib/database-config');
 const staticMiddleware = require('./static-middleware');
-const handleText = require('./textCreator');
+const handleEmail2 = require('./lib/handleEmail');
 
 const app = express();
 app.use(express.json());
@@ -13,11 +12,6 @@ app.use(express.json());
 app.use(staticMiddleware);
 
 app.use(errorMiddleware);
-
-const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
-});
 
 app.post('/api/contacts', (req, res, next) => {
   const { firstName, lastName, company, email, phoneNumber } = req.body;
@@ -242,20 +236,6 @@ app.post('/api/flightAssignments', (request, response) => {
     });
 });
 
-const transporter = nodemailer.createTransport({
-  pool: true,
-  host: 'smtp-mail.outlook.com',
-  secureConnection: false,
-  maxConnections: 1,
-  port: 587,
-  secure: false,
-  tls: { ciphers: 'SSLv3' },
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
-
 app.get('/api/email/:flightId', (request, response) => {
   const flightId = parseInt(request.params.flightId, 10);
   const sqlEmailGetQuery = `select DISTINCT on ("f"."flightId") "f"."flightName" as "flightName", "s"."scriptName", "e"."subject", "e"."emailBody",
@@ -273,29 +253,12 @@ app.get('/api/email/:flightId', (request, response) => {
   db.query(sqlEmailGetQuery, param)
     .then(result => {
       const flightInfo = result.rows[0];
-      handleEmail(flightInfo);
+      handleEmail2(flightInfo);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
-
-async function handleEmail(flightInfo) {
-  const contactList = flightInfo.json_agg;
-  for (let i = 0; i < contactList.length; i++) {
-    const contact = contactList[i];
-    const messageBody = handleText(flightInfo, contact);
-    const msg = {
-      from: process.env.EMAIL_USER,
-      to: contact.email,
-      subject: flightInfo.subject,
-      text: messageBody
-    };
-    await transporter.sendMail(msg).catch(error => {
-      console.error(error);
-    });
-  }
-}
 
 app.get('/api/emails/:scriptId', (req, res, next) => {
   const scriptId = parseInt(req.params.scriptId, 10);
