@@ -10,6 +10,7 @@ app.use(staticMiddleware);
 app.use(errorMiddleware);
 
 app.get('/api/email/:flightId', (request, response) => {
+  response.send('hello');
   const flightId = parseInt(request.params.flightId, 10);
   const sqlEmailGetQuery = `select DISTINCT on ("f"."flightId") "f"."flightName" as "flightName", "s"."scriptName", "e"."subject", "e"."emailBody",
                             (select json_agg (json_build_object('firstName', "c"."firstName", 'lastName', "c"."lastName", 'company',"c"."company", 'email', "c"."email"))
