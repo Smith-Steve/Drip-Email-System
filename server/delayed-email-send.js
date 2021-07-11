@@ -1,7 +1,7 @@
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./lib/error-middleware');
-const textCreator = require('./lib/textCreator');
+const handleEmail = require('./lib/handleEmail');
 const db = require('./lib/database-config');
 
 const app = express();
@@ -21,12 +21,12 @@ app.get('/api/email/:flightId', (request, response) => {
                             inner join "flights" as "f" on "fA"."flightId" = "f"."flightId"
                             inner join "scripts" as "s" on "f"."scriptId" = "s"."scriptId"
                             inner join "emails" as "e" on "s"."scriptId" = "e"."scriptId"
-                            where "f"."flightId" = "fA"."flightId" and "fA"."flightId" = $1 and "e"."sendOn" < now()`;
+                            where "f"."flightId" = "fA"."flightId" and "fA"."flightId" = $1`;
   const param = [flightId];
   db.query(sqlEmailGetQuery, param)
     .then(result => {
       const flightInfo = result.rows[0];
-      textCreator(flightInfo);
+      handleEmail(flightInfo);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
