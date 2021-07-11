@@ -4,7 +4,7 @@ const ClientError = require('./lib/client-error');
 const errorMiddleware = require('./lib/error-middleware');
 const db = require('./lib/database-config');
 const staticMiddleware = require('./static-middleware');
-const handleEmail2 = require('./lib/handleEmail');
+const handleEmail = require('./lib/handleEmail');
 
 const app = express();
 app.use(express.json());
@@ -253,7 +253,7 @@ app.get('/api/email/:flightId', (request, response) => {
   db.query(sqlEmailGetQuery, param)
     .then(result => {
       const flightInfo = result.rows[0];
-      handleEmail2(flightInfo);
+      handleEmail(flightInfo);
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
