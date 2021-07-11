@@ -30,7 +30,7 @@ class CreateEmail extends React.Component {
       const dateInfo = form.get('date'); const timeInfo = form.get('time');
       const dateArray = dateInfo.split('-'); const timeArray = timeInfo.split(':');
       const [year, month, day] = dateArray; const [hour, minute] = timeArray;
-      emailSubmission = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, new Date(year, month - 1), day, hour, minute);
+      emailSubmission = new Email(this.state.subject, this.state.emailBody, this.props.script.scriptId, this.state.emailNumberInSequence, new Date(year, month - 1, day, hour, minute));
     }
     const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(emailSubmission) };
     fetch('/api/emails', initMethod)
