@@ -60,3 +60,4 @@ create table "flightAssignments" (
    foreign key ("contactId")
    references "contacts"("contactId")
 )
+

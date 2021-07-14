@@ -7,4 +7,5 @@ const launchFlight = flightId => {
       console.error(error);
     });
 };
+
 export { launchFlight };
