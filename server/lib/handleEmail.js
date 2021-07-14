@@ -1,20 +1,5 @@
 const textCreator = require('./textCreator');
-const nodemailer = require('nodemailer');
-// const transporter = require('./nodeMailer-transporter');
-
-const transporter = nodemailer.createTransport({
-  pool: true,
-  host: 'smtp-mail.outlook.com',
-  secureConnection: false,
-  maxConnections: 1,
-  port: 587,
-  secure: false,
-  tls: { ciphers: 'SSLv3' },
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+const transporter = require('./nodeMailer-transporter');
 
 async function handleEmail(flightInfo) {
   const contactList = flightInfo.json_agg;
