@@ -1,5 +1,5 @@
 {
-  "name": "final-project",
+  "name": "DripEmailSystem",
   "version": "1.0.0",
   "private": true,
   "description": "A full stack JavaScript solo project.",
@@ -35,6 +35,7 @@
     "express": "^4.17.1",
     "ityped": "^1.0.3",
     "jsonwebtoken": "^8.5.1",
+    "node-codein": "^1.0.8",
     "nodemailer": "^6.6.2",
     "pg": "^8.6.0",
     "pug": "^3.0.2",
