@@ -29,6 +29,7 @@ create table "flights" (
   "topics" text not null,
   "scriptId" INT not null,
   "createdAt" timestamptz(5) not null default now(),
+  "sentOn" timestamptz(5) default null,
   primary key ("flightId"),
   constraint "scriptId"
    foreign key ("scriptId")
@@ -41,7 +42,7 @@ create table "emails" (
   "emailBody" text not null,
   "scriptId" INT not null,
   "emailNumberInSequence" INT default 1,
-  "sendOn" timestamp with time zone,
+  "sentAt" timestamptz(5),
   "createdAt" timestamptz(5) not null default now(),
   primary key ("emailId"),
   constraint "scriptId"
@@ -60,4 +61,3 @@ create table "flightAssignments" (
    foreign key ("contactId")
    references "contacts"("contactId")
 )
-
