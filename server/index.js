@@ -259,7 +259,7 @@ app.get('/api/email/:flightId', (request, response) => {
       handleEmail(flightInfo);// be careful where youu group functaionality together.
     }).catch(error => {
       console.error(error);
-      response.status(500).json({ error: 'an unexpected error occured.1111' });
+      response.status(500).json({ error: 'an unexpected error occured.' });
     });
 });
 
