@@ -9,6 +9,7 @@ A Full Stack JavaScript || Node.js || PostgreSQL solo project created for users 
 - PostgreSQL
 - HTML5
 - CSS3
+- Heroku Scheduled Jobs
 - Webpack
 - Nodemailer
 
