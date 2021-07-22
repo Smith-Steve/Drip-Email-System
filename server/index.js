@@ -5,6 +5,8 @@ const errorMiddleware = require('./lib/error-middleware');
 const db = require('./lib/database-config');
 const staticMiddleware = require('./static-middleware');
 const handleEmail = require('./lib/handleEmail');
+const argon2 = require('argon2');
+// const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
@@ -293,6 +295,55 @@ app.get('/api/scripts/count/:scriptId', (request, response) => {
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occurred.' });
+    });
+});
+
+// sign-up.
+
+app.post('/api/authorization/sign-up', (request, response, next) => {
+  const { userName, userEmail, password } = request.body;
+  if (!userName || !userEmail || !password) {
+    throw new ClientError(400, 'username, email and password are required.');
+  }
+
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sqlInsertUser = `insert into "users"("userName", "userEmail", "hashedPassword")
+                              values ($1, $2, $3)
+                              returning "userName", "userEmail", "hashedPassword"`;
+      const parameters = [userName, userEmail, hashedPassword];
+      return db.query(sqlInsertUser, parameters);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      response.status(201).json(user);
+    }).catch(err => next(err));
+});
+
+app.post('/api/authorization/sign-in', (request, response, next) => {
+  const { userName, password } = request.body;
+  if (!userName || !password) {
+    throw new ClientError(400, 'invalid login');
+  }
+  const sqlPostLogin = 'select "userId", "hashedPassword" from "users" where "userName" = $1';
+  const parameter = [userName];
+  db.query(sqlPostLogin, parameter)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'Invalid Login');
+      }
+      // const { userId, hashedPassword } = user;
+      return argon2;
+      // verify(hashedPassword, password)
+      //   .then(isMatching => {
+      //     if (!isMatching) {
+      //       throw new ClientError(401, 'Invalid Login');
+      //     }
+      //     const payload = { userId, userName };
+      //     // SET UP TOKEN.
+      //   });
     });
 });
 
