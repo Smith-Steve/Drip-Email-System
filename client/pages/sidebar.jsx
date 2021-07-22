@@ -18,6 +18,7 @@ const Sidebar = ({ sideBarState, removeSideBar }) => {
               <a href=""><h1>Home</h1></a>
               <a href="#Contacts" ><h4>Contacts</h4></a>
               <a href="#Flights"><h4>Flights</h4></a>
+              <a href="#Flights"><h4>Login/User</h4></a>
               <a href="#Scripts" ><h4>Scripts</h4></a>
             </div>
           </div>
