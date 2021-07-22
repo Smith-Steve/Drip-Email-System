@@ -61,4 +61,15 @@ create table "flightAssignments" (
   constraint "contactId"
    foreign key ("contactId")
    references "contacts"("contactId")
-)
+);
+
+create table "users" (
+  "userId" serial,
+  "userName" text                 not null,
+  "userEmail" text                not null,
+  "hashedPassword" text           not null,
+  "createdAt" timestamptz(5)      not null default now(),
+  primary key ("userId"),
+  unique ("userName"),
+  unique ("userEmail")
+);

@@ -14,3 +14,6 @@ values ('Email #1', 'Hello {{PersonName}}, Hope you are doing well. We are offer
 
 insert into "flightAssignments" ("flightId", "contactId")
 values (1, 1), (2, 2), (2, 3), (2, 4);
+
+insert into "users" ("userName", "userEmail", "hashedPassword")
+values ('SteveSmith1123', 'Steve.M.Smith.3@outlook.com', '$argon2i$v=19$m=4096,t=3,p=1$sRb5hJd3ChtQszxO7kmQvQ$VIX7KkCYNBYvsMd5TlTVSmlmTrLxv64fU3+iptc4QsM')
