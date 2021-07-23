@@ -6,7 +6,7 @@ const db = require('./lib/database-config');
 const staticMiddleware = require('./static-middleware');
 const handleEmail = require('./lib/handleEmail');
 const argon2 = require('argon2');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
@@ -321,29 +321,67 @@ app.post('/api/authorization/sign-up', (request, response, next) => {
     }).catch(err => next(err));
 });
 
-app.post('/api/authorization/sign-in', (request, response, next) => {
-  const { userName, password } = request.body;
-  if (!userName || !password) {
-    throw new ClientError(400, 'invalid login');
+// app.post('/api/authorization/sign-in', (request, response, next) => {
+//   const { userName, password } = request.body;
+//   if (!userName || !password) {
+//     throw new ClientError(404, 'invalid username or password');
+//   }
+//   const sqlPostLogin = 'select "userId", "hashedPassword" from "users" where "userName" = $1';
+//   const parameter = [userName];
+//   db.query(sqlPostLogin, parameter)
+//     .then(result => {
+//       const [user] = result.rows;
+//       if (!user) {
+//         throw new ClientError(401, 'Invalid Login');
+//       }
+//       const { userId, hashedPassword } = user;
+//       return argon2
+//         .verify(hashedPassword, password)
+//         .then(isMatching => {
+//           if (!isMatching) {
+//             throw new ClientError(401, 'Invalid Login');
+//           }
+//           console.log(hashedPassword)
+//           const payload = { userId, userName };
+//           const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
+//           response.json({ token, user: payload });
+//         });
+//     })
+//     .catch(error => next(error));
+// });
+
+app.post('/api/authorization/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
   }
-  const sqlPostLogin = 'select "userId", "hashedPassword" from "users" where "userName" = $1';
-  const parameter = [userName];
-  db.query(sqlPostLogin, parameter)
+  const sql = `
+    select "userId",
+           "hashedPassword"
+      from "users"
+     where "username" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
     .then(result => {
       const [user] = result.rows;
       if (!user) {
-        throw new ClientError(401, 'Invalid Login');
+        throw new ClientError(401, 'invalid login');
       }
-      // const { userId, hashedPassword } = user;
-      return argon2;
-      // verify(hashedPassword, password)
-      //   .then(isMatching => {
-      //     if (!isMatching) {
-      //       throw new ClientError(401, 'Invalid Login');
-      //     }
-      //     const payload = { userId, userName };
-      //     // SET UP TOKEN.
-      //   });
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(error => {
+      console.error(error);
     });
 });
 
