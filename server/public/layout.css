@@ -214,14 +214,6 @@ h4 {
   z-index: 1;
 }
 
-table tbody tr > td span.tableText {
-  display: inline-block;
-  white-space: nowrap;
-  width: 340px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .sendOn-row {
   margin-left: 0.5rem;
 }

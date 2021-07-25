@@ -9,10 +9,9 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(express.json());
-
+const jsonMiddleWare = express.json();
+app.use(jsonMiddleWare);
 app.use(staticMiddleware);
-
 app.use(errorMiddleware);
 
 app.post('/api/contacts', (req, res, next) => {
@@ -322,66 +321,63 @@ app.post('/api/authorization/sign-up', (request, response, next) => {
 });
 
 // app.post('/api/authorization/sign-in', (request, response, next) => {
-//   const { userName, password } = request.body;
-//   if (!userName || !password) {
-//     throw new ClientError(404, 'invalid username or password');
+//   const { username, password } = request.body;
+//   if (!username || !password) {
+//     throw new ClientError(401, 'invalid login');
 //   }
-//   const sqlPostLogin = 'select "userId", "hashedPassword" from "users" where "userName" = $1';
-//   const parameter = [userName];
-//   db.query(sqlPostLogin, parameter)
+
+//   const sqlGet = 'select "userId", "hashedPassword" from "users" where "username" = $1';
+//   const sqlGetParams = [username];
+//   db.query(sqlGet, sqlGetParams)
 //     .then(result => {
 //       const [user] = result.rows;
 //       if (!user) {
-//         throw new ClientError(401, 'Invalid Login');
+//         throw new ClientError(401, 'cannot find username.');
+//       } else {
+//         const { userId, hashedPassword } = user;
+//         return argon2
+//           .verify(hashedPassword, password)
+//           .then(isMatching => {
+//             if (!isMatching) {
+//               throw new ClientError(401, 'invalid login');
+//             }
+//             const payload = { userId, username };
+//             const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+//             response.json({ token, user: payload });
+//           })
+//           .catch(err => next(err));
 //       }
-//       const { userId, hashedPassword } = user;
-//       return argon2
-//         .verify(hashedPassword, password)
-//         .then(isMatching => {
-//           if (!isMatching) {
-//             throw new ClientError(401, 'Invalid Login');
-//           }
-//           console.log(hashedPassword)
-//           const payload = { userId, userName };
-//           const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
-//           response.json({ token, user: payload });
-//         });
 //     })
-//     .catch(error => next(error));
+//     .catch(err => next(err));
 // });
 
-app.post('/api/authorization/sign-in', (req, res, next) => {
-  const { username, password } = req.body;
+app.post('/api/authorization/sign-in', (request, response, next) => {
+  const { username, password } = request.body;
   if (!username || !password) {
     throw new ClientError(401, 'invalid login');
   }
-  const sql = `
-    select "userId",
-           "hashedPassword"
-      from "users"
-     where "username" = $1
-  `;
-  const params = [username];
-  db.query(sql, params)
+
+  const sqlGet = 'select "userId", "hashedPassword" from "users" where "username" = $1';
+  const sqlGetParams = [username];
+  db.query(sqlGet, sqlGetParams)
     .then(result => {
       const [user] = result.rows;
       if (!user) {
-        throw new ClientError(401, 'invalid login');
+        throw new ClientError(401, 'cannot find username.');
+      } else {
+        const { userId, hashedPassword } = user;
+        argon2
+          .verify(hashedPassword, password)
+          .then(isMatching => {
+            if (!isMatching) {
+              throw new ClientError(401, 'invalid login');
+            }
+            const payload = { userId, username };
+            const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+            response.json({ token, user: payload });
+          })
+          .catch(err => next(err));
       }
-      const { userId, hashedPassword } = user;
-      return argon2
-        .verify(hashedPassword, password)
-        .then(isMatching => {
-          if (!isMatching) {
-            throw new ClientError(401, 'invalid login');
-          }
-          const payload = { userId, username };
-          const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
-          res.json({ token, user: payload });
-        });
-    })
-    .catch(error => {
-      console.error(error);
     });
 });
 
