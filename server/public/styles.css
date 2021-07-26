@@ -131,6 +131,10 @@ button.manageFlights {
   background-color: rgb(0, 128, 128);
 }
 
+button.removeContact {
+  background-color: #f33;
+}
+
 .specialText-home {
   font-style: italic;
   text-align: center;

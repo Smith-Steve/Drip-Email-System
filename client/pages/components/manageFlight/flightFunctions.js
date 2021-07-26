@@ -8,4 +8,14 @@ const launchFlight = flightId => {
     });
 };
 
-export { launchFlight };
+const removeContact = (flightId, contactId) => {
+  const removeContactIdBody = { contactId: contactId };
+  const init = { method: 'Delete', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(removeContactIdBody) };
+  fetch(`/api/flightAssignments/${flightId}`, init)
+    .then(response => response.json())
+    .then(returnedResponse => {
+      if (returnedResponse) alert('removed from flight');
+    }).catch(error => console.error(error));
+};
+
+export { launchFlight, removeContact };
