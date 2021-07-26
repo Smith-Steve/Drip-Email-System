@@ -145,23 +145,6 @@ app.get('/api/flights', (request, response) => {
     });
 });
 
-app.get('/api/scripts/:scriptId', (req, res, next) => {
-  const scriptId = parseInt(req.params.scriptId, 10);
-  if (!Number.isInteger(scriptId) || scriptId <= 0) {
-    throw new ClientError('400', 'Invalid Script.');
-  }
-  const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
-  const params = [scriptId];
-  db.query(sqlGetQuery, params)
-    .then(result => {
-      const script = result.rows[0];
-      res.status(200).json(script);
-    }).catch(error => {
-      console.error(error);
-      res.status(500).json({ error: 'an unexpected error occurred.' });
-    });
-});
-
 app.post('/api/flights/:scriptId', (request, response) => {
   const { flightName, topics } = request.body;
   const scriptId = parseInt(request.params.scriptId, 10);
@@ -180,6 +163,23 @@ app.post('/api/flights/:scriptId', (request, response) => {
     .catch(error => {
       console.error(error);
       response.status(500).json({ error: 'please review entered parameters and try again.' });
+    });
+});
+
+app.get('/api/scripts/:scriptId', (req, res, next) => {
+  const scriptId = parseInt(req.params.scriptId, 10);
+  if (!Number.isInteger(scriptId) || scriptId <= 0) {
+    throw new ClientError('400', 'Invalid Script.');
+  }
+  const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
+  const params = [scriptId];
+  db.query(sqlGetQuery, params)
+    .then(result => {
+      const script = result.rows[0];
+      res.status(200).json(script);
+    }).catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'an unexpected error occurred.' });
     });
 });
 
@@ -232,6 +232,25 @@ app.post('/api/flightAssignments', (request, response) => {
       response.status(201).json(flight);
     })
     .catch(error => {
+      console.error(error);
+      response.status(500).json({ error: 'please review entered parameters and try again. ' });
+    });
+});
+
+app.delete('/api/flightAssignments/:flightId', (request, response) => {
+  const flightId = parseInt(request.params.flightId, 10);
+  const { contactId } = request.body;
+  if ((!Number.isInteger(contactId) || contactId <= 0) && (!Number.isInteger(flightId) || flightId <= 0)) {
+    throw new ClientError('400', 'Invalid Flight');
+  }
+  const sqlDelete = `delete from "flightAssignments"
+                    where "contactId" = $1 and "flightId" = $2`;
+  const sqlParameters = [contactId, flightId];
+  db.query(sqlDelete, sqlParameters)
+    .then(result => {
+      const reducedFlightNo = result.rows[0];
+      response.status(204).json(reducedFlightNo);
+    }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'please review entered parameters and try again. ' });
     });
