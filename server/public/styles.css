@@ -16,6 +16,10 @@ h4,
   color: rgb(186, 186, 186);
 }
 
+label {
+  font-weight: 600;
+}
+
 h4:hover {
   color: rgba(190, 186, 186, 0.5);
 }
