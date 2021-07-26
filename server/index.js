@@ -248,7 +248,7 @@ app.delete('/api/flightAssignments/:flightId', (request, response) => {
   const sqlParameters = [contactId, flightId];
   db.query(sqlDelete, sqlParameters)
     .then(result => {
-      const reducedFlightNo = result.rows[0];
+      const [reducedFlightNo] = result.rows;
       response.status(204).json(reducedFlightNo);
     }).catch(error => {
       console.error(error);

@@ -8,7 +8,7 @@ const triggerButton = flightId => {
 
 function FlightTable({ contactList, flightId }) {
   const contactRow = contactList.map(contact => {
-    return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 2}><span className="tableText align-left">{contact.email}</span></td></tr>;
+    return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 2}><span className="tableText align-left">{contact.email}</span></td><td id={contact.contactId + 2}><button className="removeContact alignRight">Remove Contact</button></td></tr>;
   });
   return (<React.Fragment>
             <div className="row">
