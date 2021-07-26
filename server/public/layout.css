@@ -42,7 +42,7 @@ div.sidenav.open {
 th,
 td,
 .flexContainer {
-  padding: 2rem;
+  padding: 1.2rem;
 }
 
 div.side-bar.closed,
@@ -70,7 +70,7 @@ span.specialText.view-script {
 }
 
 span.specialText {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .align-right {
@@ -98,6 +98,11 @@ form {
 .table-container {
   flex-basis: 100%;
   padding: 0.4rem;
+  border-radius: 30px;
+}
+
+.view-script-component > .view-script .lg.flexContainer {
+  border-radius: 30px;
 }
 
 .form-container {
@@ -138,7 +143,7 @@ button {
 }
 
 button.createContact {
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-right: 6.5rem;
 }
 
