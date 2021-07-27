@@ -95,7 +95,7 @@ class ManageFlight extends React.Component {
         contact => contact.email === deletedContact.email
       );
 
-      const newContactList = [...prevState.contacts];
+      const newContactList = [...prevState.contactsAssignedToFlight];
       if (indexOfPerson >= 0) {
         newContactList.splice(indexOfPerson, 1);
       }
