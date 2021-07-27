@@ -2,10 +2,10 @@ insert into "contacts" ("firstName", "lastName", "company", "email", "phoneNumbe
 values ('Jeff', 'Lewis', 'Travel Co', 'Steve.A.Dore@outlook.com', '7038914575'), ('Alexandre', 'Dumas', 'Ainsworths Magazine', 'AlexandreDumas@dispostable.com', '2154981116'),
 ('Thomas', 'Bill', 'Pinkerton Security', 'ThomasBill@dispostable.com', '2154981116'), ('Billy', 'Slick', 'Dispostable', 'BillySlick@dispostable.com', '2154981116');
 
-insert into "scripts" ("scriptName", "sent")
-values ('Script #1', FALSE),('Script #2', FALSE);
+insert into "scripts" ("scriptName")
+values ('Script #1'),('Script #2');
 
-insert into "flights" ("flightName", "topics", "scriptId")
+insert into "flights" ("flightName", "topics", "scriptId", "sent")
 values ('Flight #1', 'Nice', 1), ('Flight #2', 'Nice', 2);
 
 insert into "emails" ("subject", "emailBody", "scriptId")
