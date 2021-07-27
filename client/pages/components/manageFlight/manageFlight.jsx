@@ -6,6 +6,7 @@ class ManageFlight extends React.Component {
     super(props);
     this.controlChange = this.controlChange.bind(this);
     this.getContacts = this.getContacts.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
     this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
   }
 
@@ -88,6 +89,22 @@ class ManageFlight extends React.Component {
       }).catch(error => console.error(error));
   }
 
+  deleteContact = deletedContact => {
+    this.setState(prevState => {
+      const indexOfPerson = prevState.contactsAssignedToFlight.findIndex(
+        contact => contact.email === deletedContact.email
+      );
+
+      const newContactList = [...prevState.contacts];
+      if (indexOfPerson >= 0) {
+        newContactList.splice(indexOfPerson, 1);
+      }
+      return {
+        contactsAssignedToFlight: newContactList
+      };
+    });
+  }
+
   render() {
     const contactList = this.state.contacts;
     const contactFlightList = this.state.contactsAssignedToFlight;
@@ -114,7 +131,7 @@ class ManageFlight extends React.Component {
             </div>
           </div>
         </div>
-        {contactFlightList.length > 0 ? <FlightTable contactList={contactFlightList} flightId={this.props.flight.flightId}/> : <BlankElement flightName={this.props.flight.flightName}/>}
+        {contactFlightList.length > 0 ? <FlightTable contactList={contactFlightList} flightId={this.props.flight.flightId} deleteContact={this.deleteContact}/> : <BlankElement flightName={this.props.flight.flightName}/>}
       </div>
     );
   }
