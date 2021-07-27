@@ -101,6 +101,10 @@ form {
   border-radius: 30px;
 }
 
+tr:last-of-type {
+  border-radius: 30px;
+}
+
 .view-script-component > .view-script .lg.flexContainer {
   border-radius: 30px;
 }
