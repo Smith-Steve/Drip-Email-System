@@ -20,6 +20,7 @@ create table "contacts" (
 create table "scripts" (
   "scriptId" serial,
   "scriptName" text not null,
+  "sent" BOOLEAN not null,
   primary key ("scriptId")
 );
 
