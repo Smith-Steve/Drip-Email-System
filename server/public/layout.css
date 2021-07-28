@@ -45,6 +45,22 @@ td,
   padding: 1.2rem;
 }
 
+td {
+  text-align: center;
+}
+
+td:nth-child(3n + 1) {
+  text-align: left;
+}
+
+tr:last-of-type > td:first-of-type {
+  border-radius: 0 0 0 30px;
+}
+
+tr:last-of-type > td:last-of-type {
+  border-radius: 0 0 30px 0;
+}
+
 div.side-bar.closed,
 div.side-bar.closed-open-first-time,
 div.textContainer-side-bar.closed,
@@ -167,14 +183,6 @@ label.companyLabel {
 table {
   border-collapse: collapse;
   flex-basis: 100%;
-}
-
-td {
-  text-align: center;
-}
-
-td:nth-child(3n + 1) {
-  text-align: left;
 }
 
 .flexContainer {
