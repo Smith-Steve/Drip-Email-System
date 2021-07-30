@@ -135,14 +135,6 @@ button.removeContact {
   background-color: #f33;
 }
 
-.specialText-home {
-  font-style: italic;
-  text-align: center;
-  color: rgba(0, 0, 0, 0.5);
-  background-color: #666;
-  text-shadow: -1px -1px rgba(0, 0, 0, 0.5), 1px 1px rgba(255, 255, 255, 0.5);
-}
-
 tbody tr:nth-child(odd) {
   background-color: #303841;
   border-color: #303841;
