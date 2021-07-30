@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlightTable, BlankElement } from './flightTable';
+import { FlightTable, BlankElement } from './flight-table';
 
 class ManageFlight extends React.Component {
   constructor(props) {
@@ -7,6 +7,10 @@ class ManageFlight extends React.Component {
     this.controlChange = this.controlChange.bind(this);
     this.getContacts = this.getContacts.bind(this);
     this.deleteContact = this.deleteContact.bind(this);
+    this.addNewContactToFlight = this.addNewContactToFlight.bind(this);
+    this.getFlightScript = this.getFlightScript.bind(this);
+    this.getContacts = this.getContacts.bind(this);
+    this.contactsAssignedToFlight = this.contactsAssignedToFlight.bind(this);
     this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
   }
 
@@ -16,7 +20,7 @@ class ManageFlight extends React.Component {
     this.contactsAssignedToFlight();
   }
 
-  addNewContactToFlight = newContact => {
+  addNewContactToFlight(newContact) {
     this.setState(state => {
       for (let i = 0; i < this.state.contacts.length; i++) {
         const activeContact = this.state.contacts[i];
@@ -32,18 +36,7 @@ class ManageFlight extends React.Component {
     });
   }
 
-  getFlightScript = () => {
-    const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
-    fetch(`/api/scripts/${this.props.flight.scriptId}`, initGetScripts)
-      .then(response => response.json())
-      .then(returnedResponse => {
-        this.setState({ script: returnedResponse });
-      }).catch(error => {
-        console.error(error);
-      });
-  };
-
-  getContacts = () => {
+  getContacts() {
     const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch('/api/contacts', initGetContacts)
       .then(response => response.json())
@@ -53,7 +46,7 @@ class ManageFlight extends React.Component {
       ).catch(error => console.error(error));
   }
 
-  contactsAssignedToFlight = () => {
+  contactsAssignedToFlight() {
     const initGetContacts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch(`/api/contacts/flightAssignment/${this.props.flight.flightId}`, initGetContacts)
       .then(response => response.json())
@@ -63,7 +56,7 @@ class ManageFlight extends React.Component {
       ).catch(error => console.error(error));
   }
 
-  mappedContacts = contact => {
+  mappedContacts(contact) {
     return <option key={contact.contactId} id={contact.contactId} value={contact.contactId} name="selectedContactId">{contact.firstName + ' ' + contact.lastName} </option>;
   }
 
