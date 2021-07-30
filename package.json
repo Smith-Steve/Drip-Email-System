@@ -1,6 +1,9 @@
 {
   "name": "DripEmailSystem",
   "version": "1.0.0",
+  "engines": {
+    "node": "v14.16.0"
+  },
   "private": true,
   "description": "A full stack JavaScript solo project.",
   "main": "server/index.js",
