@@ -1,5 +1,5 @@
 import React from 'react';
-import { launchFlight, removeContact } from './flightFunctions';
+import { launchFlight, removeContact } from './flight-functions';
 
 const triggerButton = flightId => {
   launchFlight(flightId);

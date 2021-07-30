@@ -1,13 +1,13 @@
 import React from 'react';
 import Sidebar from './sidebar';
 import parseRoute from './lib/parse-route';
-import CreateContact from './components/contacts/createContact';
+import CreateContact from './components/contacts/create-contact';
 import Scripts from './components/scriptsFolder/scripts';
 import Flights from './components/flight/flights';
-import ViewScript from './components/scriptsFolder/viewScript';
-import CreateEmail from './components/scriptsFolder/emailComponents/createEmail';
-import ManageFlight from './components/manageFlight/manageFlight';
-import HomeComponent from './homeComponent';
+import ViewScript from './components/scriptsFolder/viewscript';
+import CreateEmail from './components/scriptsFolder/emailComponents/create-email';
+import ManageFlight from './components/manage-flight/manage-flight';
+import HomeComponent from './home-component';
 import AppContext from './lib/app-context';
 
 class Home extends React.Component {
@@ -15,6 +15,7 @@ class Home extends React.Component {
     super(props);
     this.setActiveScript = this.setActiveScript.bind(this);
     this.setFlight = this.setFlight.bind(this);
+    this.closeSideBar = this.closeSideBar.bind(this);
     this.state = { route: parseRoute(window.location.hash), activeScript: JSON.parse(localStorage.getItem('Active-Script')) || null, activeFlight: JSON.parse(localStorage.getItem('Active-Flight')) || null, sideBar: 'closed-open-first-time', arrowVisibility: 'visible' };
   }
 
@@ -42,7 +43,7 @@ class Home extends React.Component {
     this.setState({ activeFlight: selectedFlight });
   }
 
-  closeSideBar = () => {
+  closeSideBar() {
     this.setState({ sideBar: 'closed' });
   }
 

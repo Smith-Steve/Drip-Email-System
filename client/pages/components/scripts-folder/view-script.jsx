@@ -1,6 +1,6 @@
 import React from 'react';
 import AppContext from '../../lib/app-context';
-import EmailTable from './emailComponents/email-table';
+import EmailTable from './email-components/email-table';
 
 export default class ViewScript extends React.Component {
   constructor(props) {
