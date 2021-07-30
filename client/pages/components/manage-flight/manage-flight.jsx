@@ -98,6 +98,17 @@ class ManageFlight extends React.Component {
     });
   }
 
+  getFlightScript() {
+    const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch(`/api/scripts/${this.props.flight.scriptId}`, initGetScripts)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ script: returnedResponse });
+      }).catch(error => {
+        console.error(error);
+      });
+  }
+
   render() {
     const contactList = this.state.contacts;
     const contactFlightList = this.state.contactsAssignedToFlight;
