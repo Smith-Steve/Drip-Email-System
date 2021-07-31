@@ -18,7 +18,9 @@ class CreateEmail extends React.Component {
     this.setState({ [name]: event.target.value });
   }
 
-  clearForm = () => this.setState({ subject: '', emailBody: '' })
+  clearForm() {
+    this.setState({ subject: '', emailBody: '' });
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -46,7 +48,7 @@ class CreateEmail extends React.Component {
       });
   }
 
-  getCount = () => {
+  getCount() {
     const initGetCount = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch(`/api/scripts/count/${this.props.script.scriptId}`, initGetCount)
       .then(response => response.json())

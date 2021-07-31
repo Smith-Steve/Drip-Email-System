@@ -6,11 +6,7 @@ class ManageFlight extends React.Component {
     super(props);
     this.controlChange = this.controlChange.bind(this);
     this.getContacts = this.getContacts.bind(this);
-    this.deleteContact = this.deleteContact.bind(this);
-    this.addNewContactToFlight = this.addNewContactToFlight.bind(this);
-    this.getFlightScript = this.getFlightScript.bind(this);
-    this.getContacts = this.getContacts.bind(this);
-    this.contactsAssignedToFlight = this.contactsAssignedToFlight.bind(this);
+    this.submitFlightAssignment = this.submitFlightAssignment.bind(this);
     this.state = { script: '', contacts: [], selectedContactId: '', contactsAssignedToFlight: [], final: [] };
   }
 
@@ -60,13 +56,15 @@ class ManageFlight extends React.Component {
     return <option key={contact.contactId} id={contact.contactId} value={contact.contactId} name="selectedContactId">{contact.firstName + ' ' + contact.lastName} </option>;
   }
 
-  clearForm = () => this.setState({ selectedContactId: '' })
+  clearForm() {
+    this.setState({ selectedContactId: '' });
+  }
 
   controlChange(event) {
     this.setState({ selectedContactId: event.target.value });
   }
 
-  submitFlightAssignment = event => {
+  submitFlightAssignment(event) {
     event.preventDefault();
     const flightAssignmentBody = {
       flightId: this.props.flight.flightId,
@@ -82,7 +80,7 @@ class ManageFlight extends React.Component {
       }).catch(error => console.error(error));
   }
 
-  deleteContact = deletedContact => {
+  deleteContact(deletedContact) {
     this.setState(prevState => {
       const indexOfPerson = prevState.contactsAssignedToFlight.findIndex(
         contact => contact.email === deletedContact.email

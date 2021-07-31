@@ -4,8 +4,8 @@ import AppContext from '../../lib/app-context';
 export default class Flights extends React.Component {
   constructor(props) {
     super(props);
-    this.clearForm = this.clearForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.submitFlight = this.submitFlight.bind(this);
     this.state = { flightName: '', topics: '', scripts: [], selectedScriptId: '', flights: [] };
   }
 
@@ -14,41 +14,43 @@ export default class Flights extends React.Component {
     this.getListOfFlights();
   }
 
-    getListOfScripts = () => {
-      const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
-      fetch('/api/scripts/', initGetScripts)
-        .then(response => response.json())
-        .then(returnedResponse => {
-          this.setState({ scripts: returnedResponse });
-        }).catch(error => {
-          console.error(error);
-        });
-    }
+  getListOfScripts() {
+    const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch('/api/scripts/', initGetScripts)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ scripts: returnedResponse });
+      }).catch(error => {
+        console.error(error);
+      });
+  }
 
-    getFlightInfo(flight) {
-      this.props.getFlight(flight);
-      window.localStorage.setItem('Active-Flight', JSON.stringify(flight));
-    }
+  getFlightInfo(flight) {
+    this.props.getFlight(flight);
+    window.localStorage.setItem('Active-Flight', JSON.stringify(flight));
+  }
 
-    getListOfFlights = () => {
-      const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
-      fetch('/api/flights/', initGetScripts)
-        .then(response => response.json())
-        .then(returnedResponse => {
-          this.setState({ flights: returnedResponse });
-        }).catch(error => {
-          console.error(error);
-        });
-    }
+  getListOfFlights() {
+    const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
+    fetch('/api/flights/', initGetScripts)
+      .then(response => response.json())
+      .then(returnedResponse => {
+        this.setState({ flights: returnedResponse });
+      }).catch(error => {
+        console.error(error);
+      });
+  }
 
-    handleChange(event) {
-      const name = event.target.name;
-      this.setState({ [name]: event.target.value });
-    }
+  handleChange(event) {
+    const name = event.target.name;
+    this.setState({ [name]: event.target.value });
+  }
 
-  clearForm = () => this.setState({ flightName: '', topics: '', selectedScriptId: '' })
+  clearForm() {
+    this.setState({ flightName: '', topics: '', selectedScriptId: '' });
+  }
 
-  addFlight = newFlight => {
+  addFlight(newFlight) {
     this.setState(state => {
       const completeFlightList = [newFlight, ...this.state.flights];
       return {
@@ -57,7 +59,7 @@ export default class Flights extends React.Component {
     });
   }
 
-  submitFlight = event => {
+  submitFlight(event) {
     event.preventDefault();
     const flightBody = {
       flightName: this.state.flightName,
@@ -101,7 +103,7 @@ export default class Flights extends React.Component {
     );
   }
 
-  mappedSelectionScripts = script => {
+  mappedSelectionScripts(script) {
     return <option key={script.scriptId} id={script.scriptId} value={script.scriptId} name="selectedScriptId">{script.scriptName}</option>;
   }
 
