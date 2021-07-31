@@ -132,7 +132,7 @@ export default class Flights extends React.Component {
                 <div className="input-row">
                   <label>Choose Script: </label>
                   <select id="scripts" value={this.state.selectedScriptId} onChange={this.handleChange} name="selectedScriptId">
-                    <option value="" className="defaultOption">Select a Script Here</option>
+                    <option value="" className="default-option">Select a Script Here</option>
                     {scriptList.map(this.mappedSelectionScripts)}
                   </select>
                 </div>
