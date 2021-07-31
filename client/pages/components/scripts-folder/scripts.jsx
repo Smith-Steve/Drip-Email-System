@@ -5,6 +5,7 @@ class Scripts extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buildTable = this.buildTable.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = { scriptName: '', selectedScript: null, scripts: [] };
   }
 
@@ -17,11 +18,15 @@ class Scripts extends React.Component {
     window.localStorage.setItem('Active-Script', JSON.stringify(script));
   }
 
-  handleChange = event => this.setState({ scriptName: event.target.value });
+  handleChange(event) {
+    this.setState({ scriptName: event.target.value });
+  }
 
-  clearForm = () => this.setState({ scriptName: '' })
+  clearForm() {
+    this.setState({ scriptName: '' });
+  }
 
-  getListOfScripts = () => {
+  getListOfScripts() {
     const initGetScripts = { method: 'GET', headers: { 'Conent-Type': 'application/json' } };
     fetch('/api/scripts/', initGetScripts)
       .then(response => response.json())
@@ -32,7 +37,7 @@ class Scripts extends React.Component {
       });
   }
 
-  addScript = newScript => {
+  addScript(newScript) {
     this.setState(state => {
       const completeScriptList = [newScript, ...this.state.scripts];
       return {

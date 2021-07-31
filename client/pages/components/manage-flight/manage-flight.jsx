@@ -80,23 +80,7 @@ class ManageFlight extends React.Component {
       }).catch(error => console.error(error));
   }
 
-  // submitFlightAssignment = event => {
-  //   event.preventDefault();
-  //   const flightAssignmentBody = {
-  //     flightId: this.props.flight.flightId,
-  //     contactId: this.state.selectedContactId
-  //   };
-  //   const initMethod = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(flightAssignmentBody) };
-  //   fetch('/api/flightAssignments', initMethod)
-  //     .then(response => response.json())
-  //     .then(returnedResponse => {
-  //       if (returnedResponse) alert('added to flight!');
-  //       this.addNewContactToFlight(returnedResponse);
-  //       this.clearForm();
-  //     }).catch(error => console.error(error));
-  // }
-
-  deleteContact = deletedContact => {
+  deleteContact(deletedContact) {
     this.setState(prevState => {
       const indexOfPerson = prevState.contactsAssignedToFlight.findIndex(
         contact => contact.email === deletedContact.email
