@@ -5,7 +5,6 @@ export default class CreateContact extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.clearForm = this.clearForm.bind(this);
     this.state = { firstName: '', lastName: '', company: '', email: '', phoneNumber: '' };
   }
 

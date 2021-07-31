@@ -5,7 +5,7 @@ values ('Jeff', 'Lewis', 'Travel Co', 'Steve.A.Dore@outlook.com', '7038914575'),
 insert into "scripts" ("scriptName")
 values ('Script #1'),('Script #2');
 
-insert into "flights" ("flightName", "topics", "scriptId", "sent")
+insert into "flights" ("flightName", "topics", "scriptId")
 values ('Flight #1', 'Nice', 1), ('Flight #2', 'Nice', 2);
 
 insert into "emails" ("subject", "emailBody", "scriptId")
