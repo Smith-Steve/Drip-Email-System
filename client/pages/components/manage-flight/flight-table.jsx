@@ -1,14 +1,14 @@
 import React from 'react';
 import { launchFlight, removeContact } from './flight-functions';
 
-const triggerButton = flightId => {
+function triggerButton(flightId) {
   launchFlight(flightId);
   window.location.hash = 'Flights';
-};
+}
 
-const triggerButtonRemoveContact = (flightIdentity, contact) => {
+function triggerButtonRemoveContact(flightIdentity, contact) {
   removeContact(flightIdentity, contact.contactId);
-};
+}
 
 function FlightTable({ contactList, flightId, deleteContact }) {
   const contactRow = contactList.map(contact => {
