@@ -62,7 +62,7 @@ class CreateEmail extends React.Component {
 
   renderSelectInput = emailNumber => {
     return (<div className="align-right">
-      <span className="specialText">E-mail Number#: {emailNumber}</span>
+      <span className="special-text">E-mail Number#: {emailNumber}</span>
     </div>);
   }
 
@@ -75,7 +75,7 @@ class CreateEmail extends React.Component {
                   <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
                 </div>
               </div>
-              <div className="align-left sendOn-row">
+              <div className="align-left sendon-row">
                 <div className="input-row">
                   <label>Time: </label>
                   <input type="time" className="time" name="time" required/>
@@ -91,7 +91,7 @@ class CreateEmail extends React.Component {
       <div className="create-email">
         <div className="row">
           <div className="col">
-            <span className="specialText">Manage Script - {this.props.script.scriptName}</span>
+            <span className="special-text">Manage Script - {this.props.script.scriptName}</span>
           </div>
         </div>
         <div className="row">
@@ -100,19 +100,19 @@ class CreateEmail extends React.Component {
               {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               <form className="create-email" onSubmit={this.handleSubmit}>
                 <div className="input-row">
-                  <label htmlFor="subjectInputField">Subject:</label>
-                <div className="emailInputContainer">
-                  <input className="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
+                  <label htmlFor="subject-input-field">Subject:</label>
+                <div className="email-input-container">
+                  <input className="subject-input-field" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
                 </div>
                 </div>
                 <div className="input-row">
                   <label>Body:</label>
-                <div className="emailInputContainer">
-                  <textarea className="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
+                <div className="email-input-container">
+                  <textarea className="email-body-field" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
                 </div>
                 </div>
                 <div className="align-right">
-                  <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Email</button>
+                  <button className="scripts purple-button" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
                 {emailsInActiveScript > 0 ? this.renderTimeFields() : null}
               </form>

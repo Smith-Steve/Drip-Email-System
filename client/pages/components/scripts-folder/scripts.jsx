@@ -64,16 +64,16 @@ class Scripts extends React.Component {
 
   buildTable(scriptList) {
     const scriptRow = scriptList.map(script => {
-      return <tr key={script.scriptId}><td key={script.scriptId}> <span className="tableText">{script.scriptName}</span></td><td id={script.scriptId + 2}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}><button className="manageScripts alignRight">Manage Script</button></a></td></tr>;
+      return <tr key={script.scriptId}><td key={script.scriptId}> <span className="table-text">{script.scriptName}</span></td><td id={script.scriptId + 2}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}><button className="manageScripts alignRight">Manage Script</button></a></td></tr>;
     });
     return (
       <div className="row">
         <div className="col">
           <div className="table-container lg">
-            <table id="scripts_list">
+            <table id="scripts-list">
               <thead>
                 <tr>
-                  <th><span className="specialText align-left">Script Name</span></th>
+                  <th><span className="special-text align-left">Script Name</span></th>
                   <th></th>
                 </tr>
               </thead>
@@ -93,7 +93,7 @@ class Scripts extends React.Component {
       <div className="scripts">
         <div className="row">
           <div className="col">
-            <span className="specialText prompt">Script E-mail Chain Set Up:</span>
+            <span className="special-text prompt">Script E-mail Chain Set Up:</span>
           </div>
         </div>
         <div className="row">
@@ -102,10 +102,10 @@ class Scripts extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <div className="input-row">
                   <label>Script Chain Name:</label>
-                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
+                  <input className="script-input-field" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
                 </div>
                 <div className="align-right">
-                  <button className="scripts purpleButton" onSubmit={this.handleSubmit}>Create Script</button>
+                  <button className="scripts purple-button" onSubmit={this.handleSubmit}>Create Script</button>
                 </div>
               </form>
             </div>

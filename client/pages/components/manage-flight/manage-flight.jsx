@@ -113,7 +113,7 @@ class ManageFlight extends React.Component {
     return (
       <div className="flights">
         <div className="row flex">
-            <span className="specialText prompt">Managing Flight - {this.props.flight.flightName}</span> <span className="specialText prompt manageFlightScriptPrompt">Script Name: {this.state.script.scriptName}</span>
+            <span className="special-text prompt">Managing Flight - {this.props.flight.flightName}</span> <span className="special-text prompt manage-flight-script-prompt">Script Name: {this.state.script.scriptName}</span>
         </div>
         <div className="row">
           <div className="col">
@@ -127,7 +127,7 @@ class ManageFlight extends React.Component {
                     </select >
                 </div>
                  <div className="align-right">
-                  <button className="purpleButton" onSubmit={this.submitFlightAssignment}>Add Contact</button>
+                  <button className="purple-button" onSubmit={this.submitFlightAssignment}>Add Contact</button>
                 </div>
               </form>
             </div>

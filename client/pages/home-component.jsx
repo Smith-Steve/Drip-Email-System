@@ -3,10 +3,10 @@ import React from 'react';
 export default function HomeComponent() {
   return (
     <React.Fragment>
-      <div className="homeComponentContainer">
+      <div className="home-component-container">
         <div className="row">
           <div className="col">
-            <div className="homeComponentContainer-textBox">
+            <div className="home-component-container-textbox">
               <div className="homeHeader">
                 <i className="fa fa-envelope fa-4x"></i><h1>Unleash Your Message</h1>
               </div>
