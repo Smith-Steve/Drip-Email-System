@@ -13,7 +13,7 @@ export default function SideBar({ sideBarState, removeSideBar }) {
   return (
       <div className={`side-bar lg ${sideBarState}`}>
         <React.Fragment>
-          <div className={`col textContainer-side-bar ${sideBarState}`}>
+          <div className={`col text-container-side-bar ${sideBarState}`}>
             <div className={`sidenav ${sideBarState}`} onClick={handleClick}>
               <a href=""><h1>Home</h1></a>
               <a href="#Contacts" ><h4>Contacts</h4></a>

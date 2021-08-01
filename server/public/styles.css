@@ -24,7 +24,7 @@ h4:hover {
   color: rgba(190, 186, 186, 0.5);
 }
 
-button.purpleButton::after {
+button.purple-button::after {
   content: "";
   background: rgb(171, 140, 228);
   display: block;
@@ -37,7 +37,7 @@ button.purpleButton::after {
   transition: all 0.8s;
 }
 
-button.purpleButton:active::after {
+button.purple-button:active::after {
   padding: 0;
   margin: 0;
   opacity: 1;
@@ -56,8 +56,8 @@ span {
   background-color: #36404a;
 }
 
-.specialText,
-.tableText {
+.special-text,
+.table-text {
   font-family: 'Montserrat', sans-serif;
   color: #ab8ce4;
   margin-right: 2rem;
@@ -66,15 +66,15 @@ span {
   /* white-space: nowrap; make sure this hasn't changed anything */
 }
 
-span.specialText.prompt.manageFlightScriptPrompt {
+span.special-text.prompt.manage-flight-script-proompt {
   margin-left: auto;
 }
 
-.specialText {
+.special-text {
   text-align: center;
 }
 
-span.specialText {
+span.special-text {
   font-weight: 650;
 }
 
@@ -126,12 +126,12 @@ button {
   box-shadow: 2px 2px rgb(0, 0, 0, 0.5);
 }
 
-button.manageScripts,
-button.manageFlights {
+button.manage-scripts,
+button.manage-flights {
   background-color: rgb(0, 128, 128);
 }
 
-button.removeContact {
+button.remove-contact {
   background-color: #f33;
 }
 
@@ -159,7 +159,7 @@ tbody tr:nth-child(odd) {
   transition-delay: 1s;
 }
 
-.homeComponentContainer {
+.home-component-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,7 +167,7 @@ tbody tr:nth-child(odd) {
   height: 85vh;
 }
 
-.homeComponentContainer-textBox {
+.home-component-container-textbox {
   border: 0.45rem rgba(186, 186, 186, 0.5) solid;
   justify-content: center;
   align-items: center;
@@ -190,8 +190,8 @@ tbody tr:nth-child(odd) {
     font-size: 1rem;
   }
 
-  .table-container .specialText,
-  .table-container .tableText {
+  .table-container .special-text,
+  .table-container .table-text {
     font-size: 1rem;
   }
 }

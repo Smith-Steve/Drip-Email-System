@@ -12,7 +12,7 @@ function triggerButtonRemoveContact(flightIdentity, contact) {
 
 function FlightTable({ contactList, flightId, deleteContact }) {
   const contactRow = contactList.map(contact => {
-    return <tr key={contact.contactId}><td key={contact.contactId}> <span className="tableText">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 2}><span className="tableText align-left">{contact.email}</span></td><td id={contact.contactId + 2}><button onClick={function () { triggerButtonRemoveContact(flightId, contact); deleteContact(contact); } } className="removeContact alignRight">Remove</button></td></tr>;
+    return <tr key={contact.contactId}><td key={contact.contactId}> <span className="table-text">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 2}><span className="table-text align-left">{contact.email}</span></td><td id={contact.contactId + 2}><button onClick={function () { triggerButtonRemoveContact(flightId, contact); deleteContact(contact); } } className="remove-contact align-right">Remove</button></td></tr>;
   });
   return (<React.Fragment>
             <div className="row">
@@ -21,8 +21,8 @@ function FlightTable({ contactList, flightId, deleteContact }) {
             <table id="contact_list">
               <thead>
                 <tr>
-                  <th><span className="specialText align-left">Contact Name</span></th>
-                  <th><span className="specialText align-left">Contact Email </span></th>
+                  <th><span className="special-text align-left">Contact Name</span></th>
+                  <th><span className="special-text align-left">Contact Email </span></th>
                 </tr>
               </thead>
               <tbody>
@@ -42,7 +42,7 @@ function FlightTable({ contactList, flightId, deleteContact }) {
 function BlankElement({ flightName }) {
   return (
     <div className="row flex">
-      <span className="specialText prompt blankElement">No Contacts in {flightName} Presently </span>
+      <span className="special-text prompt blank-element">No Contacts in {flightName} Presently </span>
     </div>);
 }
 
