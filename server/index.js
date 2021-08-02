@@ -124,7 +124,8 @@ app.post('/api/scripts', (requests, response, next) => {
 });
 
 app.get('/api/scripts', (requests, response) => {
-  const sqlGetAllScriptsQuery = 'select * from "scripts" order by "scriptName" desc;';
+  const sqlGetAllScriptsQuery = `select * from "scripts"
+                                 order by "scriptName" desc;`;
   db.query(sqlGetAllScriptsQuery)
     .then(result => {
       const scripts = result.rows;
@@ -136,7 +137,8 @@ app.get('/api/scripts', (requests, response) => {
 });
 
 app.get('/api/flights', (request, response) => {
-  const sqlGetQuery = 'select * from "flights" order by "flightName" desc;';
+  const sqlGetQuery = `select * from "flights"
+                       order by "flightName" desc;`;
   db.query(sqlGetQuery)
     .then(result => {
       const flights = result.rows;
@@ -155,7 +157,8 @@ app.post('/api/flights/:scriptId', (request, response) => {
     throw new ClientError('400', 'Invalid Script.');
   }
 
-  const sqlPostFlightsInsert = 'insert into "flights" ("flightName", "topics", "scriptId") values ($1, $2, $3) returning*;';
+  const sqlPostFlightsInsert = `insert into "flights" ("flightName", "topics", "scriptId")
+                                 values ($1, $2, $3) returning*;`;
   const sqlPostFlightsParams = [flightName, topics, scriptId];
   db.query(sqlPostFlightsInsert, sqlPostFlightsParams)
     .then(result => {
@@ -173,7 +176,8 @@ app.get('/api/scripts/:scriptId', (req, res, next) => {
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
-  const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
+  const sqlGetQuery = `select * from "scripts"
+                       where "scriptId" = $1`;
   const params = [scriptId];
   db.query(sqlGetQuery, params)
     .then(result => {
@@ -193,7 +197,8 @@ app.post('/api/emails', (request, response) => {
     throw new ClientError('400', 'Invalid Script.');
   }
 
-  const sqlPostEmailsInsert = 'insert into "emails" ("subject", "emailBody", "scriptId", "emailNumberInSequence", "sendOn") values ($1, $2, $3, $4, $5) returning*;';
+  const sqlPostEmailsInsert = `insert into "emails" ("subject", "emailBody", "scriptId", "emailNumberInSequence", "sendOn")
+                               values ($1, $2, $3, $4, $5) returning*;`;
   const sqlPostEmailsParams = [subject, emailBody, scriptId, emailNumberInSequence, sendOn];
   db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
     .then(result => {
@@ -211,7 +216,8 @@ app.get('/api/scripts/:scriptId', (req, res, next) => {
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
-  const sqlGetQuery = 'select * from "scripts" where "scriptId" = $1';
+  const sqlGetQuery = `select * from "scripts"
+                       where "scriptId" = $1`;
   const params = [scriptId];
   db.query(sqlGetQuery, params)
     .then(result => {
@@ -226,7 +232,8 @@ app.get('/api/scripts/:scriptId', (req, res, next) => {
 app.post('/api/flightAssignments', (request, response) => {
   const { flightId, contactId } = request.body;
 
-  const sqlPostEmailsInsert = 'insert into "flightAssignments" ("flightId", "contactId") values ($1, $2) returning*;';
+  const sqlPostEmailsInsert = `insert into "flightAssignments" ("flightId", "contactId")
+                               values ($1, $2) returning*;`;
   const sqlPostEmailsParams = [flightId, contactId];
   db.query(sqlPostEmailsInsert, sqlPostEmailsParams)
     .then(result => {
@@ -290,7 +297,9 @@ app.get('/api/emails/:scriptId', (req, res, next) => {
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script.');
   }
-  const sqlGetQuery = 'select * from "emails" where "scriptId" = $1 order by "createdAt" asc';
+  const sqlGetQuery = `select * from "emails"
+                        where "scriptId" = $1
+                        order by "createdAt" asc`;
   const params = [scriptId];
   db.query(sqlGetQuery, params)
     .then(result => {
@@ -307,7 +316,9 @@ app.get('/api/scripts/count/:scriptId', (request, response) => {
   if (!Number.isInteger(scriptId) || scriptId <= 0) {
     throw new ClientError('400', 'Invalid Script');
   }
-  const sqlGetScriptEmailCount = 'select COUNT ("emailId") from "emails" where "scriptId" = $1';
+  const sqlGetScriptEmailCount = `select COUNT ("emailId")
+                                  from "emails"
+                                  where "scriptId" = $1`;
   const params = [scriptId];
   db.query(sqlGetScriptEmailCount, params)
     .then(result => {
