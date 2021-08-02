@@ -70,7 +70,7 @@ class Scripts extends React.Component {
       <div className="row">
         <div className="col">
           <div className="table-container lg">
-            <table id="scripts_list">
+            <table id="scripts-list">
               <thead>
                 <tr>
                   <th><span className="special-text align-left">Script Name</span></th>
@@ -102,7 +102,7 @@ class Scripts extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <div className="input-row">
                   <label>Script Chain Name:</label>
-                  <input className="scriptInputField" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
+                  <input className="script-input-field" type="text" name="scriptName" value={this.state.scriptName} onChange={this.handleChange} required/>
                 </div>
                 <div className="align-right">
                   <button className="scripts purple-button" onSubmit={this.handleSubmit}>Create Script</button>

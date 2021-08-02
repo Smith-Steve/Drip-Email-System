@@ -75,7 +75,7 @@ class CreateEmail extends React.Component {
                   <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
                 </div>
               </div>
-              <div className="align-left sendOn-row">
+              <div className="align-left sendon-row">
                 <div className="input-row">
                   <label>Time: </label>
                   <input type="time" className="time" name="time" required/>
