@@ -144,7 +144,7 @@ div.email-input-container {
   justify-content: center;
 }
 
-.component-container .fa-arrow-left,
+.component-container .left-arrow,
 .component-container .fa-mailbox {
   position: absolute;
   display: inline;

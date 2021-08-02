@@ -18,7 +18,7 @@ function FlightTable({ contactList, flightId, deleteContact }) {
             <div className="row">
         <div className="col">
           <div className="table-container lg">
-            <table id="contact_list">
+            <table id="contact-list">
               <thead>
                 <tr>
                   <th><span className="special-text align-left">Contact Name</span></th>

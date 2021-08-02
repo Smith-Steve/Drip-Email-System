@@ -76,7 +76,7 @@ class Home extends React.Component {
         <div className="row parent">
           <Sidebar removeSideBar={this.closeSideBar} sideBarState={this.state.sideBar}/>
           <div className={`column component-container ${this.state.sideBar}`}>
-            {route.path === '' ? <i className={`fa fa-arrow-left ${this.state.sideBar}`}></i> : null}
+            {route.path === '' ? <i className={`fa fa-arrow-left left-arrow ${this.state.sideBar}`}></i> : null}
             {this.renderComponent()}
           </div>
         </div>

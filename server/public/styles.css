@@ -145,13 +145,13 @@ tbody tr:nth-child(odd) {
   color: rgba(186, 186, 186, 0.1);
 }
 
-.fa-arrow-left {
+.left-arrow {
   transform: scale(4);
   color: rgba(186, 186, 186, 0.4);
 }
 
-.fa-arrow-left.open,
-.fa-arrow-left.closed,
+.left-arrow.open,
+.left-arrow.closed,
 .fa-mailbox.closed {
   opacity: 0;
   transition-property: opacity;
