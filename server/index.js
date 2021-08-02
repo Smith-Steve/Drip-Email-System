@@ -42,7 +42,8 @@ app.get('/api/contacts/:contactId', (req, res, next) => {
   if (!Number.isInteger(contactId) || contactId <= 0) {
     throw new ClientError('400', 'must enter a legitimate contact.');
   }
-  const sqlGetQuery = 'select * from "contacts" where "contactId" = $1';
+  const sqlGetQuery = `select * from "contacts"
+                       where "contactId" = $1`;
   const params = [contactId];
   db.query(sqlGetQuery, params)
     .then(result => {
@@ -55,7 +56,8 @@ app.get('/api/contacts/:contactId', (req, res, next) => {
 });
 
 app.get('/api/contacts', (req, res) => {
-  const sqlGetQuery = 'select * from "contacts" order by "firstName" desc;';
+  const sqlGetQuery = `select * from "contacts"
+                       order by "firstName" desc;`;
   db.query(sqlGetQuery)
     .then(result => {
       const contacts = result.rows;
@@ -71,8 +73,7 @@ app.get('/api/contacts/flightAssignment/:flightId', (request, response) => {
   if (!Number.isInteger(flightId) || flightId <= 0) {
     throw new ClientError('400', 'must enter legitimate flight');
   }
-  const sqlGetQuery = `select *
-                      from "contacts" as "c"
+  const sqlGetQuery = `select * from "contacts" as "c"
                       join "flightAssignments" as "fa" using("contactId")
                       where "c"."contactId" = "fa"."contactId" and "fa"."flightId" = $1`;
 
@@ -92,7 +93,8 @@ app.delete('/api/contacts/:contactId', (req, res, next) => {
   if (!Number.isInteger(contactId) || contactId <= 0) {
     throw new ClientError('400', 'must enter a legitimate contact.');
   }
-  const sqlDeleteQuery = 'delete from "contacts" where "contactId" = $1';
+  const sqlDeleteQuery = `delete from "contacts"
+                           where "contactId" = $1`;
   const deleteParams = [contactId];
   db.query(sqlDeleteQuery, deleteParams)
     .then(result => {

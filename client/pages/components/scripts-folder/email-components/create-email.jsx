@@ -101,13 +101,13 @@ class CreateEmail extends React.Component {
               <form className="create-email" onSubmit={this.handleSubmit}>
                 <div className="input-row">
                   <label htmlFor="subjectInputField">Subject:</label>
-                <div className="emailInputContainer">
+                <div className="email-input-container">
                   <input className="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
                 </div>
                 </div>
                 <div className="input-row">
                   <label>Body:</label>
-                <div className="emailInputContainer">
+                <div className="email-input-container">
                   <textarea className="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
                 </div>
                 </div>
