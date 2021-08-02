@@ -79,7 +79,7 @@ export default class Flights extends React.Component {
 
   buildTable(flightsList) {
     const flightRow = flightsList.map(flight => {
-      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="table-text" key={flight.flightId + 1}>{flight.flightName}</span></td><td id={flight.flightId + 2}><a href={`#ManageFlight/FlightId/${flight.flightId}`}><button className="manageFlights alignRight" onClick={() => this.getFlightInfo(flight)} key={flight.flightId + 2}>Manage Flight</button></a></td></tr>;
+      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="table-text" key={flight.flightId + 1}>{flight.flightName}</span></td><td id={flight.flightId + 2}><a href={`#ManageFlight/FlightId/${flight.flightId}`}><button className="manage-flights alignRight" onClick={() => this.getFlightInfo(flight)} key={flight.flightId + 2}>Manage Flight</button></a></td></tr>;
     });
 
     return (
