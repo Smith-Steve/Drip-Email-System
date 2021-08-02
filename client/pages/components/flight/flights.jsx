@@ -114,7 +114,9 @@ export default class Flights extends React.Component {
       <div className="flights">
         <div className="row">
           <div className="col">
-            <span className="special-text prompt">Flight Set Up: </span>
+            <div>
+              <p className="special-text prompt">Flight Set Up </p>
+            </div>
           </div>
         </div>
         <div className="row">

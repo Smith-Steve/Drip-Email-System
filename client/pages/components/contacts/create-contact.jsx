@@ -41,7 +41,9 @@ export default class CreateContact extends React.Component {
     <div className="contacts">
     <div className="row">
           <div className="col">
-            <span className="special-text prompt">Add Contact: </span>
+            <div>
+              <p className="special-text prompt">Add Contact </p>
+            </div>
           </div>
         </div>
       <div className="row">
@@ -52,23 +54,23 @@ export default class CreateContact extends React.Component {
           <div className="form-container lg">
             <form onSubmit={this.handleSubmit}>
               <div className="input-row">
-                <label> FirstName: </label>
+                <label> FirstName</label>
                 <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
-                <label> Lastname:</label>
+                <label> Lastname</label>
                 <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
-                <label> Company: </label>
+                <label> Company</label>
                 <input type="text" name="company" value={this.state.company} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
-                <label> E-mail: </label>
+                <label> E-mail</label>
                 <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required/>
               </div>
               <div className="input-row">
-                <label> Phone #:</label>
+                <label> Phone #</label>
                 <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required/>
               </div>
               <div className="row">

@@ -38,7 +38,6 @@ div.sidenav.open {
   z-index: 1;
 }
 
-.component-container,
 th,
 td,
 .flex-container {
@@ -95,7 +94,8 @@ span.special-text {
 }
 
 .align-left,
-span.prompt {
+span.prompt,
+p.prompt {
   text-align: left;
   float: left;
 }

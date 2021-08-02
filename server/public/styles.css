@@ -73,7 +73,8 @@ span.special-text.prompt.manage-flight-script-prompt {
   text-align: center;
 }
 
-span.special-text {
+span.special-text,
+p.special-text {
   font-weight: 650;
 }
 

@@ -93,7 +93,9 @@ class Scripts extends React.Component {
       <div className="scripts">
         <div className="row">
           <div className="col">
-            <span className="special-text prompt">Script E-mail Chain Set Up:</span>
+            <div>
+              <p className="special-text prompt">Script E-mail Chain Set Up</p>
+            </div>
           </div>
         </div>
         <div className="row">
