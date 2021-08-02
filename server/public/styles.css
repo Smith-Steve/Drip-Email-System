@@ -4,7 +4,6 @@ body {
   font-family: 'Playfair Display', serif, 'door-sliding';
 }
 
-/* #525963 */
 a {
   text-decoration: none;
 }
@@ -97,6 +96,7 @@ select {
   font-size: 1rem;
   outline: rgb(171, 140, 228);
   cursor: pointer;
+  border-radius: 30px;
 }
 
 input:hover,
