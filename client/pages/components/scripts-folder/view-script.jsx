@@ -50,7 +50,7 @@ export default class ViewScript extends React.Component {
                   <div className="col">
                     {this.renderPrompt(emailList.length)}
                     <div className="align-right">
-                      <button className="create-email purpleButton" onClick={this.handlePageChange}>Create Email</button>
+                      <button className="create-email purple-button" onClick={this.handlePageChange}>Create Email</button>
                     </div>
                   </div>
                 </div>

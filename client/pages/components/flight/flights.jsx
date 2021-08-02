@@ -137,7 +137,7 @@ export default class Flights extends React.Component {
                   </select>
                 </div>
                 <div className="align-right">
-                  <button className="purpleButton" onSubmit={this.submitFlight}>Create</button>
+                  <button className="purple-button" onSubmit={this.submitFlight}>Create</button>
                 </div>
               </form>
             </div>
