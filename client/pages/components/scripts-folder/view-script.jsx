@@ -29,7 +29,7 @@ export default class ViewScript extends React.Component {
   }
 
   renderPrompt(emailListLength) {
-    return (emailListLength > 0 ? <span className="specialText view-script">{this.props.script.scriptName} has {emailListLength} email(s) attached to it.</span> : <span className="specialText view-script">{this.props.script.scriptName} is a new script to which there are no e-mails attached</span>);
+    return (emailListLength > 0 ? <span className="special-text view-script">{this.props.script.scriptName} has {emailListLength} email(s) attached to it.</span> : <span className="special-text view-script">{this.props.script.scriptName} is a new script to which there are no e-mails attached</span>);
   }
 
   render() {
@@ -40,17 +40,17 @@ export default class ViewScript extends React.Component {
         <div className="view-script">
           <div className="row">
             <div className="col">
-                <span className="specialText prompt">Manage Script: {activeScript.scriptName} </span>
+                <span className="special-text prompt">Manage Script: {activeScript.scriptName} </span>
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <div className="lg flexContainer">
+              <div className="lg flex-container">
                 <div className="row view-script">
                   <div className="col">
                     {this.renderPrompt(emailList.length)}
                     <div className="align-right">
-                      <button className="createEmail purpleButton" onClick={this.handlePageChange}>Create Email</button>
+                      <button className="create-email purpleButton" onClick={this.handlePageChange}>Create Email</button>
                     </div>
                   </div>
                 </div>

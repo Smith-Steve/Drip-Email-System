@@ -56,8 +56,8 @@ span {
   background-color: #36404a;
 }
 
-.specialText,
-.tableText {
+.special-text,
+.table-text {
   font-family: 'Montserrat', sans-serif;
   color: #ab8ce4;
   margin-right: 2rem;
@@ -66,15 +66,15 @@ span {
   /* white-space: nowrap; make sure this hasn't changed anything */
 }
 
-span.specialText.prompt.manageFlightScriptPrompt {
+span.special-text.prompt.manageFlightScriptPrompt {
   margin-left: auto;
 }
 
-.specialText {
+.special-text {
   text-align: center;
 }
 
-span.specialText {
+span.special-text {
   font-weight: 650;
 }
 
@@ -190,8 +190,8 @@ tbody tr:nth-child(odd) {
     font-size: 1rem;
   }
 
-  .table-container .specialText,
-  .table-container .tableText {
+  .table-container .special-text,
+  .table-container .table-text {
     font-size: 1rem;
   }
 }

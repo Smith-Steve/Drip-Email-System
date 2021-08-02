@@ -41,7 +41,7 @@ export default class CreateContact extends React.Component {
     <div className="contacts">
     <div className="row">
           <div className="col">
-            <span className="specialText prompt">Add Contact: </span>
+            <span className="special-text prompt">Add Contact: </span>
           </div>
         </div>
       <div className="row">
@@ -72,7 +72,7 @@ export default class CreateContact extends React.Component {
                 <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required/>
               </div>
               <div className="row">
-                <button className="createContact purpleButton" onSubmit={this.handleSubmit}>Enter Contact</button>
+                <button className="create-contact purpleButton" onSubmit={this.handleSubmit}>Enter Contact</button>
               </div>
             </form>
           </div>

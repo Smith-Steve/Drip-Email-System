@@ -79,7 +79,7 @@ export default class Flights extends React.Component {
 
   buildTable(flightsList) {
     const flightRow = flightsList.map(flight => {
-      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="tableText" key={flight.flightId + 1}>{flight.flightName}</span></td><td id={flight.flightId + 2}><a href={`#ManageFlight/FlightId/${flight.flightId}`}><button className="manageFlights alignRight" onClick={() => this.getFlightInfo(flight)} key={flight.flightId + 2}>Manage Flight</button></a></td></tr>;
+      return <tr key={flight.flightId}><td key={flight.flightId}> <span className="table-text" key={flight.flightId + 1}>{flight.flightName}</span></td><td id={flight.flightId + 2}><a href={`#ManageFlight/FlightId/${flight.flightId}`}><button className="manageFlights alignRight" onClick={() => this.getFlightInfo(flight)} key={flight.flightId + 2}>Manage Flight</button></a></td></tr>;
     });
 
     return (
@@ -89,7 +89,7 @@ export default class Flights extends React.Component {
             <table id="flights-list">
               <thead>
                 <tr>
-                  <th><span className="specialText align-left">Flight Name:</span></th>
+                  <th><span className="special-text align-left">Flight Name:</span></th>
                   <th></th>
                 </tr>
               </thead>
@@ -114,7 +114,7 @@ export default class Flights extends React.Component {
       <div className="flights">
         <div className="row">
           <div className="col">
-            <span className="specialText prompt">Flight Set Up: </span>
+            <span className="special-text prompt">Flight Set Up: </span>
           </div>
         </div>
         <div className="row">

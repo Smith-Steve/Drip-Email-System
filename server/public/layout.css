@@ -30,7 +30,7 @@ body {
 }
 
 div.side-bar.open,
-div.textContainer-side-bar.open,
+div.text-container-side-bar.open,
 div.sidenav.open {
   transform: translateX(0);
   transition: transform 1s ease;
@@ -41,7 +41,7 @@ div.sidenav.open {
 .component-container,
 th,
 td,
-.flexContainer {
+.flex-container {
   padding: 1.2rem;
 }
 
@@ -63,8 +63,8 @@ tr:last-of-type > td:last-of-type {
 
 div.side-bar.closed,
 div.side-bar.closed-open-first-time,
-div.textContainer-side-bar.closed,
-div.textContainer-side-bar.closed-open-first-time,
+div.text-container-side-bar.closed,
+div.text-container-side-bar.closed-open-first-time,
 div.sidenav.closed,
 div.sidenav.closed.closed-open-first-time {
   transform: translateX(-120%);
@@ -81,11 +81,11 @@ div.sidenav.closed.closed-open-first-time {
   width: 100%;
 }
 
-span.specialText.view-script {
+span.special-text.view-script {
   flex: 0 0 100%;
 }
 
-span.specialText {
+span.special-text {
   margin-bottom: 0.5rem;
 }
 
@@ -117,7 +117,7 @@ form {
   border-radius: 30px;
 }
 
-.view-script-component > .view-script .lg.flexContainer {
+.view-script-component > .view-script .lg.flex-container {
   border-radius: 30px;
 }
 
@@ -158,25 +158,25 @@ button {
   overflow: hidden;
 }
 
-button.createContact {
+button.create-contact {
   margin-top: 1rem;
   margin-right: 6.5rem;
 }
 
-button.createEmail,
+button.create-email,
 div.flights > div.align-right > button {
   margin-top: 3rem;
 }
 
-label.emailLabel {
+label.email-label {
   margin-right: 2.5rem;
 }
 
-label.phoneLabel {
+label.phone-label {
   margin-right: 1.7rem;
 }
 
-label.companyLabel {
+label.company-label {
   margin-right: 1.1rem;
 }
 
@@ -185,12 +185,12 @@ table {
   flex-basis: 100%;
 }
 
-.flexContainer {
+.flex-container {
   display: flex;
   flex-wrap: wrap;
 }
 
-.blankElement {
+.blank-element {
   margin-top: 1rem;
 }
 
@@ -220,14 +220,14 @@ h4 {
   position: relative;
 }
 
-.textContainer-side-bar {
+.text-container-side-bar {
   position: relative;
   margin-right: 2rem;
   margin-left: 0.4rem;
   z-index: 1;
 }
 
-.sendOn-row {
+.sendon-row {
   margin-left: 0.5rem;
 }
 
@@ -271,11 +271,11 @@ h4 {
   .component-container,
   th,
   td,
-  .flexContainer {
+  .flex-container {
     padding: 0.5rem;
   }
 
-  table tbody tr > td span.tableText {
+  table tbody tr > td span.table-text {
     display: inline-block;
     white-space: nowrap;
     width: 175px;
@@ -283,7 +283,7 @@ h4 {
     text-overflow: ellipsis;
   }
 
-  table#contact_list tbody tr > td span.tableText {
+  table#contact_list tbody tr > td span.table-text {
     display: inline;
     white-space: nowrap;
     width: 120px;
