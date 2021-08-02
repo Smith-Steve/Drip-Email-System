@@ -158,11 +158,6 @@ button {
   overflow: hidden;
 }
 
-button.create-contact {
-  margin-top: 1rem;
-  margin-right: 6.5rem;
-}
-
 button.create-email,
 div.flights > div.align-right > button {
   margin-top: 3rem;
