@@ -66,7 +66,7 @@ span {
   /* white-space: nowrap; make sure this hasn't changed anything */
 }
 
-span.special-text.prompt.manage-flight-script-proompt {
+span.special-text.prompt.manage-flight-script-prompt {
   margin-left: auto;
 }
 
@@ -145,13 +145,13 @@ tbody tr:nth-child(odd) {
   color: rgba(186, 186, 186, 0.1);
 }
 
-.fa-arrow-left {
+.left-arrow {
   transform: scale(4);
   color: rgba(186, 186, 186, 0.4);
 }
 
-.fa-arrow-left.open,
-.fa-arrow-left.closed,
+.left-arrow.open,
+.left-arrow.closed,
 .fa-mailbox.closed {
   opacity: 0;
   transition-property: opacity;
@@ -167,7 +167,7 @@ tbody tr:nth-child(odd) {
   height: 85vh;
 }
 
-.home-component-container-textbox {
+.home-component-container-textBox {
   border: 0.45rem rgba(186, 186, 186, 0.5) solid;
   justify-content: center;
   align-items: center;

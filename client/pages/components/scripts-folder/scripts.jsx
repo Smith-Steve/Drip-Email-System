@@ -64,7 +64,7 @@ class Scripts extends React.Component {
 
   buildTable(scriptList) {
     const scriptRow = scriptList.map(script => {
-      return <tr key={script.scriptId}><td key={script.scriptId}> <span className="table-text">{script.scriptName}</span></td><td id={script.scriptId + 2}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}><button className="manageScripts alignRight">Manage Script</button></a></td></tr>;
+      return <tr key={script.scriptId}><td key={script.scriptId}> <span className="table-text">{script.scriptName}</span></td><td id={script.scriptId + 2}><a href={`#Script/${script.scriptId}`} onClick={() => this.chosenScript(script)}><button className="manage-scripts alignRight">Manage Script</button></a></td></tr>;
     });
     return (
       <div className="row">

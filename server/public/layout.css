@@ -144,7 +144,7 @@ div.email-input-container {
   justify-content: center;
 }
 
-.component-container .fa-arrow-left,
+.component-container .left-arrow,
 .component-container .fa-mailbox {
   position: absolute;
   display: inline;
@@ -158,7 +158,7 @@ button {
   overflow: hidden;
 }
 
-button.createContact {
+button.create-contact {
   margin-top: 1rem;
   margin-right: 6.5rem;
 }
