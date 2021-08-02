@@ -3,10 +3,11 @@
 }
 
 body {
-  margin: 1.3rem;
+  margin: 0;
 }
 
 .container {
   margin-right: auto;
   margin-left: auto;
+  padding: 1.2rem;
 }
