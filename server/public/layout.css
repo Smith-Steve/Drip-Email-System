@@ -107,7 +107,8 @@ label {
 
 form {
   margin: 1rem;
-  padding: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  padding: 1.8rem;
 }
 
 .form-container,
