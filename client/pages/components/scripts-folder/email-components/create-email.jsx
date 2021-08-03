@@ -41,6 +41,7 @@ class CreateEmail extends React.Component {
         if (returnedResponse) alert('email submitted!');
         this.clearForm();
         window.location.hash = localStorage.getItem('Active-Route');
+        this.setState({ emailNumberInSequence: this.state.emailNumberInSequence + 1 });
       })
       .catch(error => {
         if (error) alert('please check submission and try again');
@@ -62,7 +63,7 @@ class CreateEmail extends React.Component {
 
   renderSelectInput = emailNumber => {
     return (<div className="align-right">
-      <span className="special-text">E-mail Number#: {emailNumber}</span>
+      <span className="special-text">E-mail Number# {emailNumber + 1}</span>
     </div>);
   }
 

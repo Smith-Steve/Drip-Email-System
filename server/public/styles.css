@@ -4,7 +4,6 @@ body {
   font-family: 'Playfair Display', serif, 'door-sliding';
 }
 
-/* #525963 */
 a {
   text-decoration: none;
 }
@@ -74,7 +73,8 @@ span.special-text.prompt.manage-flight-script-prompt {
   text-align: center;
 }
 
-span.special-text {
+span.special-text,
+p.special-text {
   font-weight: 650;
 }
 
@@ -97,6 +97,7 @@ select {
   font-size: 1rem;
   outline: rgb(171, 140, 228);
   cursor: pointer;
+  border-radius: 30px;
 }
 
 input:hover,
@@ -108,8 +109,8 @@ select:hover {
 }
 
 img {
-  width: 680px;
-  height: 712px;
+  width: 650px;
+  height: 640px;
   margin-top: 0.5rem;
 }
 
