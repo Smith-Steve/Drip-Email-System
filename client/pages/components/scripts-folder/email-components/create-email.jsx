@@ -41,6 +41,7 @@ class CreateEmail extends React.Component {
         if (returnedResponse) alert('email submitted!');
         this.clearForm();
         window.location.hash = localStorage.getItem('Active-Route');
+        this.setState({ emailNumberInSequence: this.state.emailNumberInSequence + 1 });
       })
       .catch(error => {
         if (error) alert('please check submission and try again');
