@@ -138,6 +138,14 @@ textarea {
   flex-basis: 100%;
 }
 
+input {
+  text-indent: 0.5rem;
+}
+
+textarea {
+  text-indent: 1.2rem;
+}
+
 div.email-input-container {
   display: flex;
   align-items: center;
