@@ -282,6 +282,7 @@ h4 {
   table tbody tr > td span.table-text {
     display: inline-block;
     white-space: nowrap;
+    width: 175px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
