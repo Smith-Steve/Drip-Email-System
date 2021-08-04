@@ -78,12 +78,6 @@ p.special-text {
   font-weight: 650;
 }
 
-form {
-  margin: 1rem;
-  font-family: 'Montserrat', sans-serif;
-  padding: 2rem;
-}
-
 .table-container {
   margin-top: 1rem;
   display: flex;

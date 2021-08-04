@@ -12,7 +12,7 @@ function triggerButtonRemoveContact(flightIdentity, contact) {
 
 function FlightTable({ contactList, flightId, deleteContact }) {
   const contactRow = contactList.map(contact => {
-    return <tr key={contact.contactId}><td key={contact.contactId}> <span className="table-text">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 2}><span className="table-text align-left">{contact.email}</span></td><td id={contact.contactId + 2}><button onClick={function () { triggerButtonRemoveContact(flightId, contact); deleteContact(contact); } } className="removeContact alignRight">Remove</button></td></tr>;
+    return <tr key={contact.contactId}><td key={contact.contactId}> <span className="table-text">{contact.firstName + ' ' + contact.lastName}</span></td><td id={contact.contactId + 2}><span className="table-text align-left">{contact.email}</span></td><td id={contact.contactId + 2}><button onClick={function () { triggerButtonRemoveContact(flightId, contact); deleteContact(contact); } } className="remove-contact alignRight">Remove</button></td></tr>;
   });
   return (<React.Fragment>
             <div className="row">
