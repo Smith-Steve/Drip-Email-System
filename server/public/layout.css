@@ -44,6 +44,10 @@ td,
   padding: 0.8rem 0 0.8rem 2.5rem;
 }
 
+span.prompt {
+  margin-left: 2.5rem;
+}
+
 td {
   text-align: center;
 }
