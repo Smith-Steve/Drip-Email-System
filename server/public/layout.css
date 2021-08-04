@@ -33,7 +33,7 @@ div.side-bar.open,
 div.text-container-side-bar.open,
 div.sidenav.open {
   transform: translateX(0);
-  transition: transform 1s ease;
+  transition: transform 1.3s ease;
   flex: 1 1 200px;
   z-index: 1;
 }
@@ -222,16 +222,18 @@ table {
   z-index: 1;
 }
 
+/* Be careful of this one. Is it affecting the buttons that redirect the user within the flow? */
 a,
 h4 {
   z-index: 1;
   position: relative;
+  margin-left: 1.4rem;
 }
 
 .text-container-side-bar {
   position: relative;
-  margin-right: 2rem;
-  margin-left: 0.4rem;
+  margin-right: 6rem;
+  margin-left: 0.9rem;
   z-index: 1;
 }
 
