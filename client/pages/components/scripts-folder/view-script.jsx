@@ -40,7 +40,7 @@ export default class ViewScript extends React.Component {
         <div className="view-script">
           <div className="row">
             <div className="col">
-                <span className="special-text prompt">Manage Script: {activeScript.scriptName} </span>
+                <span className="special-text prompt">Manage Script {activeScript.scriptName} </span>
             </div>
           </div>
           <div className="row">

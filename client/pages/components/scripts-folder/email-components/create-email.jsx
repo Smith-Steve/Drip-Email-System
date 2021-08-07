@@ -72,13 +72,13 @@ class CreateEmail extends React.Component {
       <>
         <div className="align-left">
                 <div className="input-row">
-                  <label>Date: </label>
+                  <label>Date </label>
                   <input type="date" className="date" name="date" min={new Date().toISOString().split('T')[0]} required/>
                 </div>
               </div>
               <div className="align-left sendon-row">
                 <div className="input-row">
-                  <label>Time: </label>
+                  <label>Time </label>
                   <input type="time" className="time" name="time" required/>
                 </div>
               </div>
@@ -97,7 +97,7 @@ class CreateEmail extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <div className="form-container lg">
+            <div className="form-container rounded-corners lg">
               {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               <form className="create-email" onSubmit={this.handleSubmit}>
                 <div className="input-row">

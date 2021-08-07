@@ -17,7 +17,7 @@ function FlightTable({ contactList, flightId, deleteContact }) {
   return (<React.Fragment>
             <div className="row">
         <div className="col">
-          <div className="table-container lg">
+          <div className="table-container rounded-corners lg">
             <table id="contact-list">
               <thead>
                 <tr>
