@@ -57,11 +57,11 @@ td:nth-child(3n + 1) {
 }
 
 tr:last-of-type > td:first-of-type {
-  border-radius: 0 0 0 30px;
+  border-radius: 0 0 0 0.25rem;
 }
 
 tr:last-of-type > td:last-of-type {
-  border-radius: 0 0 30px 0;
+  border-radius: 0 0 0.25rem 0;
 }
 
 div.side-bar.closed,
@@ -119,11 +119,11 @@ form {
 .table-container {
   flex-basis: 100%;
   padding: 0.4rem;
-  border-radius: 30px;
+  border-radius: 0.25rem;
 }
 
 .view-script-component > .view-script .lg.flex-container {
-  border-radius: 30px;
+  border-radius: 0.25rem;
 }
 
 .form-container {
@@ -227,7 +227,10 @@ a,
 h4 {
   z-index: 1;
   position: relative;
-  margin-left: 1.4rem;
+}
+
+h4 {
+  margin-top: 2.5rem;
 }
 
 .text-container-side-bar {
