@@ -184,6 +184,7 @@ button {
 button.create-email,
 div.flights > div.align-right > button {
   margin-top: 3rem;
+  margin-right: 1rem;
 }
 
 label.email-label {
