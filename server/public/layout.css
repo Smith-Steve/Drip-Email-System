@@ -33,7 +33,7 @@ div.side-bar.open,
 div.text-container-side-bar.open,
 div.sidenav.open {
   transform: translateX(0);
-  transition: transform 1s ease;
+  transition: transform 1.3s ease;
   flex: 1 1 200px;
   z-index: 1;
 }
@@ -57,11 +57,11 @@ td:nth-child(3n + 1) {
 }
 
 tr:last-of-type > td:first-of-type {
-  border-radius: 0 0 0 30px;
+  border-radius: 0 0 0 0.25rem;
 }
 
 tr:last-of-type > td:last-of-type {
-  border-radius: 0 0 30px 0;
+  border-radius: 0 0 0.25rem 0;
 }
 
 div.side-bar.closed,
@@ -119,11 +119,11 @@ form {
 .table-container {
   flex-basis: 100%;
   padding: 0.4rem;
-  border-radius: 30px;
+  border-radius: 0.25rem;
 }
 
 .view-script-component > .view-script .lg.flex-container {
-  border-radius: 30px;
+  border-radius: 0.25rem;
 }
 
 .form-container {
@@ -222,16 +222,21 @@ table {
   z-index: 1;
 }
 
+/* Be careful of this one. Is it affecting the buttons that redirect the user within the flow? */
 a,
 h4 {
   z-index: 1;
   position: relative;
 }
 
+h4 {
+  margin-top: 2.5rem;
+}
+
 .text-container-side-bar {
   position: relative;
-  margin-right: 2rem;
-  margin-left: 0.4rem;
+  margin-right: 6rem;
+  margin-left: 0.9rem;
   z-index: 1;
 }
 

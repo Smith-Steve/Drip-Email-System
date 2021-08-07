@@ -91,7 +91,7 @@ select {
   font-size: 1rem;
   outline: rgb(171, 140, 228);
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 0.25rem;
 }
 
 input:hover,
@@ -110,7 +110,7 @@ img {
 
 button {
   background-color: rgb(171, 140, 228);
-  border-radius: 10px;
+  border-radius: 0.25rem;
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
