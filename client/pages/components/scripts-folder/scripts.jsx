@@ -69,7 +69,7 @@ class Scripts extends React.Component {
     return (
       <div className="row">
         <div className="col">
-          <div className="table-container lg">
+          <div className="table-container rounded-corners lg">
             <table id="scripts-list">
               <thead>
                 <tr>
@@ -100,7 +100,7 @@ class Scripts extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <div className="form-container lg">
+            <div className="form-container rounded-corners lg">
               <form onSubmit={this.handleSubmit}>
                 <div className="input-row">
                   <label>Script Chain Name</label>

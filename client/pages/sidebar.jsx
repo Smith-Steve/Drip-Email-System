@@ -11,7 +11,7 @@ export default function SideBar({ sideBarState, removeSideBar }) {
   };
 
   return (
-      <div className={`side-bar lg ${sideBarState}`}>
+      <div className={`side-bar lg rounded-corners ${sideBarState}`}>
         <React.Fragment>
           <div className={`col text-container-side-bar ${sideBarState}`}>
             <div className={`sidenav ${sideBarState}`} onClick={handleClick}>

@@ -9,7 +9,7 @@ function EmailTable({ emailList, scriptName }) {
     <React.Fragment>
     <div className="row">
         <div className="col">
-          <div className="table-container lg">
+          <div className="table-container rounded-corners lg">
             <table id="contact_list">
               <thead>
                 <tr>

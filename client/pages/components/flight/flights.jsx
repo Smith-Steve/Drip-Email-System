@@ -85,7 +85,7 @@ export default class Flights extends React.Component {
     return (
       <div className="row">
         <div className="col">
-          <div className="table-container lg">
+          <div className="table-container rounded-corners lg">
             <table id="flights-list">
               <thead>
                 <tr>
@@ -121,7 +121,7 @@ export default class Flights extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <div className="form-container lg">
+            <div className="form-container rounded-corners lg">
               <form onSubmit={this.submitFlight}>
                 <div className="input-row">
                   <label>Flight Name:</label>

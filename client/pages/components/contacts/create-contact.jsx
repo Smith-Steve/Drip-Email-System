@@ -51,7 +51,7 @@ export default class CreateContact extends React.Component {
           <span><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="generic contact"></img></span>
         </div>
         <div className="col">
-          <div className="form-container lg">
+          <div className="form-container rounded-corners lg">
             <form onSubmit={this.handleSubmit}>
               <div className="input-row">
                 <label> FirstName</label>

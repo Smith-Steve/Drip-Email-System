@@ -117,7 +117,7 @@ class ManageFlight extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <div className="form-container lg">
+            <div className="form-container rounded-corners lg">
               <form onSubmit={this.submitFlightAssignment}>
                 <div className="row">
                     <label>Select Contact: </label>

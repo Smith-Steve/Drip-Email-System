@@ -97,7 +97,7 @@ class CreateEmail extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <div className="form-container lg">
+            <div className="form-container rounded-corners lg">
               {emailsInActiveScript > 0 ? this.renderSelectInput(emailsInActiveScript) : null}
               <form className="create-email" onSubmit={this.handleSubmit}>
                 <div className="input-row">

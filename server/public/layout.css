@@ -56,14 +56,6 @@ td:nth-child(3n + 1) {
   text-align: left;
 }
 
-tr:last-of-type > td:first-of-type {
-  border-radius: 0 0 0 0.25rem;
-}
-
-tr:last-of-type > td:last-of-type {
-  border-radius: 0 0 0.25rem 0;
-}
-
 div.side-bar.closed,
 div.side-bar.closed-open-first-time,
 div.text-container-side-bar.closed,
@@ -92,6 +84,25 @@ span.special-text {
   margin-bottom: 0.5rem;
 }
 
+/* Rounded Corners */
+.rounded-corners,
+button,
+input,
+textarea,
+select {
+  border-radius: 0.25rem;
+}
+
+tr:last-of-type > td:first-of-type {
+  border-radius: 0 0 0 0.25rem;
+}
+
+tr:last-of-type > td:last-of-type {
+  border-radius: 0 0 0.25rem 0;
+}
+
+/* Alignment */
+
 .align-right {
   text-align: right;
   float: right;
@@ -119,7 +130,6 @@ form {
 .table-container {
   flex-basis: 100%;
   padding: 0.4rem;
-  border-radius: 0.25rem;
 }
 
 .view-script-component > .view-script .lg.flex-container {
