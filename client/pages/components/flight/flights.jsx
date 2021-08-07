@@ -89,7 +89,7 @@ export default class Flights extends React.Component {
             <table id="flights-list">
               <thead>
                 <tr>
-                  <th><span className="special-text align-left">Flight Name:</span></th>
+                  <th><span className="special-text align-left">Flight Name</span></th>
                   <th></th>
                 </tr>
               </thead>
