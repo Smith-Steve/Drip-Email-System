@@ -7,6 +7,12 @@ body {
   height: 100%;
 }
 
+img {
+  width: 700px;
+  height: 565px;
+  margin-top: 0.1rem;
+}
+
 .row {
   display: flex;
   flex-direction: flex;
@@ -36,6 +42,7 @@ div.sidenav.open {
   transition: transform 1.3s ease;
   flex: 1 1 200px;
   z-index: 1;
+  padding-left: 0.5rem;
 }
 
 th,
@@ -43,10 +50,6 @@ td,
 .flex-container {
   padding: 0.8rem 0 0.8rem 2.5rem;
 }
-
-/* span.prompt {
-  margin-left: 2.5rem;
-} */
 
 td {
   text-align: center;
@@ -195,8 +198,9 @@ label.phone-label {
   margin-right: 1.7rem;
 }
 
-label.company-label {
-  margin-right: 1.1rem;
+label.company-label,
+button.remove-contact {
+  margin-right: 1rem;
 }
 
 table {
@@ -245,8 +249,7 @@ h4 {
 
 .text-container-side-bar {
   position: relative;
-  margin-right: 6rem;
-  margin-left: 0.9rem;
+  margin-right: 4rem;
   z-index: 1;
 }
 
