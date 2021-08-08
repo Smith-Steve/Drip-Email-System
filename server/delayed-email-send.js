@@ -12,7 +12,7 @@ const sqlEmailGetQuery = `select DISTINCT on ("e"."emailId") "f"."flightName" as
                             inner join "flights" as "f" on "fA"."flightId" = "f"."flightId"
                             inner join "scripts" as "s" on "f"."scriptId" = "s"."scriptId"
                             inner join "emails" as "e" on "s"."scriptId" = "e"."scriptId"
-                            where "e"."sendOn" > now() and "e"."sendOn" is NOT NULL and "e"."sentAt" is NULL`;
+                            where "e"."sendOn" is NOT NULL and "e"."sendOn" < now() and "e"."sentAt" is NULL`;
 
 db.query(sqlEmailGetQuery)
   .then(result => {
