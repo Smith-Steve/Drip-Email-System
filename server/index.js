@@ -352,37 +352,6 @@ app.post('/api/authorization/sign-up', (request, response, next) => {
     }).catch(err => next(err));
 });
 
-// app.post('/api/authorization/sign-in', (request, response, next) => {
-//   const { username, password } = request.body;
-//   if (!username || !password) {
-//     throw new ClientError(401, 'invalid login');
-//   }
-
-//   const sqlGet = 'select "userId", "hashedPassword" from "users" where "username" = $1';
-//   const sqlGetParams = [username];
-//   db.query(sqlGet, sqlGetParams)
-//     .then(result => {
-//       const [user] = result.rows;
-//       if (!user) {
-//         throw new ClientError(401, 'cannot find username.');
-//       } else {
-//         const { userId, hashedPassword } = user;
-//         return argon2
-//           .verify(hashedPassword, password)
-//           .then(isMatching => {
-//             if (!isMatching) {
-//               throw new ClientError(401, 'invalid login');
-//             }
-//             const payload = { userId, username };
-//             const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-//             response.json({ token, user: payload });
-//           })
-//           .catch(err => next(err));
-//       }
-//     })
-//     .catch(err => next(err));
-// });
-
 app.post('/api/authorization/sign-in', (request, response, next) => {
   const { username, password } = request.body;
   if (!username || !password) {

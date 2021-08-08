@@ -101,12 +101,6 @@ select:hover {
   box-shadow: 0 0 1px 1px rgba(171, 140, 228, 0.6);
 }
 
-img {
-  width: 650px;
-  height: 640px;
-  margin-top: 0.5rem;
-}
-
 button {
   background-color: rgb(171, 140, 228);
   color: white;
