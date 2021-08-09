@@ -113,8 +113,10 @@ class ManageFlight extends React.Component {
     const contactFlightList = this.state.contactsAssignedToFlight;
     return (
       <div className="flights">
-        <div className="row flex">
-            <span className="special-text prompt">Managing Flight - {this.props.flight.flightName}</span>
+          <div className="row">
+            <div className="col">
+              <p className="special-text prompt">Managing Flight - {this.props.flight.flightName}</p>
+            </div>
         </div>
         <div className="row">
           <div className="col">
