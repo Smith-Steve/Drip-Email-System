@@ -286,6 +286,20 @@ app.get('/api/email/:flightId', (request, response) => {
     .then(result => {
       const flightInfo = result.rows[0];
       handleEmail(flightInfo);// be careful where youu group functaionality together.
+      module.FlightUpdateInfo = flightInfo;
+    }).then(() => {
+      const flightId = parseInt(request.params.flightId, 10);
+      if (!Number.isInteger(flightId) || flightId <= 0) {
+        throw new ClientError('400', 'Invalid flight');
+      }
+      const sqlFlightLaunchedOnUpdate = `update "flights"
+                                         set "sentOn" = now(), "flightActive" = true, "flightComplete" = false
+                                         where "flightId" = $1`;
+      const param = [flightId];
+      db.query(sqlFlightLaunchedOnUpdate, param)
+        .catch(err => {
+          console.error(err);
+        });
     }).catch(error => {
       console.error(error);
       response.status(500).json({ error: 'an unexpected error occured.' });
