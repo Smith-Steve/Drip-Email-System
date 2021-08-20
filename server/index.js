@@ -293,7 +293,7 @@ app.get('/api/email/:flightId', (request, response) => {
         throw new ClientError('400', 'Invalid flight');
       }
       const sqlFlightLaunchedOnUpdate = `update "flights"
-                                         set "sentOn" = now(), "flightActive" = true, "flightComplete" = false
+                                         set "flightLaunchedAt" = now(), "flightComplete" = false
                                          where "flightId" = $1`;
       const param = [flightId];
       db.query(sqlFlightLaunchedOnUpdate, param)

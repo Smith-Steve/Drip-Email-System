@@ -5,8 +5,8 @@ values ('Jeff', 'Lewis', 'Travel Co', 'Steve.A.Dore@outlook.com', '7038914575'),
 insert into "scripts" ("scriptName")
 values ('Script #1'),('Script #2');
 
-insert into "flights" ("flightName", "topics","flightActive", "flightComplete", "scriptId")
-values ('Flight #1', 'Nice',false, false , 1), ('Flight #2', 'Nice',false,false, 2);
+insert into "flights" ("flightName", "topics", "flightComplete", "scriptId")
+values ('Flight #1', 'Nice',false, 1), ('Flight #2', 'Nice',false, 2);
 
 insert into "emails" ("subject", "emailBody", "scriptId")
 values ('Email #1', 'Hello {{PersonName}}, Hope you are doing well. We are offering some new penn testing services. We feel this is a great opportunity for you and you all over at {{Company}} to have your software reviewed by some quality consultants.', 1),

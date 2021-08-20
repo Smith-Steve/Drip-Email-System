@@ -29,8 +29,7 @@ create table "flights" (
   "topics" text not null,
   "scriptId" INT not null,
   "createdAt" timestamptz(5) not null default now(),
-  "sentOn" timestamptz(5) default null,
-  "flightActive" BOOLEAN default null,
+  "flightLaunchedAt" timestamptz(5) default null,
   "flightComplete" BOOLEAN default null,
   primary key ("flightId"),
   constraint "scriptId"
