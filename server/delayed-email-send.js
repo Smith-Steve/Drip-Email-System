@@ -1,6 +1,6 @@
 require('dotenv/config');
 const db = require('./lib/database-config');
-const handleEmail = require('./lib/handleEmail');
+const handleEmail = require('./lib/handle-email');
 
 const sqlEmailGetQuery = `select DISTINCT on ("e"."emailId") "f"."flightName" as "flightName", "e"."emailId" as "emailId", "s"."scriptName", "e"."subject", "e"."emailBody",
                             (select json_agg (json_build_object('firstName', "c"."firstName", 'lastName', "c"."lastName", 'company',"c"."company", 'email', "c"."email"))
@@ -12,7 +12,7 @@ const sqlEmailGetQuery = `select DISTINCT on ("e"."emailId") "f"."flightName" as
                             inner join "flights" as "f" on "fA"."flightId" = "f"."flightId"
                             inner join "scripts" as "s" on "f"."scriptId" = "s"."scriptId"
                             inner join "emails" as "e" on "s"."scriptId" = "e"."scriptId"
-                            where "e"."sendOn" < now() and "e"."sendOn" is NOT NULL and "e"."sentAt" is NULL`;
+                            where "e"."sendOn" < now() and "e"."sendOn" is NOT NULL and "e"."sentAt" is NULL and "f"."flightComplete" = false`;
 
 db.query(sqlEmailGetQuery)
   .then(result => {

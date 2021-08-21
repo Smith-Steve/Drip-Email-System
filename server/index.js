@@ -4,7 +4,7 @@ const ClientError = require('./lib/client-error');
 const errorMiddleware = require('./lib/error-middleware');
 const db = require('./lib/database-config');
 const staticMiddleware = require('./static-middleware');
-const handleEmail = require('./lib/handleEmail');
+const handleEmail = require('./lib/handle-email');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
@@ -270,7 +270,7 @@ app.get('/api/email/:flightId', (request, response) => {
   if (!Number.isInteger(flightId) || flightId <= 0) {
     throw new ClientError('400', 'Invalid flight');
   }
-  const sqlEmailGetQuery = `select DISTINCT on ("f"."flightId") "f"."flightName" as "flightName", "s"."scriptName", "e"."subject", "e"."emailBody",
+  const sqlEmailGetQuery = `select DISTINCT on ("f"."flightId") "f"."flightName" as "flightName", "s"."scriptName", "e"."subject", "e"."emailBody", "e"."emailId",
                             (select json_agg (json_build_object('firstName', "c"."firstName", 'lastName', "c"."lastName", 'company',"c"."company", 'email', "c"."email"))
                               from "contacts" as "c"
                               inner join "flightAssignments" as "fa" on "c"."contactId" = "fa"."contactId"
@@ -286,14 +286,27 @@ app.get('/api/email/:flightId', (request, response) => {
     .then(result => {
       const flightInfo = result.rows[0];
       handleEmail(flightInfo);// be careful where youu group functaionality together.
-      module.FlightUpdateInfo = flightInfo;
+      module.emailUpdateInfo = flightInfo;
+    }).then(() => {
+      const emailId = module.emailUpdateInfo.emailId;
+      if (!Number.isInteger(emailId) || emailId <= 0) {
+        throw new ClientError('400', 'Invalid Email');
+      }
+      const sqlEmailUpdateOnLaunch = `update "emails"
+                                      set "sentAt" = now()
+                                      where "emailId" = $1`;
+      const param = [emailId];
+      db.query(sqlEmailUpdateOnLaunch, param)
+        .catch(err => {
+          console.error(err);
+        });
     }).then(() => {
       const flightId = parseInt(request.params.flightId, 10);
       if (!Number.isInteger(flightId) || flightId <= 0) {
         throw new ClientError('400', 'Invalid flight');
       }
       const sqlFlightLaunchedOnUpdate = `update "flights"
-                                         set "flightLaunchedAt" = now(), "flightComplete" = false
+                                         set "flightLaunchedAt" = now()
                                          where "flightId" = $1`;
       const param = [flightId];
       db.query(sqlFlightLaunchedOnUpdate, param)
