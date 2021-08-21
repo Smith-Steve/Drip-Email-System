@@ -64,7 +64,7 @@ class CreateEmail extends React.Component {
 
   renderSelectInput = emailNumber => {
     return (<div className="align-right">
-      <span className="special-text">E-mail Number# {emailNumber + 1}</span>
+      <span className="special-text">E-mail Number# {emailNumber}</span>
     </div>);
   }
 
