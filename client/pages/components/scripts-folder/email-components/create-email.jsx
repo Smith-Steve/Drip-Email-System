@@ -54,7 +54,8 @@ class CreateEmail extends React.Component {
     fetch(`/api/scripts/count/${this.props.script.scriptId}`, initGetCount)
       .then(response => response.json())
       .then(returnedResponse => {
-        this.setState({ emailNumberInSequence: parseInt(returnedResponse.count, 10) });
+        const emailNumber = parseInt(returnedResponse.count, 10);
+        this.setState({ emailNumberInSequence: emailNumber + 1 });
       })
       .catch(error => {
         console.error(error);
