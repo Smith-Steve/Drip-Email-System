@@ -64,7 +64,7 @@ class CreateEmail extends React.Component {
 
   renderSelectInput = emailNumber => {
     return (<div className="align-right">
-      <span className="special-text">E-mail Number# {emailNumber + 1}</span>
+      <span className="special-text">E-mail Number# {emailNumber}</span>
     </div>);
   }
 
@@ -103,20 +103,16 @@ class CreateEmail extends React.Component {
               <form className="create-email" onSubmit={this.handleSubmit}>
                 <div className="input-row">
                   <label htmlFor="subjectInputField">Subject:</label>
-                <div className="email-input-container">
                   <input className="subjectInputField" value={this.state.subject} onChange={this.handleFormChange} type="text" name="subject" required/>
-                </div>
                 </div>
                 <div className="input-row">
                   <label>Body:</label>
-                <div className="email-input-container">
                   <textarea className="emailBodyField" value={this.state.emailBody} onChange={this.handleFormChange} type="text" rows="8" name="emailBody" required/>
-                </div>
                 </div>
                 <div className="align-right">
                   <button className="scripts purple-button" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                {emailsInActiveScript > 0 ? this.renderTimeFields() : null}
+                {emailsInActiveScript > 1 ? this.renderTimeFields() : null}
               </form>
             </div>
           </div>
