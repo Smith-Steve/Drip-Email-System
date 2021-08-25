@@ -61,8 +61,6 @@ span {
   color: #ab8ce4;
   margin-right: 2rem;
   font-size: 1.5rem;
-
-  /* white-space: nowrap; make sure this hasn't changed anything */
 }
 
 span.special-text.prompt.manage-flight-script-prompt {
