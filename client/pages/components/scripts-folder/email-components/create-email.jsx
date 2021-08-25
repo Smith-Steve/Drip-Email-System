@@ -116,7 +116,7 @@ class CreateEmail extends React.Component {
                 <div className="align-right">
                   <button className="scripts purple-button" onSubmit={this.handleSubmit}>Create Email</button>
                 </div>
-                {emailsInActiveScript > 0 ? this.renderTimeFields() : null}
+                {emailsInActiveScript > 1 ? this.renderTimeFields() : null}
               </form>
             </div>
           </div>
