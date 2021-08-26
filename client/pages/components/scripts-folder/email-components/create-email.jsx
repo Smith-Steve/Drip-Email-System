@@ -1,5 +1,6 @@
 import React from 'react';
 import Email from '../../../lib/email-post';
+import DatePicker from 'react-datepicker';
 
 class CreateEmail extends React.Component {
   constructor(props) {
