@@ -30,13 +30,22 @@ db.query(sqlEmailGetQuery)
         console.error(err);
       });
   }).then(() => {
-    const sqlCountQuery = `select
-                            count ("scriptId" = $2) as "Number of Scripts",
-                            count ("sentAt" is null) as "Number of Emails Not Sent"
-                          from "emails"
-                          where "scriptId" = $2`;
+
+    const sqlFlightCompleteQuery =
+                                  `select count ("scriptId" = $1) as "Number of Scripts", count ("sentAt" is null) as "Number of Emails Not Sent",
+                                    CASE WHEN count("sentAt") = 0 then true
+                                  else false end
+                                  as "flightComplete"
+                                  from "emails"
+                                  where "scriptId" = 2`;
     const param = [module.flightInformation.scriptId];
-    console.log(param);
+    db.query(sqlFlightCompleteQuery, param)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   })
   .catch(error => {
     console.error(error);
